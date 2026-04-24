@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "generated_at": null,
+    "periodo": {
+      "mes_actual": null,
+      "mes_anterior": null,
+      "porcentaje_transcurrido": null
+    },
+    "cliente": "SURA Tech Colombia",
+    "agencia": "Beyond Media Agency"
+  },
+  "kpis_globales": {
+    "inversion_total": null,
+    "leads_crm_totales": null,
+    "compromiso_leads_total": null,
+    "cumplimiento_global_pct": null,
+    "cpl_negocio_promedio": null,
+    "variacion_mom": {
+      "inversion_total": null,
+      "leads_crm_totales": null,
+      "cumplimiento_global_pct": null,
+      "cpl_negocio_promedio": null
+    }
+  },
+  "alertas_criticas": [
+    {
+      "tipo": "accounts_not_publishing",
+      "severidad": "critica",
+      "titulo": "5 cuentas cuyos anuncios no se están publicando",
+      "detalle": "Detectado en el MCC SURATECH - COLOMBIA. Inversión potencial parada.",
+      "accion_sugerida": "Revisar estado de las 5 cuentas y reactivar publicación hoy mismo."
+    },
+    {
+      "tipo": "financial_services_verification",
+      "severidad": "critica",
+      "titulo": "Completa la verificación de servicios financieros en 3 cuentas",
+      "detalle": "Bloqueante administrativo de Google Ads para publicar anuncios de seguros.",
+      "accion_sugerida": "Enviar documentación de verificación de servicios financieros esta semana."
+    }
+  ],
+  "seguros": [],
+  "recomendaciones": [],
+  "eventos_conversion": [],
+  "discrepancias": [],
+  "caso_negocio": {
+    "estado_actual": null,
+    "proyeccion_si_aplicamos_top5": null,
+    "proximo_paso": "Escalar a pipeline semanal con APIs oficiales (Google Ads API, Meta Marketing API, GA4 Data API, Sheets API) + alertas automáticas."
+  }
+}

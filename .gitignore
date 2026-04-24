@@ -1,0 +1,60 @@
+# === Datos crudos nunca al repo ===
+raw/
+outputs/*.tmp
+outputs/*.bak
+
+# === Credenciales / sesiones ===
+*.env
+.env.*
+credentials.json
+client_secret*.json
+token.json
+token.pickle
+*.pem
+*.key
+cookies.json
+storage_state.json
+chrome_profile/
+playwright_profile/
+playwright/.auth/
+
+# === Screenshots de debug ===
+debug/
+screenshots/
+*.debug.png
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# === Node (por si usamos Playwright JS) ===
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json.bak
+
+# === OS / editores ===
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-*
+
+# === Logs ===
+*.log
+logs/

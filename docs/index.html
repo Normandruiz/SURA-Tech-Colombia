@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SURA Tech Colombia · Informe mensual</title>
+  <meta name="description" content="Informe estratégico mensual SURA Tech Colombia — 6 seguros, cruce Google Ads + Meta + CRM + GA4. Elaborado por Beyond Media Agency.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+  <!-- ========== HERO HEADER ========== -->
+  <header class="hero">
+    <div class="container">
+      <h1>SURA Tech Colombia · Informe mensual</h1>
+      <div class="subtitle">
+        Periodo: <span id="periodo">—</span> · Cruce Google Ads · Meta · CRM · GA4
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi" id="kpi-inversion">
+          <div class="label">Inversión total</div>
+          <div class="value">—</div>
+          <div class="delta"></div>
+        </div>
+        <div class="kpi" id="kpi-leads">
+          <div class="label">Leads CRM</div>
+          <div class="value">—</div>
+          <div class="delta"></div>
+        </div>
+        <div class="kpi" id="kpi-cumplimiento">
+          <div class="label">Cumplimiento global</div>
+          <div class="value">—</div>
+          <div class="delta"></div>
+        </div>
+        <div class="kpi" id="kpi-cpl">
+          <div class="label">CPL Negocio promedio</div>
+          <div class="value">—</div>
+          <div class="delta"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== ALERTAS CRÍTICAS ========== -->
+  <div class="container">
+    <div id="alertas" class="alert-banner"></div>
+  </div>
+
+  <!-- ========== 6 SEGUROS ========== -->
+  <section>
+    <div class="container">
+      <h2>6 seguros — <span class="accent">cumplimiento del mes</span></h2>
+      <div class="seguros-grid" id="seguros"></div>
+    </div>
+  </section>
+
+  <!-- ========== TOP 10 RECOMENDACIONES ========== -->
+  <section>
+    <div class="container">
+      <h2>TOP 10 — <span class="accent">recomendaciones accionables</span></h2>
+      <div class="recos">
+        <div class="filters" id="reco-filters">
+          <span class="chip active">Todas</span>
+          <span class="chip">Google Ads</span>
+          <span class="chip">Meta</span>
+          <span class="chip">Tracking</span>
+        </div>
+        <div id="reco-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECCIONES POR SEGURO (placeholder, anclas) ========== -->
+  <section id="detalle-seguros">
+    <div class="container">
+      <h2>Detalle por seguro</h2>
+      <div class="empty-state">
+        Las 6 secciones detalladas por seguro (KPIs, gráficos Leads vs Compromiso,
+        CPL Negocio MoM, split Google Ads vs Meta, campañas/ad sets) se generan
+        automáticamente tras el análisis.
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MATRIZ DE EVENTOS DE CONVERSIÓN ========== -->
+  <section>
+    <div class="container">
+      <h2>Eventos de conversión — <span class="accent">seguro × plataforma</span></h2>
+      <div class="empty-state">Pendiente — Paso 4.3.</div>
+    </div>
+  </section>
+
+  <!-- ========== DISCREPANCIAS ========== -->
+  <section>
+    <div class="container">
+      <h2>Discrepancias — <span class="accent">plataforma vs CRM vs GA4</span></h2>
+      <div class="empty-state">Pendiente — Paso 4.4.</div>
+    </div>
+  </section>
+
+  <!-- ========== CASO DE NEGOCIO ========== -->
+  <section>
+    <div class="container">
+      <h2>Caso de negocio — <span class="accent">próximo paso</span></h2>
+      <div class="empty-state">Escalar a pipeline semanal con APIs oficiales (Paso 6).</div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container">
+      Elaborado por <strong>Beyond Media Agency</strong> ·
+      Dashboard SURA Tech Colombia ·
+      <a href="https://github.com/Normandruiz/SURA-Tech-Colombia" style="color:var(--sura-aqua)">Ver repositorio</a>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
