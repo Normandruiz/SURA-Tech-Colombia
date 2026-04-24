@@ -19,27 +19,39 @@ SEGUROS = [
 GOOGLE_ADS_MCC_ID = "383-039-2811"
 GOOGLE_ADS_MCC_ID_NUMERIC = "3830392811"
 
-# Auth params internos de Google Ads que "amarran" la sesion y evitan el chooser.
-# Confirmados desde la URL del MCC visible en el screenshot del user (abr 2026).
-# Patron equivalente al de answer-auto-dashboard/config.json.
-GOOGLE_ADS_AUTH_PARAMS = {
-    "ocid":     "1194015290",
-    "ascid":    "1194015290",
-    "euid":     "325839748",    # norman.ruiz Google user ID
-    "__u":      "4137086052",   # user ID secundario
-    "uscid":    "705295378",    # user+customer session id MCC
+# Auth params del USER (norman.ruiz) - sirven para cualquier cuenta del MCC.
+# Estos amarran la sesion al user correcto sin pedir chooser de cuenta Google.
+GOOGLE_ADS_USER_PARAMS = {
+    "euid":     "325839748",    # Google user ID (effective)
+    "__u":      "4137086052",   # secondary user ID
     "authuser": "0",
 }
 
-# Cuentas hijas del MCC - Customer IDs confirmados desde la UI (abr 2026).
-# 'numeric' es el __c de cada cuenta cuando navegamos a su overview/campaigns.
+# Auth params especificos del MCC - usar SOLO al navegar al MCC, no a cuentas hijas.
+# Cada cuenta hija tiene su propio uscid/ocid que no conozco hasta entrar.
+GOOGLE_ADS_MCC_PARAMS = {
+    **GOOGLE_ADS_USER_PARAMS,
+    "ocid":  "1194015290",
+    "ascid": "1194015290",
+    "uscid": "705295378",
+}
+
+# Alias retrocompatible
+GOOGLE_ADS_AUTH_PARAMS = GOOGLE_ADS_MCC_PARAMS
+
+# MCC __c (queda fijo en todas las URLs - identifica el contexto MCC activo).
+GOOGLE_ADS_MCC_INTERNAL_C = "8322065922"
+
+# Cuentas hijas del MCC.
+# Lo que CAMBIA por cuenta es el 'ocid' (= ascid). El __c queda en el MCC.
+# OCIDs descubiertos via debug_mcc_links.py contra el MCC SURATECH (abr 2026).
 GOOGLE_ADS_ACCOUNTS = {
-    "Arrendamiento":  {"name": "Arrendamiento Digital - SURATECH", "id": "642-211-2433", "numeric": "6422112433"},
-    "Salud para Dos": {"name": "Salud para dos - SURATECH",         "id": "248-508-8915", "numeric": "2485088915"},
-    "Motos":          {"name": "Motos - SURATECH",                  "id": "331-988-8513", "numeric": "3319888513"},
-    "Autos":          {"name": "Autos - SURATECH",                  "id": "375-790-7670", "numeric": "3757907670"},
-    "Salud Animal":   {"name": "Salud Animal - SURATECH",           "id": "132-565-6703", "numeric": "1325656703"},
-    "Viajes":         {"name": "Viajes - SURATECH",                 "id": "791-087-6723", "numeric": "7910876723"},
+    "Arrendamiento":  {"name": "Arrendamiento Digital - SURATECH", "id": "642-211-2433", "ocid": "1294729847"},
+    "Salud para Dos": {"name": "Salud para dos - SURATECH",        "id": "248-508-8915", "ocid": "7354551308"},
+    "Motos":          {"name": "Motos - SURATECH",                 "id": "331-988-8513", "ocid": "1294745033"},
+    "Autos":          {"name": "Autos - SURATECH",                 "id": "375-790-7670", "ocid": "1294555918"},
+    "Salud Animal":   {"name": "Salud Animal - SURATECH",          "id": "132-565-6703", "ocid": "1466566994"},
+    "Viajes":         {"name": "Viajes - SURATECH",                "id": "791-087-6723", "ocid": "1294562092"},
 }
 
 CAMPAIGN_TOKEN_BY_SEGURO = {

@@ -21,16 +21,85 @@ import json
 import re
 import sys
 
-from src.config import GOOGLE_ADS_ACCOUNTS, GOOGLE_ADS_MCC_ID, GOOGLE_ADS_AUTH_PARAMS
+from src.config import (
+    GOOGLE_ADS_ACCOUNTS,
+    GOOGLE_ADS_MCC_ID,
+    GOOGLE_ADS_USER_PARAMS,
+    GOOGLE_ADS_MCC_PARAMS,
+    GOOGLE_ADS_MCC_INTERNAL_C,
+)
 from src.extractors.browser import open_browser
 from src.extractors._utils import raw_dir_for, save_screenshot, ts, wait_quiet
 
 
-def _url(view: str, customer_numeric: str) -> str:
-    """Construye URL de una vista (overview/campaigns/conversions) con auth_params."""
-    params = {"__c": customer_numeric, **GOOGLE_ADS_AUTH_PARAMS}
+def _url(view: str, ocid: str) -> str:
+    """Construye URL de una vista usando ocid de la cuenta hija.
+
+    Patron exacto que usa Google Ads internamente:
+    /aw/{view}?ocid={CUENTA}&ascid={CUENTA}&authuser=0&__u=4137086052&__c=8322065922
+    """
+    params = {
+        "ocid":  ocid,
+        "ascid": ocid,
+        **GOOGLE_ADS_USER_PARAMS,
+        "__c":   GOOGLE_ADS_MCC_INTERNAL_C,
+    }
     qs = "&".join(f"{k}={v}" for k, v in params.items())
     return f"https://ads.google.com/aw/{view}?{qs}"
+
+
+def _mcc_accounts_url() -> str:
+    qs = "&".join(f"{k}={v}" for k, v in GOOGLE_ADS_MCC_PARAMS.items())
+    return f"https://ads.google.com/aw/accounts?{qs}"
+
+
+def discover_account_ocids(page) -> dict[str, str]:
+    """Navega al MCC y extrae el ocid de cada cuenta hija.
+
+    Devuelve {customer_id_humano: ocid} ej. {"375-790-7670": "1294555918"}.
+    Sirve como check de que los OCIDs hardcoded en config siguen vigentes.
+    """
+    print("  [discover] navegando al MCC para extraer ocid de cada cuenta...")
+    page.goto(_mcc_accounts_url(), wait_until="domcontentloaded", timeout=60_000)
+    wait_quiet(page, 25_000)
+
+    if "accounts.google.com" in page.url:
+        print(f"  [discover] sesion caida, URL: {page.url[:120]}")
+        return {}
+
+    ocids: dict[str, str] = {}
+    # Estrategia 1: anchors con texto que matchee nombre de cuenta + href con ocid
+    for a in page.locator("a[href*='ocid=']").all():
+        try:
+            href = a.get_attribute("href") or ""
+            txt  = (a.text_content() or "").strip()
+        except Exception:
+            continue
+        m = re.search(r"\bocid=(\d+)", href)
+        if not m:
+            continue
+        ocid = m.group(1)
+        # asocia al nombre de cuenta si matchea uno conocido
+        for seguro, info in GOOGLE_ADS_ACCOUNTS.items():
+            if info["name"].lower() in txt.lower() and info["id"] not in ocids:
+                ocids[info["id"]] = ocid
+                break
+
+    # Estrategia 2: por proximidad en texto (fallback)
+    if len(ocids) < len(GOOGLE_ADS_ACCOUNTS):
+        html = page.content()
+        for info in GOOGLE_ADS_ACCOUNTS.values():
+            if info["id"] in ocids:
+                continue
+            esc = re.escape(info["id"])
+            m = re.search(rf"ocid=(\d+)[^\"']{{0,800}}?{esc}|{esc}[^\"']{{0,800}}?ocid=(\d+)", html)
+            if m:
+                ocids[info["id"]] = m.group(1) or m.group(2)
+
+    print(f"  [discover] encontrados {len(ocids)}/{len(GOOGLE_ADS_ACCOUNTS)} ocid")
+    for human, ocid in ocids.items():
+        print(f"    {human} -> ocid={ocid}")
+    return ocids
 
 
 def _clean(s: str | None) -> str:
@@ -73,29 +142,28 @@ def _extract_rows(page, limit: int = 200) -> list[dict]:
     return rows
 
 
-def extract_account(page, seguro: str, info: dict) -> dict:
-    numeric = info["numeric"]
-    print(f"\n== {seguro} ({info['id']}) ==")
+def extract_account(page, seguro: str, info: dict, ocid: str) -> dict:
+    print(f"\n== {seguro} ({info['id']}) ocid={ocid} ==")
     out_dir = raw_dir_for(seguro)
     bundle: dict = {
         "seguro": seguro,
         "cuenta": info["name"],
         "customer_id": info["id"],
-        "numeric": numeric,
+        "ocid": ocid,
         "extracted_at": ts(),
         "source": "google_ads_ui",
     }
 
     # ---- Overview ----
     print("  -> overview")
-    page.goto(_url("overview", numeric), wait_until="domcontentloaded", timeout=60_000)
+    page.goto(_url("overview", ocid), wait_until="domcontentloaded", timeout=60_000)
     wait_quiet(page, 20_000)
     save_screenshot(page, seguro, "google_ads_overview")
     bundle["overview_kpis"] = _extract_kpi_cards(page)
     bundle["overview_url"]  = page.url
 
-    # Detectar si cayo al login / chooser
-    if any(s in page.url for s in ("accounts.google.com", "accountchooser", "selectaccount", "signin")):
+    # Detectar si cayo a login real (no a redirects internos de Ads)
+    if "accounts.google.com" in page.url:
         bundle["error"] = "redirigido a login - correr setup_auth.py de nuevo"
         json_path = out_dir / f"google_ads_{ts()}.json"
         json_path.write_text(json.dumps(bundle, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -104,7 +172,7 @@ def extract_account(page, seguro: str, info: dict) -> dict:
 
     # ---- Campaigns ----
     print("  -> campaigns")
-    page.goto(_url("campaigns", numeric), wait_until="domcontentloaded", timeout=60_000)
+    page.goto(_url("campaigns", ocid), wait_until="domcontentloaded", timeout=60_000)
     wait_quiet(page, 20_000)
     save_screenshot(page, seguro, "google_ads_campaigns")
     (out_dir / f"google_ads_campaigns_{ts()}.html").write_text(
@@ -115,7 +183,7 @@ def extract_account(page, seguro: str, info: dict) -> dict:
 
     # ---- Conversions (eventos) ----
     print("  -> conversions")
-    page.goto(_url("conversions/customconversions", numeric),
+    page.goto(_url("conversions/customconversions", ocid),
               wait_until="domcontentloaded", timeout=60_000)
     wait_quiet(page, 20_000)
     save_screenshot(page, seguro, "google_ads_conversions")
@@ -141,9 +209,22 @@ def run(only_seguro: str | None = None, headless: bool = True) -> int:
         return 2
 
     with open_browser(headless=headless) as page:
+        # Usamos los ocid hardcoded de config (descubiertos via debug). Si se rompen,
+        # discover los re-detecta del MCC en vivo.
+        ocids_from_config = {info["id"]: info["ocid"] for info in accounts.values()}
+        if any(not v for v in ocids_from_config.values()):
+            ocids_from_config = discover_account_ocids(page)
+            if not ocids_from_config:
+                print("  [FATAL] no se pudieron descubrir ocid. Sesion caida.")
+                return 4
+
         for seguro, info in accounts.items():
+            ocid = ocids_from_config.get(info["id"]) or info.get("ocid")
+            if not ocid:
+                print(f"\n== {seguro} ({info['id']}) ==  [SKIP] sin ocid")
+                continue
             try:
-                extract_account(page, seguro, info)
+                extract_account(page, seguro, info, ocid)
             except Exception as e:
                 print(f"  [FAIL] {seguro}: {e.__class__.__name__}: {e}")
     return 0
