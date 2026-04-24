@@ -17,6 +17,7 @@ storage_state.json
 chrome_profile/
 playwright_profile/
 playwright/.auth/
+.auth-profile/
 
 # === Screenshots de debug ===
 debug/
