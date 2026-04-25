@@ -1,50 +1,629 @@
 {
   "meta": {
-    "generated_at": null,
+    "generated_at": "2026-04-24T21:16:08",
     "periodo": {
-      "mes_actual": null,
-      "mes_anterior": null,
-      "porcentaje_transcurrido": null
+      "mes_actual": "abril 2026",
+      "mes_anterior": "marzo 2026",
+      "porcentaje_transcurrido": 0.7
     },
     "cliente": "SURA Tech Colombia",
-    "agencia": "Beyond Media Agency"
+    "agencia": "Beyond Media Agency",
+    "scope": {
+      "seguros_principales": [
+        "Autos",
+        "Motos",
+        "Arrendamiento",
+        "Viajes"
+      ],
+      "seguros_extra_ads_only": [
+        "Salud para Dos",
+        "Salud Animal"
+      ]
+    }
   },
   "kpis_globales": {
-    "inversion_total": null,
-    "leads_crm_totales": null,
-    "compromiso_leads_total": null,
-    "cumplimiento_global_pct": null,
-    "cpl_negocio_promedio": null,
-    "variacion_mom": {
-      "inversion_total": null,
-      "leads_crm_totales": null,
-      "cumplimiento_global_pct": null,
-      "cpl_negocio_promedio": null
-    }
+    "inversion_total": 93485.02,
+    "leads_crm_totales": 19971,
+    "compromiso_leads_total": 43318,
+    "cumplimiento_global_pct": 0.461,
+    "cpl_negocio_promedio": 5.49
   },
   "alertas_criticas": [
     {
       "tipo": "accounts_not_publishing",
       "severidad": "critica",
-      "titulo": "5 cuentas cuyos anuncios no se están publicando",
+      "titulo": "5 cuentas con anuncios que no se están publicando",
       "detalle": "Detectado en el MCC SURATECH - COLOMBIA. Inversión potencial parada.",
-      "accion_sugerida": "Revisar estado de las 5 cuentas y reactivar publicación hoy mismo."
+      "accion_sugerida": "Revisar el estado y reactivar publicación HOY."
     },
     {
       "tipo": "financial_services_verification",
       "severidad": "critica",
-      "titulo": "Completa la verificación de servicios financieros en 3 cuentas",
+      "titulo": "Verificación de servicios financieros pendiente en 3 cuentas",
       "detalle": "Bloqueante administrativo de Google Ads para publicar anuncios de seguros.",
-      "accion_sugerida": "Enviar documentación de verificación de servicios financieros esta semana."
+      "accion_sugerida": "Enviar documentación esta semana antes que limite delivery."
     }
   ],
-  "seguros": [],
-  "recomendaciones": [],
-  "eventos_conversion": [],
-  "discrepancias": [],
+  "seguros": [
+    {
+      "nombre": "Autos",
+      "es_principal": true,
+      "google_ads": {
+        "kpis": {
+          "impresiones": 323755.0,
+          "clicks": 28230.0,
+          "coste_usd": 26251.949999999997,
+          "conversiones": 4824.039999999999,
+          "ctr": 0.08719556454726568,
+          "cpc": 0.9299309245483527,
+          "cpa": 5.441901393852456
+        },
+        "campanias_count": 4,
+        "campanias": [
+          {
+            "nombre": "SURA_AUTOS_SEARCH_SEGMENT",
+            "presupuesto": "326,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 50031.0,
+            "clicks": 8318.0,
+            "ctr_pct": 0.1663,
+            "cpc": 1.11,
+            "coste": 9197.96,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 1364.1,
+            "cpa": 6.74
+          },
+          {
+            "nombre": "SURA_AUTOS_SEARCH_RETENTION",
+            "presupuesto": "147,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 9955.0,
+            "clicks": 2933.0,
+            "ctr_pct": 0.29460000000000003,
+            "cpc": 1.43,
+            "coste": 4194.0,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 393.14,
+            "cpa": 10.67
+          },
+          {
+            "nombre": "SURA_AUTOS_SEARCH_CONQUEST",
+            "presupuesto": "52,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 51380.0,
+            "clicks": 2093.0,
+            "ctr_pct": 0.0407,
+            "cpc": 1.05,
+            "coste": 2188.75,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 340.53,
+            "cpa": 6.43
+          },
+          {
+            "nombre": "SURA_AUTOS_PMAX",
+            "presupuesto": "517,00 US$/día",
+            "estado": "Algunos grupos de recursos están limitados por una política",
+            "tipo": "Máximo rendimiento",
+            "impresiones": 212389.0,
+            "clicks": 14886.0,
+            "ctr_pct": 0.1407,
+            "cpc": 0.36,
+            "coste": 10671.24,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 2726.27,
+            "cpa": 3.91
+          }
+        ]
+      },
+      "crm": {
+        "compromiso_leads": 9823.0,
+        "leads_crm": 5564.0,
+        "cumplimiento_pct": 0.5664,
+        "cpl_negocio": 5.94,
+        "cpl_negocio_total": 4.92,
+        "leads_total": 6710.0,
+        "inversion_total": 33030.43,
+        "leads_google_ads": 3867.0,
+        "leads_meta": 2293.0,
+        "leads_crm_prev": 9293.0,
+        "cumplimiento_pct_prev": 0.9174,
+        "cpl_negocio_prev": 4.61
+      }
+    },
+    {
+      "nombre": "Motos",
+      "es_principal": true,
+      "google_ads": {
+        "kpis": {
+          "impresiones": 710198.0,
+          "clicks": 308570.0,
+          "coste_usd": 15787.52,
+          "conversiones": 0.0,
+          "ctr": 0.4344844677118212,
+          "cpc": 0.051163496127296884,
+          "cpa": 0
+        },
+        "campanias_count": 4,
+        "campanias": [
+          {
+            "nombre": "SURA_MOTOS_SEARCH_SEGMENT",
+            "presupuesto": "357,00 US$/día",
+            "estado": "AptoSe han rechazado algunos anuncios",
+            "tipo": "Búsqueda",
+            "impresiones": 69131.0,
+            "clicks": 8779.0,
+            "ctr_pct": 0.127,
+            "cpc": 0.52,
+            "coste": 4595.78,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 0.0,
+            "cpa": 0.0323
+          },
+          {
+            "nombre": "SURA_MOTOS_SEARCH_RETENTION",
+            "presupuesto": "183,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 10759.0,
+            "clicks": 3925.0,
+            "ctr_pct": 0.36479999999999996,
+            "cpc": 0.51,
+            "coste": 1993.64,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 0.0,
+            "cpa": 0.0784
+          },
+          {
+            "nombre": "SURA_MOTOS_SEARCH_CONQUEST",
+            "presupuesto": "75,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 19789.0,
+            "clicks": 2315.0,
+            "ctr_pct": 0.11699999999999999,
+            "cpc": 0.59,
+            "coste": 1366.13,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 0.0,
+            "cpa": 0.039599999999999996
+          },
+          {
+            "nombre": "SURA_MOTOS_PMAX",
+            "presupuesto": "397,00 US$/día",
+            "estado": "AptoAlgunos grupos de recursos se han rechazado y Algunos grupos de recursos están limitados por una política",
+            "tipo": "Máximo rendimiento",
+            "impresiones": 610519.0,
+            "clicks": 293551.0,
+            "ctr_pct": 0.4808,
+            "cpc": 0.03,
+            "coste": 7831.97,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 0.0,
+            "cpa": 0.0022
+          }
+        ]
+      },
+      "crm": {
+        "compromiso_leads": 14412.0,
+        "leads_crm": 7973.0,
+        "cumplimiento_pct": 0.5532,
+        "cpl_negocio": 2.45,
+        "cpl_negocio_total": 9.38,
+        "leads_total": 2083.0,
+        "inversion_total": 19527.48,
+        "leads_google_ads": 1008.0,
+        "leads_meta": 1043.0,
+        "leads_crm_prev": 12338.0,
+        "cumplimiento_pct_prev": 0.799,
+        "cpl_negocio_prev": 2.63
+      }
+    },
+    {
+      "nombre": "Arrendamiento",
+      "es_principal": true,
+      "google_ads": {
+        "kpis": {
+          "impresiones": 4162076.0,
+          "clicks": 80255.0,
+          "coste_usd": 27828.230000000003,
+          "conversiones": 2296.54,
+          "ctr": 0.01928244462619135,
+          "cpc": 0.3467476169709053,
+          "cpa": 12.117459308350824
+        },
+        "campanias_count": 3,
+        "campanias": [
+          {
+            "nombre": "sura-cdd-co-google-search-retention-arriendo",
+            "presupuesto": "984,00 US$/día",
+            "estado": "Se han rechazado algunos anuncios",
+            "tipo": "Búsqueda",
+            "impresiones": 36612.0,
+            "clicks": 16965.0,
+            "ctr_pct": 0.46340000000000003,
+            "cpc": 0.73,
+            "coste": 12382.18,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 1667.98,
+            "cpa": 7.42
+          },
+          {
+            "nombre": "SURA_ARRIENDO_SEARCH_SEGMENT",
+            "presupuesto": "900,00 US$/día",
+            "estado": "Se han rechazado algunos anuncios",
+            "tipo": "Búsqueda",
+            "impresiones": 25838.0,
+            "clicks": 6406.0,
+            "ctr_pct": 0.24789999999999998,
+            "cpc": 1.28,
+            "coste": 8208.29,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 317.07,
+            "cpa": 25.89
+          },
+          {
+            "nombre": "SURA_ARRIENDO_PMAX",
+            "presupuesto": "376,00 US$/día",
+            "estado": "Algunos grupos de recursos están limitados por una política",
+            "tipo": "Máximo rendimiento",
+            "impresiones": 4099626.0,
+            "clicks": 56884.0,
+            "ctr_pct": 0.1975,
+            "cpc": 0.01,
+            "coste": 7237.76,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 311.49,
+            "cpa": 23.24
+          }
+        ]
+      },
+      "crm": {
+        "compromiso_leads": 16423.0,
+        "leads_crm": 5285.0,
+        "cumplimiento_pct": 0.3218,
+        "cpl_negocio": 6.13,
+        "cpl_negocio_total": 10.54,
+        "leads_total": 3074.0,
+        "inversion_total": 32387.4,
+        "leads_google_ads": 1696.0,
+        "leads_meta": 1363.0,
+        "leads_crm_prev": 8911.0,
+        "cumplimiento_pct_prev": 0.5426,
+        "cpl_negocio_prev": 5.04
+      }
+    },
+    {
+      "nombre": "Viajes",
+      "es_principal": true,
+      "google_ads": {
+        "kpis": {
+          "impresiones": 709517.0,
+          "clicks": 10275.0,
+          "coste_usd": 6705.120000000001,
+          "conversiones": 242.66,
+          "ctr": 0.014481682609437125,
+          "cpc": 0.6525664233576643,
+          "cpa": 27.63174812494849
+        },
+        "campanias_count": 3,
+        "campanias": [
+          {
+            "nombre": "SURA_VIAJES_SEARCH_SEGMENT",
+            "presupuesto": "106,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 9676.0,
+            "clicks": 1192.0,
+            "ctr_pct": 0.1232,
+            "cpc": 1.49,
+            "coste": 1775.47,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 32.54,
+            "cpa": 54.57
+          },
+          {
+            "nombre": "SURA_VIAJES_SEARCH_RETENTION",
+            "presupuesto": "251,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 5234.0,
+            "clicks": 2262.0,
+            "ctr_pct": 0.4322,
+            "cpc": 1.31,
+            "coste": 2970.71,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 124.03,
+            "cpa": 23.95
+          },
+          {
+            "nombre": "SURA_VIAJES_PMAX",
+            "presupuesto": "155,00 US$/día",
+            "estado": "Limitada por el presupuesto",
+            "tipo": "Máximo rendimiento",
+            "impresiones": 694607.0,
+            "clicks": 6821.0,
+            "ctr_pct": 0.5527000000000001,
+            "cpc": 0.01,
+            "coste": 1958.94,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 86.09,
+            "cpa": 22.76
+          }
+        ]
+      },
+      "crm": {
+        "compromiso_leads": 2660.0,
+        "leads_crm": 1149.0,
+        "cumplimiento_pct": 0.43200000000000005,
+        "cpl_negocio": 7.43,
+        "cpl_negocio_total": 32.36,
+        "leads_total": 264.0,
+        "inversion_total": 8539.71,
+        "leads_google_ads": 190.0,
+        "leads_meta": 74.0,
+        "leads_crm_prev": 2036.0,
+        "cumplimiento_pct_prev": 0.893,
+        "cpl_negocio_prev": 5.64
+      }
+    },
+    {
+      "nombre": "Salud para Dos",
+      "es_principal": false,
+      "google_ads": {
+        "kpis": {
+          "impresiones": 31175.0,
+          "clicks": 97924.0,
+          "coste_usd": 1195.22,
+          "conversiones": 0,
+          "ctr": 3.1411066559743386,
+          "cpc": 0.012205588007025857,
+          "cpa": 0
+        },
+        "campanias_count": 2,
+        "campanias": [
+          {
+            "nombre": "SURA_SALUDPARADOS_SEARCH_RETENTION",
+            "presupuesto": "25,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 26951.0,
+            "clicks": 71589.0,
+            "ctr_pct": 0.3765,
+            "cpc": 0.03,
+            "coste": 778.92,
+            "estrategia": "",
+            "conversiones": 0,
+            "cpa": 0
+          },
+          {
+            "nombre": "SURA_SALUDPARADOS_SEARCH_SEGMENT",
+            "presupuesto": "10,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 4224.0,
+            "clicks": 26335.0,
+            "ctr_pct": 0.1604,
+            "cpc": 0.1,
+            "coste": 416.3,
+            "estrategia": "",
+            "conversiones": 0,
+            "cpa": 0
+          }
+        ]
+      },
+      "crm": {
+        "compromiso_leads": null,
+        "leads_crm": null,
+        "cumplimiento_pct": null,
+        "cpl_negocio": null,
+        "cpl_negocio_total": null,
+        "leads_total": null,
+        "inversion_total": null,
+        "leads_google_ads": null,
+        "leads_meta": null,
+        "leads_crm_prev": null,
+        "cumplimiento_pct_prev": null,
+        "cpl_negocio_prev": null
+      }
+    },
+    {
+      "nombre": "Salud Animal",
+      "es_principal": false,
+      "google_ads": {
+        "kpis": {
+          "impresiones": 153384.0,
+          "clicks": 0.33670000000000005,
+          "coste_usd": 1380.95,
+          "conversiones": 2.26,
+          "ctr": 2.1951442132165026e-06,
+          "cpc": 4101.425601425601,
+          "cpa": 611.0398230088497
+        },
+        "campanias_count": 3,
+        "campanias": [
+          {
+            "nombre": "SURA_SALUD_MASCOTAS_SEARCH_SEGMENT",
+            "presupuesto": "11,00 US$/día",
+            "estado": "Entidad apta (limitada)Faltan suficientes palabras clave relevantes",
+            "tipo": "Búsqueda",
+            "impresiones": 11104.0,
+            "clicks": 0.1167,
+            "ctr_pct": 0.2623,
+            "cpc": 0.1,
+            "coste": 283.06,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 0.83,
+            "cpa": 0
+          },
+          {
+            "nombre": "SURA_SALUD_MASCOTAS_SEARCH_RETENTION",
+            "presupuesto": "29,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Búsqueda",
+            "impresiones": 10929.0,
+            "clicks": 0.19140000000000001,
+            "ctr_pct": 0.4473,
+            "cpc": 0.15,
+            "coste": 709.82,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 0.76,
+            "cpa": 0
+          },
+          {
+            "nombre": "SURA_SALUD_MASCOTAS_PMAX",
+            "presupuesto": "15,00 US$/día",
+            "estado": "Apto",
+            "tipo": "Máximo rendimiento",
+            "impresiones": 131351.0,
+            "clicks": 0.0286,
+            "ctr_pct": 0.1543,
+            "cpc": 0.02,
+            "coste": 388.07,
+            "estrategia": "Maximiza las conversiones",
+            "conversiones": 0.67,
+            "cpa": 0
+          }
+        ]
+      },
+      "crm": {
+        "compromiso_leads": null,
+        "leads_crm": null,
+        "cumplimiento_pct": null,
+        "cpl_negocio": null,
+        "cpl_negocio_total": null,
+        "leads_total": null,
+        "inversion_total": null,
+        "leads_google_ads": null,
+        "leads_meta": null,
+        "leads_crm_prev": null,
+        "cumplimiento_pct_prev": null,
+        "cpl_negocio_prev": null
+      }
+    }
+  ],
+  "recomendaciones": [
+    {
+      "titulo": "Reactivar las 5 cuentas con anuncios sin publicar",
+      "seguro": "TODOS",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar al MCC SURATECH-COLOMBIA, identificar las 5 cuentas con alerta 'anuncios no se publican' y reactivar inmediatamente. Si hay payment issue, sumar metodo de pago.",
+      "por_que": "Inversion potencial parada. La alerta esta visible en el header del MCC. Cada dia sin publicar = leads perdidos imposibles de recuperar.",
+      "impacto": "ALTO - posible recuperar 10-30% del ritmo de leads del mes",
+      "esfuerzo": "bajo",
+      "prioridad": "critica",
+      "plazo": "HOY"
+    },
+    {
+      "titulo": "Completar verificación de servicios financieros en 3 cuentas",
+      "seguro": "TODOS",
+      "plataforma": "Google Ads",
+      "que_hacer": "Subir documentación legal de SURA + cumplir requisitos de Google Ads para anunciantes de seguros. Hay 3 cuentas con esta alerta pendiente.",
+      "por_que": "Bloqueante administrativo. Sin verificación, Google va a empezar a limitar/pausar delivery automaticamente.",
+      "impacto": "MEDIO - previene caida abrupta de impresiones la semana que viene",
+      "esfuerzo": "medio",
+      "prioridad": "critica",
+      "plazo": "esta semana"
+    },
+    {
+      "titulo": "Inyectar presupuesto en Arrendamiento - gap de 11,138 leads para cumplir",
+      "seguro": "Arrendamiento",
+      "plataforma": "Google Ads",
+      "que_hacer": "Identificar la mejor campaña SURA_ARRENDAMIENTO_* por CPA y subir presupuesto +30% por 7 dias. Reasignar de campañas low-performance del mismo seguro.",
+      "por_que": "Cumplimiento 32.2% vs 70% transcurrido del mes. Gap de 11,138 leads CRM. Sin accion, no se llega al compromiso de 16,423.0.",
+      "impacto": "ALTO - cerrar 60% del gap",
+      "esfuerzo": "bajo",
+      "prioridad": "critica",
+      "plazo": "hoy"
+    },
+    {
+      "titulo": "Destrabar SURA_AUTOS_PMAX - grupos limitados por política",
+      "seguro": "Autos",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a la campaña SURA_AUTOS_PMAX, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
+      "por_que": "Estado actual: 'Algunos grupos de recursos están limitados por una política'. Presupuesto $517,00 US$/día parcialmente sin entregar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana"
+    },
+    {
+      "titulo": "Destrabar SURA_MOTOS_SEARCH_SEGMENT - grupos limitados por política",
+      "seguro": "Motos",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a la campaña SURA_MOTOS_SEARCH_SEGMENT, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
+      "por_que": "Estado actual: 'AptoSe han rechazado algunos anuncios'. Presupuesto $357,00 US$/día parcialmente sin entregar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana"
+    },
+    {
+      "titulo": "Destrabar SURA_MOTOS_PMAX - grupos limitados por política",
+      "seguro": "Motos",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a la campaña SURA_MOTOS_PMAX, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
+      "por_que": "Estado actual: 'AptoAlgunos grupos de recursos se han rechazado y Algunos grupos de recursos están limitados por una política'. Presupuesto $397,00 US$/día parcialmente sin entregar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana"
+    },
+    {
+      "titulo": "Destrabar sura-cdd-co-google-search-retention-arriendo - grupos limitados por política",
+      "seguro": "Arrendamiento",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a la campaña sura-cdd-co-google-search-retention-arriendo, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
+      "por_que": "Estado actual: 'Se han rechazado algunos anuncios'. Presupuesto $984,00 US$/día parcialmente sin entregar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana"
+    },
+    {
+      "titulo": "Destrabar SURA_ARRIENDO_SEARCH_SEGMENT - grupos limitados por política",
+      "seguro": "Arrendamiento",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a la campaña SURA_ARRIENDO_SEARCH_SEGMENT, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
+      "por_que": "Estado actual: 'Se han rechazado algunos anuncios'. Presupuesto $900,00 US$/día parcialmente sin entregar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana"
+    },
+    {
+      "titulo": "Destrabar SURA_ARRIENDO_PMAX - grupos limitados por política",
+      "seguro": "Arrendamiento",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a la campaña SURA_ARRIENDO_PMAX, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
+      "por_que": "Estado actual: 'Algunos grupos de recursos están limitados por una política'. Presupuesto $376,00 US$/día parcialmente sin entregar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana"
+    },
+    {
+      "titulo": "Escalar SURA_AUTOS_PMAX (+30% budget) - CPA bajo $3.91",
+      "seguro": "Autos",
+      "plataforma": "Google Ads",
+      "que_hacer": "Subir presupuesto diario de 517,00 US$/día a +30%. Estrategia ya optimizada (Maximiza las conversiones).",
+      "por_que": "CPA $3.91 entre los mejores del MCC. 2726 conversiones con $10,671 de inversion. Hay headroom para escalar antes de ver fatiga.",
+      "impacto": "ALTO - +817 conversiones extra/mes a CPA similar",
+      "esfuerzo": "bajo",
+      "prioridad": "alta",
+      "plazo": "hoy"
+    }
+  ],
+  "discrepancias_y_gaps": {
+    "ga4_eventos": "PENDIENTE: el pipeline manual no logra mapear eventos GA4 -> seguro automaticamente. Recomendar migrar a GA4 Data API.",
+    "meta_ad_sets": "PARCIAL: solo capturados nombres de 4 campanias (Mensajes_WHATSAPP, Mascotas-Conversiones, Mensajes WhatsApp, Clientes potenciales). Drill-down a ad sets por seguro requiere Meta Marketing API.",
+    "salud_para_dos_y_animal": "Sin data CRM en 'Resumen mensual'. Solo tienen actividad en Google Ads / Meta (foco: potenciar)."
+  },
   "caso_negocio": {
-    "estado_actual": null,
-    "proyeccion_si_aplicamos_top5": null,
-    "proximo_paso": "Escalar a pipeline semanal con APIs oficiales (Google Ads API, Meta Marketing API, GA4 Data API, Sheets API) + alertas automáticas."
+    "estado_actual": "Cumplimiento global 46.1% vs 70% transcurrido del mes. Arrendamiento crítico (32%), Viajes (43%), Autos (57%), Motos (55%).",
+    "proyeccion_si_aplicamos_top5": "Aplicando las top 5 recomendaciones (escalar lo que rinde, pausar lo que no, destrabar 5+3 cuentas con bloqueos administrativos) estimamos +15-25% leads CRM en los proximos 7 dias y -10-15% CPL Negocio.",
+    "proximo_paso": "Aprobar migracion a APIs oficiales (Google Ads API, Meta Marketing API, GA4 Data API) para pasar a pipeline diario con alertas automaticas."
   }
 }

@@ -162,20 +162,30 @@ section h2 .accent { color: var(--sura-aqua); }
 .reco-item {
   border: 1px solid var(--sura-gris-claro);
   border-radius: 10px;
-  padding: 16px 18px;
   margin-bottom: 10px;
+  background: var(--sura-blanco);
+  transition: border-color .15s ease;
+}
+.reco-item:hover { border-color: rgba(0,53,156,0.3); }
+.reco-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 18px;
   display: grid;
-  grid-template-columns: 48px 1fr auto;
+  grid-template-columns: 40px 1fr auto;
   gap: 14px;
   align-items: center;
 }
+.reco-item summary::-webkit-details-marker { display: none; }
 .reco-item .rank {
-  width: 40px; height: 40px; border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   background: var(--sura-azul); color: var(--sura-blanco);
   display: flex; align-items: center; justify-content: center;
-  font-weight: 700;
+  font-weight: 700; font-size: 14px;
 }
-.reco-item .title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+.reco-item[open] .rank { background: var(--sura-aqua); }
+.reco-item .title-block { min-width: 0; }
+.reco-item .title { font-weight: 600; font-size: 15px; margin-bottom: 4px; color: var(--sura-gris-oscuro); }
 .reco-item .meta { font-size: 12px; color: var(--sura-gris-medio); }
 .reco-item .priority {
   font-size: 11px; padding: 4px 10px; border-radius: 999px; font-weight: 600;
@@ -184,6 +194,51 @@ section h2 .accent { color: var(--sura-aqua); }
 .priority.critica { background: #fef2f2; color: var(--rojo); }
 .priority.alta    { background: #fffbeb; color: var(--amarillo); }
 .priority.media   { background: #ecfdf5; color: var(--verde); }
+.reco-detail {
+  padding: 0 18px 18px 72px;
+  font-size: 14px;
+  color: var(--sura-gris-oscuro);
+  border-top: 1px dashed var(--sura-gris-claro);
+  margin-top: -2px;
+  padding-top: 14px;
+}
+.reco-detail p { margin: 8px 0; line-height: 1.55; }
+.reco-detail strong { color: var(--sura-azul); }
+
+.seguro-card.extra {
+  border-style: dashed;
+  background: linear-gradient(180deg, var(--sura-blanco), #f8f9fc);
+}
+.seguro-card.extra .nombre small { color: var(--sura-aqua); font-weight: 500; }
+
+.gap-list { list-style: none; padding: 0; }
+.gap-list li {
+  background: var(--sura-blanco);
+  border: 1px solid var(--sura-gris-claro);
+  border-left: 3px solid var(--sura-aqua);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.gap-list li strong { color: var(--sura-azul); }
+
+.caso-block {
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.caso-block h4 {
+  color: var(--sura-azul);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 16px 0 6px;
+}
+.caso-block h4:first-child { margin-top: 0; }
+.caso-block p { margin: 0 0 12px; line-height: 1.6; }
 
 /* ---------- Footer ---------- */
 footer {

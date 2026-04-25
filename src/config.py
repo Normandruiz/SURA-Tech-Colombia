@@ -7,14 +7,20 @@ RAW_DIR = ROOT / "raw"
 OUTPUTS_DIR = ROOT / "outputs"
 DOCS_DATA = ROOT / "docs" / "assets" / "data.json"
 
-SEGUROS = [
-    "Arrendamiento",
-    "Salud para Dos",
-    "Motos",
+# Foco MVP confirmado por el cliente (24-abr-2026):
+# - SEGUROS_PRINCIPALES: cumplimiento compromiso CRM, full data (4)
+# - SEGUROS_EXTRA: solo ads (Google + Meta) para identificar oportunidades de potenciar
+SEGUROS_PRINCIPALES = [
     "Autos",
-    "Salud Animal",
+    "Motos",
+    "Arrendamiento",
     "Viajes",
 ]
+SEGUROS_EXTRA_ADS_ONLY = [
+    "Salud para Dos",
+    "Salud Animal",
+]
+SEGUROS = SEGUROS_PRINCIPALES + SEGUROS_EXTRA_ADS_ONLY  # los 6 totales
 
 GOOGLE_ADS_MCC_ID = "383-039-2811"
 GOOGLE_ADS_MCC_ID_NUMERIC = "3830392811"
