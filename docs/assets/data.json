@@ -1,10 +1,16 @@
 {
   "meta": {
-    "generated_at": "2026-04-24T21:16:08",
+    "generated_at": "2026-04-24T21:38:39",
     "periodo": {
       "mes_actual": "abril 2026",
       "mes_anterior": "marzo 2026",
-      "porcentaje_transcurrido": 0.7
+      "porcentaje_transcurrido": 0.7,
+      "meses_disponibles": [
+        "abril 2026",
+        "marzo 2026",
+        "febrero 2026",
+        "enero 2026"
+      ]
     },
     "cliente": "SURA Tech Colombia",
     "agencia": "Beyond Media Agency",
@@ -59,68 +65,139 @@
           "cpa": 5.441901393852456
         },
         "campanias_count": 4,
+        "por_subtipo": {
+          "SEARCH_SEGMENT": {
+            "coste": 9197.96,
+            "conv": 1364.1,
+            "imp": 50031.0,
+            "clicks": 8318.0,
+            "n": 1,
+            "cpa": 6.742878088116707
+          },
+          "SEARCH_RETENTION": {
+            "coste": 4194.0,
+            "conv": 393.14,
+            "imp": 9955.0,
+            "clicks": 2933.0,
+            "n": 1,
+            "cpa": 10.667955435722643
+          },
+          "SEARCH_CONQUEST": {
+            "coste": 2188.75,
+            "conv": 340.53,
+            "imp": 51380.0,
+            "clicks": 2093.0,
+            "n": 1,
+            "cpa": 6.4274806918626854
+          },
+          "PMAX": {
+            "coste": 10671.24,
+            "conv": 2726.27,
+            "imp": 212389.0,
+            "clicks": 14886.0,
+            "n": 1,
+            "cpa": 3.914227130841773
+          }
+        },
         "campanias": [
           {
             "nombre": "SURA_AUTOS_SEARCH_SEGMENT",
-            "presupuesto": "326,00 US$/día",
+            "subtipo": "SEARCH_SEGMENT",
+            "presupuesto_diario": 326.0,
+            "presupuesto_str": "$326.00/día",
             "estado": "Apto",
+            "optimization_score": 0.0,
             "tipo": "Búsqueda",
             "impresiones": 50031.0,
             "clicks": 8318.0,
             "ctr_pct": 0.1663,
             "cpc": 1.11,
             "coste": 9197.96,
+            "cuota_imp_search": 0.6221,
+            "cuota_perdida_budget": 0.1459,
+            "cuota_perdida_ranking": 0.23199999999999998,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 1364.1,
-            "cpa": 6.74
+            "cpa": 6.74,
+            "flags": []
           },
           {
             "nombre": "SURA_AUTOS_SEARCH_RETENTION",
-            "presupuesto": "147,00 US$/día",
+            "subtipo": "SEARCH_RETENTION",
+            "presupuesto_diario": 147.0,
+            "presupuesto_str": "$147.00/día",
             "estado": "Apto",
+            "optimization_score": 0.0,
             "tipo": "Búsqueda",
             "impresiones": 9955.0,
             "clicks": 2933.0,
             "ctr_pct": 0.29460000000000003,
             "cpc": 1.43,
             "coste": 4194.0,
+            "cuota_imp_search": 0.5943,
+            "cuota_perdida_budget": 0.2289,
+            "cuota_perdida_ranking": 0.1769,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 393.14,
-            "cpa": 10.67
+            "cpa": 10.67,
+            "flags": [
+              "budget_constrained"
+            ]
           },
           {
             "nombre": "SURA_AUTOS_SEARCH_CONQUEST",
-            "presupuesto": "52,00 US$/día",
+            "subtipo": "SEARCH_CONQUEST",
+            "presupuesto_diario": 52.0,
+            "presupuesto_str": "$52.00/día",
             "estado": "Apto",
+            "optimization_score": 0.0,
             "tipo": "Búsqueda",
             "impresiones": 51380.0,
             "clicks": 2093.0,
             "ctr_pct": 0.0407,
             "cpc": 1.05,
             "coste": 2188.75,
+            "cuota_imp_search": 0.22469999999999998,
+            "cuota_perdida_budget": 0.4165,
+            "cuota_perdida_ranking": 0.3588,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 340.53,
-            "cpa": 6.43
+            "cpa": 6.43,
+            "flags": [
+              "budget_constrained",
+              "ranking_issue"
+            ]
           },
           {
             "nombre": "SURA_AUTOS_PMAX",
-            "presupuesto": "517,00 US$/día",
+            "subtipo": "PMAX",
+            "presupuesto_diario": 517.0,
+            "presupuesto_str": "$517.00/día",
             "estado": "Algunos grupos de recursos están limitados por una política",
+            "optimization_score": 0.0,
             "tipo": "Máximo rendimiento",
             "impresiones": 212389.0,
             "clicks": 14886.0,
             "ctr_pct": 0.1407,
             "cpc": 0.36,
             "coste": 10671.24,
+            "cuota_imp_search": 0.21309999999999998,
+            "cuota_perdida_budget": 0.7424,
+            "cuota_perdida_ranking": 0.044500000000000005,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 2726.27,
-            "cpa": 3.91
+            "cpa": 3.91,
+            "flags": [
+              "policy_limited",
+              "budget_constrained"
+            ]
           }
         ]
       },
       "crm": {
         "compromiso_leads": 9823.0,
         "leads_crm": 5564.0,
+        "leads_ga4": null,
         "cumplimiento_pct": 0.5664,
         "cpl_negocio": 5.94,
         "cpl_negocio_total": 4.92,
@@ -147,68 +224,136 @@
           "cpa": 0
         },
         "campanias_count": 4,
+        "por_subtipo": {
+          "SEARCH_SEGMENT": {
+            "coste": 4595.78,
+            "conv": 0.0,
+            "imp": 69131.0,
+            "clicks": 8779.0,
+            "n": 1,
+            "cpa": 0
+          },
+          "SEARCH_RETENTION": {
+            "coste": 1993.64,
+            "conv": 0.0,
+            "imp": 10759.0,
+            "clicks": 3925.0,
+            "n": 1,
+            "cpa": 0
+          },
+          "SEARCH_CONQUEST": {
+            "coste": 1366.13,
+            "conv": 0.0,
+            "imp": 19789.0,
+            "clicks": 2315.0,
+            "n": 1,
+            "cpa": 0
+          },
+          "PMAX": {
+            "coste": 7831.97,
+            "conv": 0.0,
+            "imp": 610519.0,
+            "clicks": 293551.0,
+            "n": 1,
+            "cpa": 0
+          }
+        },
         "campanias": [
           {
             "nombre": "SURA_MOTOS_SEARCH_SEGMENT",
-            "presupuesto": "357,00 US$/día",
+            "subtipo": "SEARCH_SEGMENT",
+            "presupuesto_diario": 357.0,
+            "presupuesto_str": "$357.00/día",
             "estado": "AptoSe han rechazado algunos anuncios",
+            "optimization_score": 0.84,
             "tipo": "Búsqueda",
             "impresiones": 69131.0,
             "clicks": 8779.0,
             "ctr_pct": 0.127,
             "cpc": 0.52,
             "coste": 4595.78,
+            "cuota_imp_search": 0.24170000000000003,
+            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_ranking": 0.10279999999999999,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 0.0,
-            "cpa": 0.0323
+            "cpa": 0.0323,
+            "flags": [
+              "rejected"
+            ]
           },
           {
             "nombre": "SURA_MOTOS_SEARCH_RETENTION",
-            "presupuesto": "183,00 US$/día",
+            "subtipo": "SEARCH_RETENTION",
+            "presupuesto_diario": 183.0,
+            "presupuesto_str": "$183.00/día",
             "estado": "Apto",
+            "optimization_score": 0.8640000000000001,
             "tipo": "Búsqueda",
             "impresiones": 10759.0,
             "clicks": 3925.0,
             "ctr_pct": 0.36479999999999996,
             "cpc": 0.51,
             "coste": 1993.64,
+            "cuota_imp_search": 0.9549,
+            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_ranking": 0.0067,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 0.0,
-            "cpa": 0.0784
+            "cpa": 0.0784,
+            "flags": []
           },
           {
             "nombre": "SURA_MOTOS_SEARCH_CONQUEST",
-            "presupuesto": "75,00 US$/día",
+            "subtipo": "SEARCH_CONQUEST",
+            "presupuesto_diario": 75.0,
+            "presupuesto_str": "$75.00/día",
             "estado": "Apto",
+            "optimization_score": 0.0,
             "tipo": "Búsqueda",
             "impresiones": 19789.0,
             "clicks": 2315.0,
             "ctr_pct": 0.11699999999999999,
             "cpc": 0.59,
             "coste": 1366.13,
+            "cuota_imp_search": 0.1032,
+            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_ranking": 0.1672,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 0.0,
-            "cpa": 0.039599999999999996
+            "cpa": 0.039599999999999996,
+            "flags": []
           },
           {
             "nombre": "SURA_MOTOS_PMAX",
-            "presupuesto": "397,00 US$/día",
+            "subtipo": "PMAX",
+            "presupuesto_diario": 397.0,
+            "presupuesto_str": "$397.00/día",
             "estado": "AptoAlgunos grupos de recursos se han rechazado y Algunos grupos de recursos están limitados por una política",
+            "optimization_score": 0.782,
             "tipo": "Máximo rendimiento",
             "impresiones": 610519.0,
             "clicks": 293551.0,
             "ctr_pct": 0.4808,
             "cpc": 0.03,
             "coste": 7831.97,
+            "cuota_imp_search": 0.1565,
+            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_ranking": 0.2677,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 0.0,
-            "cpa": 0.0022
+            "cpa": 0.0022,
+            "flags": [
+              "policy_limited",
+              "rejected"
+            ]
           }
         ]
       },
       "crm": {
         "compromiso_leads": 14412.0,
         "leads_crm": 7973.0,
+        "leads_ga4": null,
         "cumplimiento_pct": 0.5532,
         "cpl_negocio": 2.45,
         "cpl_negocio_total": 9.38,
@@ -235,54 +380,108 @@
           "cpa": 12.117459308350824
         },
         "campanias_count": 3,
+        "por_subtipo": {
+          "SEARCH_RETENTION": {
+            "coste": 12382.18,
+            "conv": 1667.98,
+            "imp": 36612.0,
+            "clicks": 16965.0,
+            "n": 1,
+            "cpa": 7.4234583148479
+          },
+          "SEARCH_SEGMENT": {
+            "coste": 8208.29,
+            "conv": 317.07,
+            "imp": 25838.0,
+            "clicks": 6406.0,
+            "n": 1,
+            "cpa": 25.887942725581105
+          },
+          "PMAX": {
+            "coste": 7237.76,
+            "conv": 311.49,
+            "imp": 4099626.0,
+            "clicks": 56884.0,
+            "n": 1,
+            "cpa": 23.235930527464767
+          }
+        },
         "campanias": [
           {
             "nombre": "sura-cdd-co-google-search-retention-arriendo",
-            "presupuesto": "984,00 US$/día",
+            "subtipo": "SEARCH_RETENTION",
+            "presupuesto_diario": 984.0,
+            "presupuesto_str": "$984.00/día",
             "estado": "Se han rechazado algunos anuncios",
+            "optimization_score": 0.863,
             "tipo": "Búsqueda",
             "impresiones": 36612.0,
             "clicks": 16965.0,
             "ctr_pct": 0.46340000000000003,
             "cpc": 0.73,
             "coste": 12382.18,
+            "cuota_imp_search": 0.8602,
+            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_ranking": 0.0819,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 1667.98,
-            "cpa": 7.42
+            "cpa": 7.42,
+            "flags": [
+              "rejected"
+            ]
           },
           {
             "nombre": "SURA_ARRIENDO_SEARCH_SEGMENT",
-            "presupuesto": "900,00 US$/día",
+            "subtipo": "SEARCH_SEGMENT",
+            "presupuesto_diario": 900.0,
+            "presupuesto_str": "$900.00/día",
             "estado": "Se han rechazado algunos anuncios",
+            "optimization_score": 0.748,
             "tipo": "Búsqueda",
             "impresiones": 25838.0,
             "clicks": 6406.0,
             "ctr_pct": 0.24789999999999998,
             "cpc": 1.28,
             "coste": 8208.29,
+            "cuota_imp_search": 0.8005,
+            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_ranking": 0.059500000000000004,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 317.07,
-            "cpa": 25.89
+            "cpa": 25.89,
+            "flags": [
+              "rejected"
+            ]
           },
           {
             "nombre": "SURA_ARRIENDO_PMAX",
-            "presupuesto": "376,00 US$/día",
+            "subtipo": "PMAX",
+            "presupuesto_diario": 376.0,
+            "presupuesto_str": "$376.00/día",
             "estado": "Algunos grupos de recursos están limitados por una política",
+            "optimization_score": 0.9329999999999999,
             "tipo": "Máximo rendimiento",
             "impresiones": 4099626.0,
             "clicks": 56884.0,
             "ctr_pct": 0.1975,
             "cpc": 0.01,
             "coste": 7237.76,
+            "cuota_imp_search": 0.1368,
+            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_ranking": 0.1346,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 311.49,
-            "cpa": 23.24
+            "cpa": 23.24,
+            "flags": [
+              "policy_limited"
+            ]
           }
         ]
       },
       "crm": {
         "compromiso_leads": 16423.0,
         "leads_crm": 5285.0,
+        "leads_ga4": null,
         "cumplimiento_pct": 0.3218,
         "cpl_negocio": 6.13,
         "cpl_negocio_total": 10.54,
@@ -309,54 +508,109 @@
           "cpa": 27.63174812494849
         },
         "campanias_count": 3,
+        "por_subtipo": {
+          "SEARCH_SEGMENT": {
+            "coste": 1775.47,
+            "conv": 32.54,
+            "imp": 9676.0,
+            "clicks": 1192.0,
+            "n": 1,
+            "cpa": 54.562692071296865
+          },
+          "SEARCH_RETENTION": {
+            "coste": 2970.71,
+            "conv": 124.03,
+            "imp": 5234.0,
+            "clicks": 2262.0,
+            "n": 1,
+            "cpa": 23.951543981294847
+          },
+          "PMAX": {
+            "coste": 1958.94,
+            "conv": 86.09,
+            "imp": 694607.0,
+            "clicks": 6821.0,
+            "n": 1,
+            "cpa": 22.754559182251132
+          }
+        },
         "campanias": [
           {
             "nombre": "SURA_VIAJES_SEARCH_SEGMENT",
-            "presupuesto": "106,00 US$/día",
+            "subtipo": "SEARCH_SEGMENT",
+            "presupuesto_diario": 106.0,
+            "presupuesto_str": "$106.00/día",
             "estado": "Apto",
+            "optimization_score": 0.0,
             "tipo": "Búsqueda",
             "impresiones": 9676.0,
             "clicks": 1192.0,
             "ctr_pct": 0.1232,
             "cpc": 1.49,
             "coste": 1775.47,
+            "cuota_imp_search": 0.27699999999999997,
+            "cuota_perdida_budget": 0.5768,
+            "cuota_perdida_ranking": 0.1461,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 32.54,
-            "cpa": 54.57
+            "cpa": 54.57,
+            "flags": [
+              "budget_constrained"
+            ]
           },
           {
             "nombre": "SURA_VIAJES_SEARCH_RETENTION",
-            "presupuesto": "251,00 US$/día",
+            "subtipo": "SEARCH_RETENTION",
+            "presupuesto_diario": 251.0,
+            "presupuesto_str": "$251.00/día",
             "estado": "Apto",
+            "optimization_score": 0.0,
             "tipo": "Búsqueda",
             "impresiones": 5234.0,
             "clicks": 2262.0,
             "ctr_pct": 0.4322,
             "cpc": 1.31,
             "coste": 2970.71,
+            "cuota_imp_search": 0.7525,
+            "cuota_perdida_budget": 0.201,
+            "cuota_perdida_ranking": 0.04650000000000001,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 124.03,
-            "cpa": 23.95
+            "cpa": 23.95,
+            "flags": [
+              "budget_constrained"
+            ]
           },
           {
             "nombre": "SURA_VIAJES_PMAX",
-            "presupuesto": "155,00 US$/día",
+            "subtipo": "PMAX",
+            "presupuesto_diario": 155.0,
+            "presupuesto_str": "$155.00/día",
             "estado": "Limitada por el presupuesto",
+            "optimization_score": 0.0,
             "tipo": "Máximo rendimiento",
             "impresiones": 694607.0,
             "clicks": 6821.0,
             "ctr_pct": 0.5527000000000001,
             "cpc": 0.01,
             "coste": 1958.94,
+            "cuota_imp_search": 0.1198,
+            "cuota_perdida_budget": 0.7689,
+            "cuota_perdida_ranking": 0.11130000000000001,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 86.09,
-            "cpa": 22.76
+            "cpa": 22.76,
+            "flags": [
+              "policy_limited",
+              "budget_constrained"
+            ]
           }
         ]
       },
       "crm": {
         "compromiso_leads": 2660.0,
         "leads_crm": 1149.0,
+        "leads_ga4": null,
         "cumplimiento_pct": 0.43200000000000005,
         "cpl_negocio": 7.43,
         "cpl_negocio_total": 32.36,
@@ -383,40 +637,75 @@
           "cpa": 0
         },
         "campanias_count": 2,
+        "por_subtipo": {
+          "SEARCH_RETENTION": {
+            "coste": 778.92,
+            "conv": 0,
+            "imp": 26951.0,
+            "clicks": 71589.0,
+            "n": 1,
+            "cpa": 0
+          },
+          "SEARCH_SEGMENT": {
+            "coste": 416.3,
+            "conv": 0,
+            "imp": 4224.0,
+            "clicks": 26335.0,
+            "n": 1,
+            "cpa": 0
+          }
+        },
         "campanias": [
           {
             "nombre": "SURA_SALUDPARADOS_SEARCH_RETENTION",
-            "presupuesto": "25,00 US$/día",
+            "subtipo": "SEARCH_RETENTION",
+            "presupuesto_diario": 25.0,
+            "presupuesto_str": "$25.00/día",
             "estado": "Apto",
+            "optimization_score": 0.0,
             "tipo": "Búsqueda",
             "impresiones": 26951.0,
             "clicks": 71589.0,
             "ctr_pct": 0.3765,
             "cpc": 0.03,
             "coste": 778.92,
+            "cuota_imp_search": 0.0,
+            "cuota_perdida_budget": 0.1517,
+            "cuota_perdida_ranking": 0.19,
             "estrategia": "",
             "conversiones": 0,
-            "cpa": 0
+            "cpa": 0,
+            "flags": []
           },
           {
             "nombre": "SURA_SALUDPARADOS_SEARCH_SEGMENT",
-            "presupuesto": "10,00 US$/día",
+            "subtipo": "SEARCH_SEGMENT",
+            "presupuesto_diario": 10.0,
+            "presupuesto_str": "$10.00/día",
             "estado": "Apto",
+            "optimization_score": 0.0,
             "tipo": "Búsqueda",
             "impresiones": 4224.0,
             "clicks": 26335.0,
             "ctr_pct": 0.1604,
             "cpc": 0.1,
             "coste": 416.3,
+            "cuota_imp_search": 0.0,
+            "cuota_perdida_budget": 0.159,
+            "cuota_perdida_ranking": 0.62,
             "estrategia": "",
             "conversiones": 0,
-            "cpa": 0
+            "cpa": 0,
+            "flags": [
+              "ranking_issue"
+            ]
           }
         ]
       },
       "crm": {
         "compromiso_leads": null,
         "leads_crm": null,
+        "leads_ga4": null,
         "cumplimiento_pct": null,
         "cpl_negocio": null,
         "cpl_negocio_total": null,
@@ -443,54 +732,107 @@
           "cpa": 611.0398230088497
         },
         "campanias_count": 3,
+        "por_subtipo": {
+          "SEARCH_SEGMENT": {
+            "coste": 283.06,
+            "conv": 0.83,
+            "imp": 11104.0,
+            "clicks": 0.1167,
+            "n": 1,
+            "cpa": 341.03614457831327
+          },
+          "SEARCH_RETENTION": {
+            "coste": 709.82,
+            "conv": 0.76,
+            "imp": 10929.0,
+            "clicks": 0.19140000000000001,
+            "n": 1,
+            "cpa": 933.9736842105264
+          },
+          "PMAX": {
+            "coste": 388.07,
+            "conv": 0.67,
+            "imp": 131351.0,
+            "clicks": 0.0286,
+            "n": 1,
+            "cpa": 579.2089552238806
+          }
+        },
         "campanias": [
           {
             "nombre": "SURA_SALUD_MASCOTAS_SEARCH_SEGMENT",
-            "presupuesto": "11,00 US$/día",
+            "subtipo": "SEARCH_SEGMENT",
+            "presupuesto_diario": 11.0,
+            "presupuesto_str": "$11.00/día",
             "estado": "Entidad apta (limitada)Faltan suficientes palabras clave relevantes",
+            "optimization_score": 0.682,
             "tipo": "Búsqueda",
             "impresiones": 11104.0,
             "clicks": 0.1167,
             "ctr_pct": 0.2623,
             "cpc": 0.1,
             "coste": 283.06,
+            "cuota_imp_search": 0.5466,
+            "cuota_perdida_budget": 0.33990000000000004,
+            "cuota_perdida_ranking": 0.11349999999999999,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 0.83,
-            "cpa": 0
+            "cpa": 0,
+            "flags": [
+              "policy_limited",
+              "budget_constrained"
+            ]
           },
           {
             "nombre": "SURA_SALUD_MASCOTAS_SEARCH_RETENTION",
-            "presupuesto": "29,00 US$/día",
+            "subtipo": "SEARCH_RETENTION",
+            "presupuesto_diario": 29.0,
+            "presupuesto_str": "$29.00/día",
             "estado": "Apto",
+            "optimization_score": 0.691,
             "tipo": "Búsqueda",
             "impresiones": 10929.0,
             "clicks": 0.19140000000000001,
             "ctr_pct": 0.4473,
             "cpc": 0.15,
             "coste": 709.82,
+            "cuota_imp_search": 0.8896999999999999,
+            "cuota_perdida_budget": 0.0676,
+            "cuota_perdida_ranking": 0.042699999999999995,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 0.76,
-            "cpa": 0
+            "cpa": 0,
+            "flags": []
           },
           {
             "nombre": "SURA_SALUD_MASCOTAS_PMAX",
-            "presupuesto": "15,00 US$/día",
+            "subtipo": "PMAX",
+            "presupuesto_diario": 15.0,
+            "presupuesto_str": "$15.00/día",
             "estado": "Apto",
+            "optimization_score": 0.94,
             "tipo": "Máximo rendimiento",
             "impresiones": 131351.0,
             "clicks": 0.0286,
             "ctr_pct": 0.1543,
             "cpc": 0.02,
             "coste": 388.07,
+            "cuota_imp_search": 0.3367,
+            "cuota_perdida_budget": 0.5640999999999999,
+            "cuota_perdida_ranking": 0.0992,
             "estrategia": "Maximiza las conversiones",
             "conversiones": 0.67,
-            "cpa": 0
+            "cpa": 0,
+            "flags": [
+              "budget_constrained"
+            ]
           }
         ]
       },
       "crm": {
         "compromiso_leads": null,
         "leads_crm": null,
+        "leads_ga4": null,
         "cumplimiento_pct": null,
         "cpl_negocio": null,
         "cpl_negocio_total": null,
@@ -504,122 +846,802 @@
       }
     }
   ],
+  "evolucion_mom": {
+    "meses": [
+      "enero 2026",
+      "febrero 2026",
+      "marzo 2026",
+      "abril 2026"
+    ],
+    "por_seguro": {
+      "Autos": [
+        {
+          "mes": "enero 2026",
+          "compromiso": 8312.0,
+          "leads_crm": 11398.0,
+          "leads_ga4": null,
+          "cumplimiento": 1.3713,
+          "cpl_negocio": 3.85,
+          "leads_google_ads": 6055.0,
+          "cpl_google_ads": 4.35,
+          "inv_google_ads": 26333.0,
+          "leads_meta": 5249.0,
+          "cpl_meta": 2.98,
+          "inv_meta": 15645.1,
+          "leads_total": 12291.0,
+          "inversion_total": 43862.31,
+          "cpl_negocio_total": 3.57
+        },
+        {
+          "mes": "febrero 2026",
+          "compromiso": 7879.0,
+          "leads_crm": 9883.0,
+          "leads_ga4": null,
+          "cumplimiento": 1.2543,
+          "cpl_negocio": 4.79,
+          "leads_google_ads": 5686.0,
+          "cpl_google_ads": 5.02,
+          "inv_google_ads": 28539.0,
+          "leads_meta": 4201.0,
+          "cpl_meta": 4.13,
+          "inv_meta": 17338.69,
+          "leads_total": 10960.0,
+          "inversion_total": 47315.0,
+          "cpl_negocio_total": 4.32
+        },
+        {
+          "mes": "marzo 2026",
+          "compromiso": 10130.0,
+          "leads_crm": 9293.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.9174,
+          "cpl_negocio": 4.61,
+          "leads_google_ads": 5366.0,
+          "cpl_google_ads": 4.9,
+          "inv_google_ads": 26309.0,
+          "leads_meta": 3330.0,
+          "cpl_meta": 4.64,
+          "inv_meta": 15460.49,
+          "leads_total": 9693.0,
+          "inversion_total": 42831.72,
+          "cpl_negocio_total": 4.42
+        },
+        {
+          "mes": "abril 2026",
+          "compromiso": 9823.0,
+          "leads_crm": 5564.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.5664,
+          "cpl_negocio": 5.94,
+          "leads_google_ads": 3867.0,
+          "cpl_google_ads": 5.93,
+          "inv_google_ads": 22945.0,
+          "leads_meta": 2293.0,
+          "cpl_meta": 3.97,
+          "inv_meta": 9112.46,
+          "leads_total": 6710.0,
+          "inversion_total": 33030.43,
+          "cpl_negocio_total": 4.92
+        }
+      ],
+      "Motos": [
+        {
+          "mes": "enero 2026",
+          "compromiso": 15442.0,
+          "leads_crm": 18115.0,
+          "leads_ga4": null,
+          "cumplimiento": 1.1731,
+          "cpl_negocio": 1.1,
+          "leads_google_ads": 1266.0,
+          "cpl_google_ads": 7.24,
+          "inv_google_ads": 9167.0,
+          "leads_meta": 1993.0,
+          "cpl_meta": 4.73,
+          "inv_meta": 9432.9,
+          "leads_total": 3304.0,
+          "inversion_total": 19872.21,
+          "cpl_negocio_total": 6.01
+        },
+        {
+          "mes": "febrero 2026",
+          "compromiso": 14323.0,
+          "leads_crm": 14396.0,
+          "leads_ga4": null,
+          "cumplimiento": 1.0051,
+          "cpl_negocio": 2.19,
+          "leads_google_ads": 1516.0,
+          "cpl_google_ads": 11.11,
+          "inv_google_ads": 16853.0,
+          "leads_meta": 2040.0,
+          "cpl_meta": 7.04,
+          "inv_meta": 14370.35,
+          "leads_total": 3587.0,
+          "inversion_total": 31527.67,
+          "cpl_negocio_total": 8.79
+        },
+        {
+          "mes": "marzo 2026",
+          "compromiso": 15442.0,
+          "leads_crm": 12338.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.799,
+          "cpl_negocio": 2.63,
+          "leads_google_ads": 1558.0,
+          "cpl_google_ads": 11.23,
+          "inv_google_ads": 17494.0,
+          "leads_meta": 1459.0,
+          "cpl_meta": 9.95,
+          "inv_meta": 14514.97,
+          "leads_total": 3055.0,
+          "inversion_total": 32387.48,
+          "cpl_negocio_total": 10.6
+        },
+        {
+          "mes": "abril 2026",
+          "compromiso": 14412.0,
+          "leads_crm": 7973.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.5532,
+          "cpl_negocio": 2.45,
+          "leads_google_ads": 1008.0,
+          "cpl_google_ads": 12.94,
+          "inv_google_ads": 13044.0,
+          "leads_meta": 1043.0,
+          "cpl_meta": 5.59,
+          "inv_meta": 5825.19,
+          "leads_total": 2083.0,
+          "inversion_total": 19527.48,
+          "cpl_negocio_total": 9.38
+        }
+      ],
+      "Arrendamiento": [
+        {
+          "mes": "enero 2026",
+          "compromiso": 24635.0,
+          "leads_crm": 13845.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.562,
+          "cpl_negocio": 4.44,
+          "leads_google_ads": 2751.0,
+          "cpl_google_ads": 12.39,
+          "inv_google_ads": 34073.0,
+          "leads_meta": 3175.0,
+          "cpl_meta": 8.35,
+          "inv_meta": 26509.91,
+          "leads_total": 5946.0,
+          "inversion_total": 61535.6,
+          "cpl_negocio_total": 10.35
+        },
+        {
+          "mes": "febrero 2026",
+          "compromiso": 18769.0,
+          "leads_crm": 11961.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.6373,
+          "cpl_negocio": 2.65,
+          "leads_google_ads": 2615.0,
+          "cpl_google_ads": 7.07,
+          "inv_google_ads": 18478.0,
+          "leads_meta": 2151.0,
+          "cpl_meta": 5.99,
+          "inv_meta": 12881.58,
+          "leads_total": 4783.0,
+          "inversion_total": 31718.02,
+          "cpl_negocio_total": 6.63
+        },
+        {
+          "mes": "marzo 2026",
+          "compromiso": 16423.0,
+          "leads_crm": 8911.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.5426,
+          "cpl_negocio": 5.04,
+          "leads_google_ads": 2813.0,
+          "cpl_google_ads": 9.1,
+          "inv_google_ads": 25605.0,
+          "leads_meta": 2123.0,
+          "cpl_meta": 8.87,
+          "inv_meta": 18838.04,
+          "leads_total": 4978.0,
+          "inversion_total": 44890.51,
+          "cpl_negocio_total": 9.02
+        },
+        {
+          "mes": "abril 2026",
+          "compromiso": 16423.0,
+          "leads_crm": 5285.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.3218,
+          "cpl_negocio": 6.13,
+          "leads_google_ads": 1696.0,
+          "cpl_google_ads": 14.35,
+          "inv_google_ads": 24344.0,
+          "leads_meta": 1363.0,
+          "cpl_meta": 5.24,
+          "inv_meta": 7148.38,
+          "leads_total": 3074.0,
+          "inversion_total": 32387.4,
+          "cpl_negocio_total": 10.54
+        }
+      ],
+      "Viajes": [
+        {
+          "mes": "enero 2026",
+          "compromiso": 2280.0,
+          "leads_crm": 1301.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.5706,
+          "cpl_negocio": 8.69,
+          "leads_google_ads": 224.0,
+          "cpl_google_ads": 31.47,
+          "inv_google_ads": 7046.0,
+          "leads_meta": 98.0,
+          "cpl_meta": 37.14,
+          "inv_meta": 3639.83,
+          "leads_total": 322.0,
+          "inversion_total": 11310.18,
+          "cpl_negocio_total": 35.13
+        },
+        {
+          "mes": "febrero 2026",
+          "compromiso": 2280.0,
+          "leads_crm": 1239.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.5434,
+          "cpl_negocio": 9.23,
+          "leads_google_ads": 216.0,
+          "cpl_google_ads": 32.93,
+          "inv_google_ads": 7097.0,
+          "leads_meta": 597.0,
+          "cpl_meta": 7.08,
+          "inv_meta": 4224.37,
+          "leads_total": 813.0,
+          "inversion_total": 11439.71,
+          "cpl_negocio_total": 14.08
+        },
+        {
+          "mes": "marzo 2026",
+          "compromiso": 2280.0,
+          "leads_crm": 2036.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.893,
+          "cpl_negocio": 5.64,
+          "leads_google_ads": 300.0,
+          "cpl_google_ads": 23.6,
+          "inv_google_ads": 7091.0,
+          "leads_meta": 139.0,
+          "cpl_meta": 30.6,
+          "inv_meta": 4254.02,
+          "leads_total": 439.0,
+          "inversion_total": 11475.23,
+          "cpl_negocio_total": 26.11
+        },
+        {
+          "mes": "abril 2026",
+          "compromiso": 2660.0,
+          "leads_crm": 1149.0,
+          "leads_ga4": null,
+          "cumplimiento": 0.43200000000000005,
+          "cpl_negocio": 7.43,
+          "leads_google_ads": 190.0,
+          "cpl_google_ads": 29.55,
+          "inv_google_ads": 5611.0,
+          "leads_meta": 74.0,
+          "cpl_meta": 37.46,
+          "inv_meta": 2771.74,
+          "leads_total": 264.0,
+          "inversion_total": 8539.71,
+          "cpl_negocio_total": 32.36
+        }
+      ]
+    }
+  },
+  "cruces": {
+    "mes": "abril 2026",
+    "por_seguro": [
+      {
+        "seguro": "Autos",
+        "leads_crm": 5564.0,
+        "google_ads_conv": 4824.039999999999,
+        "leads_meta_crm": 2293.0,
+        "leads_otros": 550.0,
+        "ratio_ga_conv_vs_crm": 0.867,
+        "gap_conv_vs_crm": 740.0,
+        "inversion_ga_extractor": 26251.95,
+        "inversion_ga_crm": 22945.0,
+        "delta_inversion": 3306.95
+      },
+      {
+        "seguro": "Motos",
+        "leads_crm": 7973.0,
+        "google_ads_conv": 0,
+        "leads_meta_crm": 1043.0,
+        "leads_otros": 32.0,
+        "ratio_ga_conv_vs_crm": 0.0,
+        "gap_conv_vs_crm": 0,
+        "inversion_ga_extractor": 15787.52,
+        "inversion_ga_crm": 13044.0,
+        "delta_inversion": 2743.52
+      },
+      {
+        "seguro": "Arrendamiento",
+        "leads_crm": 5285.0,
+        "google_ads_conv": 2296.54,
+        "leads_meta_crm": 1363.0,
+        "leads_otros": 15.0,
+        "ratio_ga_conv_vs_crm": 0.435,
+        "gap_conv_vs_crm": 2988.0,
+        "inversion_ga_extractor": 27828.23,
+        "inversion_ga_crm": 24344.0,
+        "delta_inversion": 3484.23
+      },
+      {
+        "seguro": "Viajes",
+        "leads_crm": 1149.0,
+        "google_ads_conv": 242.66,
+        "leads_meta_crm": 74.0,
+        "leads_otros": 0,
+        "ratio_ga_conv_vs_crm": 0.211,
+        "gap_conv_vs_crm": 906.0,
+        "inversion_ga_extractor": 6705.12,
+        "inversion_ga_crm": 5611.0,
+        "delta_inversion": 1094.12
+      }
+    ]
+  },
+  "optimizaciones": {
+    "escalar": [
+      {
+        "seguro": "Autos",
+        "nombre": "SURA_AUTOS_PMAX",
+        "subtipo": "PMAX",
+        "estado": "Algunos grupos de recursos están limitados por una política",
+        "presupuesto_diario": 517.0,
+        "coste": 10671.24,
+        "conversiones": 2726.27,
+        "cpa": 3.91,
+        "cuota_perdida_budget": 0.7424,
+        "cuota_perdida_ranking": 0.044500000000000005,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
+        ]
+      },
+      {
+        "seguro": "Autos",
+        "nombre": "SURA_AUTOS_SEARCH_CONQUEST",
+        "subtipo": "SEARCH_CONQUEST",
+        "estado": "Apto",
+        "presupuesto_diario": 52.0,
+        "coste": 2188.75,
+        "conversiones": 340.53,
+        "cpa": 6.43,
+        "cuota_perdida_budget": 0.4165,
+        "cuota_perdida_ranking": 0.3588,
+        "flags": [
+          "budget_constrained",
+          "ranking_issue"
+        ]
+      },
+      {
+        "seguro": "Autos",
+        "nombre": "SURA_AUTOS_SEARCH_SEGMENT",
+        "subtipo": "SEARCH_SEGMENT",
+        "estado": "Apto",
+        "presupuesto_diario": 326.0,
+        "coste": 9197.96,
+        "conversiones": 1364.1,
+        "cpa": 6.74,
+        "cuota_perdida_budget": 0.1459,
+        "cuota_perdida_ranking": 0.23199999999999998,
+        "flags": []
+      },
+      {
+        "seguro": "Autos",
+        "nombre": "SURA_AUTOS_SEARCH_RETENTION",
+        "subtipo": "SEARCH_RETENTION",
+        "estado": "Apto",
+        "presupuesto_diario": 147.0,
+        "coste": 4194.0,
+        "conversiones": 393.14,
+        "cpa": 10.67,
+        "cuota_perdida_budget": 0.2289,
+        "cuota_perdida_ranking": 0.1769,
+        "flags": [
+          "budget_constrained"
+        ]
+      },
+      {
+        "seguro": "Viajes",
+        "nombre": "SURA_VIAJES_PMAX",
+        "subtipo": "PMAX",
+        "estado": "Limitada por el presupuesto",
+        "presupuesto_diario": 155.0,
+        "coste": 1958.94,
+        "conversiones": 86.09,
+        "cpa": 22.76,
+        "cuota_perdida_budget": 0.7689,
+        "cuota_perdida_ranking": 0.11130000000000001,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
+        ]
+      }
+    ],
+    "pausar": [
+      {
+        "seguro": "Viajes",
+        "nombre": "SURA_VIAJES_SEARCH_SEGMENT",
+        "subtipo": "SEARCH_SEGMENT",
+        "estado": "Apto",
+        "presupuesto_diario": 106.0,
+        "coste": 1775.47,
+        "conversiones": 32.54,
+        "cpa": 54.57,
+        "cuota_perdida_budget": 0.5768,
+        "cuota_perdida_ranking": 0.1461,
+        "flags": [
+          "budget_constrained"
+        ]
+      },
+      {
+        "seguro": "Arrendamiento",
+        "nombre": "SURA_ARRIENDO_SEARCH_SEGMENT",
+        "subtipo": "SEARCH_SEGMENT",
+        "estado": "Se han rechazado algunos anuncios",
+        "presupuesto_diario": 900.0,
+        "coste": 8208.29,
+        "conversiones": 317.07,
+        "cpa": 25.89,
+        "cuota_perdida_budget": 0.0,
+        "cuota_perdida_ranking": 0.059500000000000004,
+        "flags": [
+          "rejected"
+        ]
+      },
+      {
+        "seguro": "Viajes",
+        "nombre": "SURA_VIAJES_SEARCH_RETENTION",
+        "subtipo": "SEARCH_RETENTION",
+        "estado": "Apto",
+        "presupuesto_diario": 251.0,
+        "coste": 2970.71,
+        "conversiones": 124.03,
+        "cpa": 23.95,
+        "cuota_perdida_budget": 0.201,
+        "cuota_perdida_ranking": 0.04650000000000001,
+        "flags": [
+          "budget_constrained"
+        ]
+      },
+      {
+        "seguro": "Arrendamiento",
+        "nombre": "SURA_ARRIENDO_PMAX",
+        "subtipo": "PMAX",
+        "estado": "Algunos grupos de recursos están limitados por una política",
+        "presupuesto_diario": 376.0,
+        "coste": 7237.76,
+        "conversiones": 311.49,
+        "cpa": 23.24,
+        "cuota_perdida_budget": 0.0,
+        "cuota_perdida_ranking": 0.1346,
+        "flags": [
+          "policy_limited"
+        ]
+      },
+      {
+        "seguro": "Viajes",
+        "nombre": "SURA_VIAJES_PMAX",
+        "subtipo": "PMAX",
+        "estado": "Limitada por el presupuesto",
+        "presupuesto_diario": 155.0,
+        "coste": 1958.94,
+        "conversiones": 86.09,
+        "cpa": 22.76,
+        "cuota_perdida_budget": 0.7689,
+        "cuota_perdida_ranking": 0.11130000000000001,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
+        ]
+      }
+    ],
+    "destrabar": [
+      {
+        "seguro": "Arrendamiento",
+        "nombre": "sura-cdd-co-google-search-retention-arriendo",
+        "subtipo": "SEARCH_RETENTION",
+        "estado": "Se han rechazado algunos anuncios",
+        "presupuesto_diario": 984.0,
+        "coste": 12382.18,
+        "conversiones": 1667.98,
+        "cpa": 7.42,
+        "cuota_perdida_budget": 0.0,
+        "cuota_perdida_ranking": 0.0819,
+        "flags": [
+          "rejected"
+        ]
+      },
+      {
+        "seguro": "Autos",
+        "nombre": "SURA_AUTOS_PMAX",
+        "subtipo": "PMAX",
+        "estado": "Algunos grupos de recursos están limitados por una política",
+        "presupuesto_diario": 517.0,
+        "coste": 10671.24,
+        "conversiones": 2726.27,
+        "cpa": 3.91,
+        "cuota_perdida_budget": 0.7424,
+        "cuota_perdida_ranking": 0.044500000000000005,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
+        ]
+      },
+      {
+        "seguro": "Arrendamiento",
+        "nombre": "SURA_ARRIENDO_SEARCH_SEGMENT",
+        "subtipo": "SEARCH_SEGMENT",
+        "estado": "Se han rechazado algunos anuncios",
+        "presupuesto_diario": 900.0,
+        "coste": 8208.29,
+        "conversiones": 317.07,
+        "cpa": 25.89,
+        "cuota_perdida_budget": 0.0,
+        "cuota_perdida_ranking": 0.059500000000000004,
+        "flags": [
+          "rejected"
+        ]
+      },
+      {
+        "seguro": "Motos",
+        "nombre": "SURA_MOTOS_PMAX",
+        "subtipo": "PMAX",
+        "estado": "AptoAlgunos grupos de recursos se han rechazado y Algunos grupos de recursos están limitados por una política",
+        "presupuesto_diario": 397.0,
+        "coste": 7831.97,
+        "conversiones": 0.0,
+        "cpa": 0.0022,
+        "cuota_perdida_budget": 0.0,
+        "cuota_perdida_ranking": 0.2677,
+        "flags": [
+          "policy_limited",
+          "rejected"
+        ]
+      },
+      {
+        "seguro": "Arrendamiento",
+        "nombre": "SURA_ARRIENDO_PMAX",
+        "subtipo": "PMAX",
+        "estado": "Algunos grupos de recursos están limitados por una política",
+        "presupuesto_diario": 376.0,
+        "coste": 7237.76,
+        "conversiones": 311.49,
+        "cpa": 23.24,
+        "cuota_perdida_budget": 0.0,
+        "cuota_perdida_ranking": 0.1346,
+        "flags": [
+          "policy_limited"
+        ]
+      },
+      {
+        "seguro": "Motos",
+        "nombre": "SURA_MOTOS_SEARCH_SEGMENT",
+        "subtipo": "SEARCH_SEGMENT",
+        "estado": "AptoSe han rechazado algunos anuncios",
+        "presupuesto_diario": 357.0,
+        "coste": 4595.78,
+        "conversiones": 0.0,
+        "cpa": 0.0323,
+        "cuota_perdida_budget": 0.0,
+        "cuota_perdida_ranking": 0.10279999999999999,
+        "flags": [
+          "rejected"
+        ]
+      },
+      {
+        "seguro": "Viajes",
+        "nombre": "SURA_VIAJES_PMAX",
+        "subtipo": "PMAX",
+        "estado": "Limitada por el presupuesto",
+        "presupuesto_diario": 155.0,
+        "coste": 1958.94,
+        "conversiones": 86.09,
+        "cpa": 22.76,
+        "cuota_perdida_budget": 0.7689,
+        "cuota_perdida_ranking": 0.11130000000000001,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
+        ]
+      },
+      {
+        "seguro": "Salud Animal",
+        "nombre": "SURA_SALUD_MASCOTAS_SEARCH_SEGMENT",
+        "subtipo": "SEARCH_SEGMENT",
+        "estado": "Entidad apta (limitada)Faltan suficientes palabras clave relevantes",
+        "presupuesto_diario": 11.0,
+        "coste": 283.06,
+        "conversiones": 0.83,
+        "cpa": 0,
+        "cuota_perdida_budget": 0.33990000000000004,
+        "cuota_perdida_ranking": 0.11349999999999999,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
+        ]
+      }
+    ],
+    "quality_issues": [
+      {
+        "seguro": "Salud para Dos",
+        "nombre": "SURA_SALUDPARADOS_SEARCH_SEGMENT",
+        "subtipo": "SEARCH_SEGMENT",
+        "estado": "Apto",
+        "presupuesto_diario": 10.0,
+        "coste": 416.3,
+        "conversiones": 0,
+        "cpa": 0,
+        "cuota_perdida_budget": 0.159,
+        "cuota_perdida_ranking": 0.62,
+        "flags": [
+          "ranking_issue"
+        ]
+      },
+      {
+        "seguro": "Autos",
+        "nombre": "SURA_AUTOS_SEARCH_CONQUEST",
+        "subtipo": "SEARCH_CONQUEST",
+        "estado": "Apto",
+        "presupuesto_diario": 52.0,
+        "coste": 2188.75,
+        "conversiones": 340.53,
+        "cpa": 6.43,
+        "cuota_perdida_budget": 0.4165,
+        "cuota_perdida_ranking": 0.3588,
+        "flags": [
+          "budget_constrained",
+          "ranking_issue"
+        ]
+      }
+    ]
+  },
   "recomendaciones": [
     {
       "titulo": "Reactivar las 5 cuentas con anuncios sin publicar",
       "seguro": "TODOS",
       "plataforma": "Google Ads",
-      "que_hacer": "Entrar al MCC SURATECH-COLOMBIA, identificar las 5 cuentas con alerta 'anuncios no se publican' y reactivar inmediatamente. Si hay payment issue, sumar metodo de pago.",
-      "por_que": "Inversion potencial parada. La alerta esta visible en el header del MCC. Cada dia sin publicar = leads perdidos imposibles de recuperar.",
+      "que_hacer": "Entrar al MCC SURATECH-COLOMBIA, identificar las 5 cuentas con alerta 'anuncios no se publican' y reactivar HOY. Verificar metodo de pago, billing alerts, restricciones de cuenta.",
+      "por_que": "Inversion potencial parada. Cada dia sin publicar = leads imposibles de recuperar.",
       "impacto": "ALTO - posible recuperar 10-30% del ritmo de leads del mes",
       "esfuerzo": "bajo",
       "prioridad": "critica",
-      "plazo": "HOY"
+      "plazo": "HOY",
+      "evidencia": [
+        "Alerta visible en header del MCC: '5 cuentas cuyos anuncios no se están publicando'"
+      ]
     },
     {
       "titulo": "Completar verificación de servicios financieros en 3 cuentas",
       "seguro": "TODOS",
       "plataforma": "Google Ads",
-      "que_hacer": "Subir documentación legal de SURA + cumplir requisitos de Google Ads para anunciantes de seguros. Hay 3 cuentas con esta alerta pendiente.",
-      "por_que": "Bloqueante administrativo. Sin verificación, Google va a empezar a limitar/pausar delivery automaticamente.",
-      "impacto": "MEDIO - previene caida abrupta de impresiones la semana que viene",
+      "que_hacer": "Subir documentacion legal de SURA + cumplir requisitos para anunciantes de seguros. 3 cuentas pendientes.",
+      "por_que": "Bloqueante administrativo. Sin verificación, Google empieza a limitar/pausar delivery automaticamente.",
+      "impacto": "MEDIO - previene caída abrupta de impresiones la semana que viene",
       "esfuerzo": "medio",
       "prioridad": "critica",
-      "plazo": "esta semana"
+      "plazo": "esta semana",
+      "evidencia": []
     },
     {
-      "titulo": "Inyectar presupuesto en Arrendamiento - gap de 11,138 leads para cumplir",
-      "seguro": "Arrendamiento",
-      "plataforma": "Google Ads",
-      "que_hacer": "Identificar la mejor campaña SURA_ARRENDAMIENTO_* por CPA y subir presupuesto +30% por 7 dias. Reasignar de campañas low-performance del mismo seguro.",
-      "por_que": "Cumplimiento 32.2% vs 70% transcurrido del mes. Gap de 11,138 leads CRM. Sin accion, no se llega al compromiso de 16,423.0.",
-      "impacto": "ALTO - cerrar 60% del gap",
-      "esfuerzo": "bajo",
+      "titulo": "URGENTE: Tracking de conversiones roto en Motos (Google Ads)",
+      "seguro": "Motos",
+      "plataforma": "Tracking",
+      "que_hacer": "Revisar el evento de conversion configurado en la cuenta Google Ads de Motos. El tag de conversion no esta disparando. Validar tag manager / GA4 conversion import. Reasignar el evento si fue eliminado.",
+      "por_que": "En abril 2026, el CRM registra 7,973 leads de Motos pero Google Ads reporta 0 conversiones. Sin tracking, el bidding de Smart Bidding no puede optimizar - cada US$ invertido en Motos esta a ciegas.",
+      "impacto": "ALTO - reactivar bidding optimizado puede bajar CPC -20% en 7 dias",
+      "esfuerzo": "medio",
       "prioridad": "critica",
-      "plazo": "hoy"
+      "plazo": "hoy",
+      "evidencia": [
+        "Sheet abril 2026: Motos = 7,973 leads CRM",
+        "Google Ads cuenta Motos (331-988-8513): 0 conversiones reportadas en 4 campanias"
+      ]
     },
     {
-      "titulo": "Destrabar SURA_AUTOS_PMAX - grupos limitados por política",
+      "titulo": "Investigar caída de Arrendamiento: cumplimiento -40% MoM y CPL +21% MoM",
+      "seguro": "Arrendamiento",
+      "plataforma": "Google Ads",
+      "que_hacer": "Auditar campanias SURA_ARRIENDO_*: cambios recientes en bidding, presupuesto, audiencias, palabras clave. Comparar landing pages activas vs marzo. Revisar cambios en quality score. Reactivar lo que funcionaba en febrero (CPL $2.65).",
+      "por_que": "Cumplimiento cayó de 54.3% (mes anterior) a 32.2% (mes actual). CPL Negocio subió de $5.04 a $6.13. Esto sugiere algo que se rompió en el funnel: tracking, landing, oferta o quality score.",
+      "impacto": "ALTO - cerrar el gap de 11.138 leads requiere arreglar la causa raiz",
+      "esfuerzo": "alto",
+      "prioridad": "critica",
+      "plazo": "esta semana",
+      "evidencia": [
+        "enero 2026: cumpl 56.2% / CPL $4.44",
+        "febrero 2026: cumpl 63.7% / CPL $2.65",
+        "marzo 2026: cumpl 54.3% / CPL $5.04",
+        "abril 2026: cumpl 32.2% / CPL $6.13"
+      ]
+    },
+    {
+      "titulo": "Inyectar presupuesto en Autos - gap 4,259 leads para cumplir compromiso",
       "seguro": "Autos",
       "plataforma": "Google Ads",
-      "que_hacer": "Entrar a la campaña SURA_AUTOS_PMAX, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
-      "por_que": "Estado actual: 'Algunos grupos de recursos están limitados por una política'. Presupuesto $517,00 US$/día parcialmente sin entregar.",
-      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
-      "esfuerzo": "medio",
-      "prioridad": "alta",
-      "plazo": "esta semana"
-    },
-    {
-      "titulo": "Destrabar SURA_MOTOS_SEARCH_SEGMENT - grupos limitados por política",
-      "seguro": "Motos",
-      "plataforma": "Google Ads",
-      "que_hacer": "Entrar a la campaña SURA_MOTOS_SEARCH_SEGMENT, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
-      "por_que": "Estado actual: 'AptoSe han rechazado algunos anuncios'. Presupuesto $357,00 US$/día parcialmente sin entregar.",
-      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
-      "esfuerzo": "medio",
-      "prioridad": "alta",
-      "plazo": "esta semana"
-    },
-    {
-      "titulo": "Destrabar SURA_MOTOS_PMAX - grupos limitados por política",
-      "seguro": "Motos",
-      "plataforma": "Google Ads",
-      "que_hacer": "Entrar a la campaña SURA_MOTOS_PMAX, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
-      "por_que": "Estado actual: 'AptoAlgunos grupos de recursos se han rechazado y Algunos grupos de recursos están limitados por una política'. Presupuesto $397,00 US$/día parcialmente sin entregar.",
-      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
-      "esfuerzo": "medio",
-      "prioridad": "alta",
-      "plazo": "esta semana"
-    },
-    {
-      "titulo": "Destrabar sura-cdd-co-google-search-retention-arriendo - grupos limitados por política",
-      "seguro": "Arrendamiento",
-      "plataforma": "Google Ads",
-      "que_hacer": "Entrar a la campaña sura-cdd-co-google-search-retention-arriendo, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
-      "por_que": "Estado actual: 'Se han rechazado algunos anuncios'. Presupuesto $984,00 US$/día parcialmente sin entregar.",
-      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
-      "esfuerzo": "medio",
-      "prioridad": "alta",
-      "plazo": "esta semana"
-    },
-    {
-      "titulo": "Destrabar SURA_ARRIENDO_SEARCH_SEGMENT - grupos limitados por política",
-      "seguro": "Arrendamiento",
-      "plataforma": "Google Ads",
-      "que_hacer": "Entrar a la campaña SURA_ARRIENDO_SEARCH_SEGMENT, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
-      "por_que": "Estado actual: 'Se han rechazado algunos anuncios'. Presupuesto $900,00 US$/día parcialmente sin entregar.",
-      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
-      "esfuerzo": "medio",
-      "prioridad": "alta",
-      "plazo": "esta semana"
-    },
-    {
-      "titulo": "Destrabar SURA_ARRIENDO_PMAX - grupos limitados por política",
-      "seguro": "Arrendamiento",
-      "plataforma": "Google Ads",
-      "que_hacer": "Entrar a la campaña SURA_ARRIENDO_PMAX, revisar los assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision.",
-      "por_que": "Estado actual: 'Algunos grupos de recursos están limitados por una política'. Presupuesto $376,00 US$/día parcialmente sin entregar.",
-      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campaña",
-      "esfuerzo": "medio",
-      "prioridad": "alta",
-      "plazo": "esta semana"
-    },
-    {
-      "titulo": "Escalar SURA_AUTOS_PMAX (+30% budget) - CPA bajo $3.91",
-      "seguro": "Autos",
-      "plataforma": "Google Ads",
-      "que_hacer": "Subir presupuesto diario de 517,00 US$/día a +30%. Estrategia ya optimizada (Maximiza las conversiones).",
-      "por_que": "CPA $3.91 entre los mejores del MCC. 2726 conversiones con $10,671 de inversion. Hay headroom para escalar antes de ver fatiga.",
-      "impacto": "ALTO - +817 conversiones extra/mes a CPA similar",
+      "que_hacer": "Identificar la mejor campania SURA_AUTOS_* por CPA y subir presupuesto +30% por 7 dias. Reasignar de campanias low-performance del mismo seguro.",
+      "por_que": "Cumplimiento 56.6% vs 70% transcurrido. Gap 4,259 leads. Sin accion no se llega al compromiso de 9,823.0.",
+      "impacto": "ALTO - cerrar 43% del gap",
       "esfuerzo": "bajo",
       "prioridad": "alta",
-      "plazo": "hoy"
+      "plazo": "hoy",
+      "evidencia": []
+    },
+    {
+      "titulo": "Inyectar presupuesto en Motos - gap 6,439 leads para cumplir compromiso",
+      "seguro": "Motos",
+      "plataforma": "Google Ads",
+      "que_hacer": "Identificar la mejor campania SURA_MOTOS_* por CPA y subir presupuesto +30% por 7 dias. Reasignar de campanias low-performance del mismo seguro.",
+      "por_que": "Cumplimiento 55.3% vs 70% transcurrido. Gap 6,439 leads. Sin accion no se llega al compromiso de 14,412.0.",
+      "impacto": "ALTO - cerrar 44% del gap",
+      "esfuerzo": "bajo",
+      "prioridad": "alta",
+      "plazo": "hoy",
+      "evidencia": []
+    },
+    {
+      "titulo": "Inyectar presupuesto en Viajes - gap 1,511 leads para cumplir compromiso",
+      "seguro": "Viajes",
+      "plataforma": "Google Ads",
+      "que_hacer": "Identificar la mejor campania SURA_VIAJES_* por CPA y subir presupuesto +30% por 7 dias. Reasignar de campanias low-performance del mismo seguro.",
+      "por_que": "Cumplimiento 43.2% vs 70% transcurrido. Gap 1,511 leads. Sin accion no se llega al compromiso de 2,660.0.",
+      "impacto": "ALTO - cerrar 56% del gap",
+      "esfuerzo": "bajo",
+      "prioridad": "alta",
+      "plazo": "hoy",
+      "evidencia": []
+    },
+    {
+      "titulo": "Destrabar sura-cdd-co-google-search-retention-arriendo - estado: Se han rechazado algunos anuncios",
+      "seguro": "Arrendamiento",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a la campaña sura-cdd-co-google-search-retention-arriendo, revisar assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision. Presupuesto activo $984.00/día.",
+      "por_que": "Estado actual: 'Se han rechazado algunos anuncios'. Inversion ya gastada $12,382 con limitaciones - hay headroom inmediato al destrabar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campania",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana",
+      "evidencia": []
+    },
+    {
+      "titulo": "Destrabar SURA_AUTOS_PMAX - estado: Algunos grupos de recursos están limitados por una política",
+      "seguro": "Autos",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a la campaña SURA_AUTOS_PMAX, revisar assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision. Presupuesto activo $517.00/día.",
+      "por_que": "Estado actual: 'Algunos grupos de recursos están limitados por una política'. Inversion ya gastada $10,671 con limitaciones - hay headroom inmediato al destrabar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campania",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana",
+      "evidencia": []
+    },
+    {
+      "titulo": "Destrabar SURA_ARRIENDO_SEARCH_SEGMENT - estado: Se han rechazado algunos anuncios",
+      "seguro": "Arrendamiento",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a la campaña SURA_ARRIENDO_SEARCH_SEGMENT, revisar assets/anuncios rechazados, corregir copy o creativos según motivo de rechazo, re-someter a revision. Presupuesto activo $900.00/día.",
+      "por_que": "Estado actual: 'Se han rechazado algunos anuncios'. Inversion ya gastada $8,208 con limitaciones - hay headroom inmediato al destrabar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campania",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana",
+      "evidencia": []
     }
   ],
   "discrepancias_y_gaps": {
-    "ga4_eventos": "PENDIENTE: el pipeline manual no logra mapear eventos GA4 -> seguro automaticamente. Recomendar migrar a GA4 Data API.",
-    "meta_ad_sets": "PARCIAL: solo capturados nombres de 4 campanias (Mensajes_WHATSAPP, Mascotas-Conversiones, Mensajes WhatsApp, Clientes potenciales). Drill-down a ad sets por seguro requiere Meta Marketing API.",
-    "salud_para_dos_y_animal": "Sin data CRM en 'Resumen mensual'. Solo tienen actividad en Google Ads / Meta (foco: potenciar)."
+    "ga4_eventos": "PENDIENTE: GA4 Data API no integrada en MVP. Mapeo evento -> seguro requiere intervencion manual via UI.",
+    "meta_ad_sets": "PARCIAL: solo capturados nombres de 4 campanias (Mensajes_WHATSAPP, Mascotas-Conversiones, Mensajes WhatsApp, Clientes potenciales). Drill-down a ad sets requiere Meta Marketing API.",
+    "salud_para_dos_y_animal": "Sin data CRM en 'Resumen mensual'. Solo tienen actividad en Google Ads (foco: setear tracking + potenciar)."
   },
   "caso_negocio": {
     "estado_actual": "Cumplimiento global 46.1% vs 70% transcurrido del mes. Arrendamiento crítico (32%), Viajes (43%), Autos (57%), Motos (55%).",

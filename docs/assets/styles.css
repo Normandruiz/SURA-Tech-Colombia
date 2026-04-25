@@ -240,6 +240,139 @@ section h2 .accent { color: var(--sura-aqua); }
 .caso-block h4:first-child { margin-top: 0; }
 .caso-block p { margin: 0 0 12px; line-height: 1.6; }
 
+/* ---------- Selector de mes ---------- */
+.mes-selector {
+  background: rgba(255,255,255,0.15);
+  color: var(--sura-blanco);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.mes-selector option { color: var(--sura-gris-oscuro); background: var(--sura-blanco); }
+
+/* ---------- Charts grid ---------- */
+.section-intro {
+  color: var(--sura-gris-medio); margin: -16px 0 22px; font-size: 14px;
+}
+.charts-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+}
+.chart-card {
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.chart-card h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: var(--sura-azul);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- Cruces grid ---------- */
+.cruces-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+.cruce-card {
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--sura-aqua);
+}
+.cruce-card.cruce-rojo    { border-left-color: var(--rojo); }
+.cruce-card.cruce-amarillo{ border-left-color: var(--amarillo); }
+.cruce-card.cruce-verde   { border-left-color: var(--verde); }
+.cruce-head {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+  border-bottom: 1px solid var(--sura-gris-claro); padding-bottom: 8px;
+}
+.cruce-head strong { font-size: 16px; color: var(--sura-azul); }
+.cruce-flag {
+  font-size: 11px; padding: 3px 9px; border-radius: 999px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.flag-rojo    { background: #fef2f2; color: var(--rojo); }
+.flag-amarillo{ background: #fffbeb; color: var(--amarillo); }
+.flag-verde   { background: #ecfdf5; color: var(--verde); }
+.cruce-row {
+  display: flex; justify-content: space-between; font-size: 13px; color: var(--sura-gris-medio); margin-top: 6px;
+}
+.cruce-row strong { color: var(--sura-gris-oscuro); }
+
+/* ---------- Optimizaciones tabla ---------- */
+.opt-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.opt-tab {
+  background: var(--sura-blanco);
+  border: 1px solid var(--sura-gris-claro);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--sura-azul);
+  transition: all .15s ease;
+}
+.opt-tab:hover { border-color: var(--sura-azul); }
+.opt-tab.active {
+  background: var(--sura-azul); color: var(--sura-blanco); border-color: var(--sura-azul);
+}
+.opt-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  font-size: 13px;
+}
+.opt-table th {
+  background: var(--sura-azul);
+  color: var(--sura-blanco);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.opt-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--sura-gris-claro);
+}
+.opt-table tr:hover { background: rgba(0,53,156,0.03); }
+.opt-table code {
+  font-family: "SF Mono", Consolas, monospace;
+  font-size: 11px;
+  color: var(--sura-azul);
+  background: rgba(0,53,156,0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.opt-table .badge {
+  display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px;
+  background: var(--sura-aqua); color: var(--sura-blanco); font-weight: 600;
+}
+.opt-table .flag-warn { color: var(--rojo); font-weight: 600; }
+
+.evidence { margin: 6px 0 0 16px; padding: 0; font-size: 13px; color: var(--sura-gris-medio); }
+.evidence li { margin: 3px 0; }
+
+@media (max-width: 900px) {
+  .charts-grid { grid-template-columns: 1fr; }
+  .cruces-grid { grid-template-columns: 1fr; }
+  .opt-table { font-size: 11px; }
+  .opt-table th, .opt-table td { padding: 6px 8px; }
+}
+
 /* ---------- Footer ---------- */
 footer {
   background: var(--sura-gris-oscuro);

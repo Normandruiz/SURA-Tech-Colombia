@@ -118,10 +118,11 @@ def write_detalle_ads(wb: Workbook, data: dict) -> None:
     for s in data["seguros"]:
         for c in s["google_ads"]["campanias"]:
             row = [
-                s["nombre"], c["nombre"], c["estado"], c["tipo"], c["presupuesto"],
+                s["nombre"], c["nombre"], c["estado"], c.get("tipo",""),
+                c.get("presupuesto_str") or c.get("presupuesto_diario") or "",
                 c["impresiones"], c["clicks"],
                 f"{c['ctr_pct']*100:.2f}%" if c["ctr_pct"] else "0%",
-                c["cpc"], c["coste"], c["conversiones"], c["cpa"], c["estrategia"],
+                c["cpc"], c["coste"], c["conversiones"], c["cpa"], c.get("estrategia",""),
             ]
             for i, v in enumerate(row, 1):
                 cell = ws.cell(row=r, column=i, value=v)
@@ -175,12 +176,79 @@ def write_recomendaciones(wb: Workbook, data: dict) -> None:
         ws.column_dimensions[get_column_letter(i)].width = w
 
 
+def write_evolucion(wb: Workbook, data: dict) -> None:
+    ws = wb.create_sheet("Evolución MoM")
+    headers = ["Seguro","Mes","Compromiso","Leads CRM","Cumplimiento %","CPL Negocio","Inv. Google Ads","Inv. Meta","Inv. Total","Leads Total"]
+    _header_row(ws, 1, headers)
+    r = 2
+    for seguro, serie in data.get("evolucion_mom", {}).get("por_seguro", {}).items():
+        for p in serie:
+            if p.get("vacio"): continue
+            row = [seguro, p["mes"], p["compromiso"], p["leads_crm"],
+                   f"{p['cumplimiento']*100:.1f}%", p["cpl_negocio"],
+                   p["inv_google_ads"], p["inv_meta"], p["inversion_total"], p["leads_total"]]
+            for i, v in enumerate(row, 1):
+                cell = ws.cell(row=r, column=i, value=v)
+                cell.border = BORDER
+                cell.font = NORMAL
+            r += 1
+    _autosize(ws)
+
+
+def write_cruces(wb: Workbook, data: dict) -> None:
+    ws = wb.create_sheet("Cruces")
+    headers = ["Seguro","Leads CRM","Conv. Google Ads","Ratio GA/CRM","Leads Meta","Leads Otros","Inv. GA Extractor","Inv. GA CRM","Δ Inversión"]
+    _header_row(ws, 1, headers)
+    r = 2
+    for c in data.get("cruces", {}).get("por_seguro", []):
+        ratio = c["ratio_ga_conv_vs_crm"]
+        fill = FILL_ROJO if ratio == 0 else (FILL_AMA if ratio < 0.5 else FILL_VER)
+        row = [c["seguro"], c["leads_crm"], c["google_ads_conv"],
+               f"{ratio*100:.0f}%", c["leads_meta_crm"], c["leads_otros"],
+               c["inversion_ga_extractor"], c["inversion_ga_crm"], c["delta_inversion"]]
+        for i, v in enumerate(row, 1):
+            cell = ws.cell(row=r, column=i, value=v)
+            cell.fill = fill; cell.border = BORDER; cell.font = NORMAL
+        r += 1
+    _autosize(ws)
+
+
+def write_optimizaciones(wb: Workbook, data: dict) -> None:
+    ws = wb.create_sheet("Optimizaciones")
+    cats = [("escalar","ESCALAR (CPA bajo + headroom)", FILL_VER),
+            ("pausar", "PAUSAR (CPA alto)",             FILL_ROJO),
+            ("destrabar","DESTRABAR (rechazos/políticas)", FILL_AMA),
+            ("quality_issues","QUALITY ISSUES",          FILL_AMA)]
+    r = 1
+    for cat_key, cat_label, fill in cats:
+        ws.cell(row=r, column=1, value=cat_label).font = Font(bold=True, color=SURA_AZUL, size=12)
+        r += 1
+        headers = ["Seguro","Campaña","Subtipo","Budget/día","Coste","Conversiones","CPA","% Lost Budget","% Lost Rank","Estado"]
+        _header_row(ws, r, headers)
+        r += 1
+        for c in data.get("optimizaciones", {}).get(cat_key, []):
+            row = [c["seguro"], c["nombre"], c["subtipo"], c["presupuesto_diario"],
+                   c["coste"], int(c["conversiones"]), c["cpa"],
+                   f"{c['cuota_perdida_budget']*100:.0f}%",
+                   f"{c['cuota_perdida_ranking']*100:.0f}%",
+                   c["estado"]]
+            for i, v in enumerate(row, 1):
+                cell = ws.cell(row=r, column=i, value=v)
+                cell.fill = fill; cell.border = BORDER; cell.font = NORMAL
+            r += 1
+        r += 2
+    _autosize(ws, max_w=50)
+
+
 def run() -> int:
     data = json.loads(DOCS_DATA.read_text(encoding="utf-8"))
     wb = Workbook()
     wb.remove(wb.active)
     write_resumen(wb, data)
     write_detalle_ads(wb, data)
+    write_evolucion(wb, data)
+    write_cruces(wb, data)
+    write_optimizaciones(wb, data)
     write_discrepancias(wb, data)
     write_recomendaciones(wb, data)
 

@@ -4,25 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SURA Tech Colombia · Informe mensual</title>
-  <meta name="description" content="Informe estratégico mensual SURA Tech Colombia — 6 seguros, cruce Google Ads + Meta + CRM + GA4. Elaborado por Beyond Media Agency.">
+  <meta name="description" content="Informe estratégico mensual SURA Tech Colombia — 4 seguros, cruce Google Ads + Meta + CRM + GA4. Beyond Media Agency.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
   <!-- ========== HERO HEADER ========== -->
   <header class="hero">
     <div class="container">
-      <h1>SURA Tech Colombia · Informe mensual</h1>
-      <div class="subtitle">
-        Periodo: <span id="periodo">—</span> · Cruce Google Ads · Meta · CRM · GA4
+      <div class="hero-top">
+        <div>
+          <h1>SURA Tech Colombia · Informe mensual</h1>
+          <div class="subtitle">
+            Cruce Google Ads · Meta · CRM · GA4 — <strong>Periodo:</strong>
+            <select id="mes-selector" class="mes-selector"></select>
+          </div>
+        </div>
       </div>
 
       <div class="kpi-grid">
         <div class="kpi" id="kpi-inversion">
-          <div class="label">Inversión total</div>
+          <div class="label">Inversión total (USD)</div>
           <div class="value">—</div>
           <div class="delta"></div>
         </div>
@@ -53,7 +59,7 @@
   <!-- ========== 6 SEGUROS ========== -->
   <section>
     <div class="container">
-      <h2>6 seguros — <span class="accent">cumplimiento del mes</span></h2>
+      <h2>Seguros — <span class="accent">cumplimiento del mes</span></h2>
       <div class="seguros-grid" id="seguros"></div>
     </div>
   </section>
@@ -64,20 +70,87 @@
       <h2>TOP 10 — <span class="accent">recomendaciones accionables</span></h2>
       <div class="recos">
         <div class="filters" id="reco-filters">
-          <span class="chip active">Todas</span>
-          <span class="chip">Google Ads</span>
-          <span class="chip">Meta</span>
-          <span class="chip">Tracking</span>
+          <span class="chip active" data-f="all">Todas</span>
+          <span class="chip" data-f="critica">Críticas</span>
+          <span class="chip" data-f="alta">Altas</span>
+          <span class="chip" data-f="media">Medias</span>
+          <span class="chip" data-f="Google Ads">Google Ads</span>
+          <span class="chip" data-f="Meta">Meta</span>
+          <span class="chip" data-f="Tracking">Tracking</span>
         </div>
         <div id="reco-list"></div>
       </div>
     </div>
   </section>
 
+  <!-- ========== EVOLUCIÓN MoM ========== -->
+  <section>
+    <div class="container">
+      <h2>Evolución mensual <span class="accent">2026</span></h2>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Cumplimiento por seguro</h3>
+          <canvas id="chart-cumpl" height="180"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>CPL Negocio por seguro</h3>
+          <canvas id="chart-cpl" height="180"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Leads CRM por seguro</h3>
+          <canvas id="chart-leads" height="180"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Inversión total por seguro</h3>
+          <canvas id="chart-inv" height="180"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CRUCES PLATAFORMAS ========== -->
+  <section>
+    <div class="container">
+      <h2>Cruces — <span class="accent">CRM vs Google Ads vs otros canales</span></h2>
+      <p class="section-intro">Compara los leads del CRM con las conversiones reportadas por Google Ads y la atribución entre canales. Detecta tracking roto y discrepancias.</p>
+      <div class="cruces-grid" id="cruces"></div>
+    </div>
+  </section>
+
+  <!-- ========== OPTIMIZACIONES POR CAMPAÑA ========== -->
+  <section>
+    <div class="container">
+      <h2>Optimizaciones — <span class="accent">acciones por campaña</span></h2>
+      <div class="opt-tabs">
+        <button class="opt-tab active" data-cat="escalar">📈 Escalar (CPA bajo + headroom)</button>
+        <button class="opt-tab" data-cat="pausar">⛔ Pausar / reformular (CPA alto)</button>
+        <button class="opt-tab" data-cat="destrabar">🚧 Destrabar (rechazos / políticas)</button>
+        <button class="opt-tab" data-cat="quality_issues">⚠ Quality Score bajo</button>
+      </div>
+      <table class="opt-table" id="opt-table">
+        <thead>
+          <tr>
+            <th>Seguro</th>
+            <th>Campaña</th>
+            <th>Tipo</th>
+            <th>Budget/día</th>
+            <th>Coste</th>
+            <th>Conv.</th>
+            <th>CPA</th>
+            <th>% Lost Budget</th>
+            <th>% Lost Rank</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- ========== DISCREPANCIAS Y GAPS ========== -->
   <section>
     <div class="container">
-      <h2>Discrepancias y gaps — <span class="accent">qué falta capturar</span></h2>
+      <h2>Discrepancias y gaps</h2>
       <div id="discrepancias"></div>
     </div>
   </section>
