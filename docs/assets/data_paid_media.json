@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-27T13:52:51",
+    "generated_at": "2026-04-27T14:02:06",
     "fuente": "Google Ads MCC SURATECH-COLOMBIA + Sheet diario por seguro",
     "seguros": [
       "Autos",
@@ -10335,24 +10335,24 @@
       },
       "totales": {
         "coste_google": 15787.52,
-        "conversiones_google": 0.0,
-        "clicks": 308570.0,
+        "conversiones_google": 1318.5,
+        "clicks": 28412.0,
         "impresiones": 710198.0,
-        "ctr": 0.4345,
-        "cpc": 0.05,
-        "cpa": 0,
+        "ctr": 0.04,
+        "cpc": 0.56,
+        "cpa": 11.97,
         "campanias_count": 4
       },
       "por_subtipo": {
         "SEARCH_SEGMENT": {
           "coste": 4595.78,
-          "conv": 0.0,
+          "conv": 283.43,
           "imp": 69131.0,
           "clicks": 8779.0,
           "n": 1,
           "cuota_perdida_budget_acc": 0.0,
           "cuota_perdida_ranking_acc": 0.10279999999999999,
-          "cpa": 0,
+          "cpa": 16.21486786860953,
           "ctr": 0.12699078560992896,
           "cpc": 0.523496981432965,
           "avg_cuota_perdida_budget": 0.0,
@@ -10360,13 +10360,13 @@
         },
         "SEARCH_RETENTION": {
           "coste": 1993.64,
-          "conv": 0.0,
+          "conv": 307.84,
           "imp": 10759.0,
           "clicks": 3925.0,
           "n": 1,
           "cuota_perdida_budget_acc": 0.0,
           "cuota_perdida_ranking_acc": 0.0067,
-          "cpa": 0,
+          "cpa": 6.476221413721414,
           "ctr": 0.36481085602751184,
           "cpc": 0.5079337579617834,
           "avg_cuota_perdida_budget": 0.0,
@@ -10374,13 +10374,13 @@
         },
         "SEARCH_CONQUEST": {
           "coste": 1366.13,
-          "conv": 0.0,
+          "conv": 91.6,
           "imp": 19789.0,
           "clicks": 2315.0,
           "n": 1,
           "cuota_perdida_budget_acc": 0.0,
           "cuota_perdida_ranking_acc": 0.1672,
-          "cpa": 0,
+          "cpa": 14.914082969432316,
           "ctr": 0.11698418313204305,
           "cpc": 0.5901209503239742,
           "avg_cuota_perdida_budget": 0.0,
@@ -10388,15 +10388,15 @@
         },
         "PMAX": {
           "coste": 7831.97,
-          "conv": 0.0,
+          "conv": 635.59,
           "imp": 610519.0,
-          "clicks": 293551.0,
+          "clicks": 13393.0,
           "n": 1,
           "cuota_perdida_budget_acc": 0.0,
           "cuota_perdida_ranking_acc": 0.2677,
-          "cpa": 0,
-          "ctr": 0.480822054678069,
-          "cpc": 0.026680099880429638,
+          "cpa": 12.32236189996696,
+          "ctr": 0.021937073211480723,
+          "cpc": 0.5847808556708729,
           "avg_cuota_perdida_budget": 0.0,
           "avg_cuota_perdida_ranking": 0.2677
         }
@@ -10417,8 +10417,8 @@
           "cuota_perdida_budget": 0.0,
           "cuota_perdida_ranking": 0.10279999999999999,
           "estrategia": "Maximiza las conversiones",
-          "conversiones": 0.0,
-          "cpa": 0.0323,
+          "conversiones": 283.43,
+          "cpa": 16.22,
           "flags": [
             "rejected"
           ]
@@ -10438,8 +10438,8 @@
           "cuota_perdida_budget": 0.0,
           "cuota_perdida_ranking": 0.0067,
           "estrategia": "Maximiza las conversiones",
-          "conversiones": 0.0,
-          "cpa": 0.0784,
+          "conversiones": 307.84,
+          "cpa": 6.48,
           "flags": []
         },
         {
@@ -10457,8 +10457,8 @@
           "cuota_perdida_budget": 0.0,
           "cuota_perdida_ranking": 0.1672,
           "estrategia": "Maximiza las conversiones",
-          "conversiones": 0.0,
-          "cpa": 0.039599999999999996,
+          "conversiones": 91.6,
+          "cpa": 14.91,
           "flags": []
         },
         {
@@ -10469,23 +10469,31 @@
           "estado": "AptoAlgunos grupos de recursos se han rechazado y Algunos grupos de recursos están limitados por una política",
           "tipo": "Máximo rendimiento",
           "impresiones": 610519.0,
-          "clicks": 293551.0,
+          "clicks": 13393.0,
           "ctr_pct": 0.4808,
           "cpc": 0.03,
           "coste": 7831.97,
           "cuota_perdida_budget": 0.0,
           "cuota_perdida_ranking": 0.2677,
           "estrategia": "Maximiza las conversiones",
-          "conversiones": 0.0,
-          "cpa": 0.0022,
+          "conversiones": 635.59,
+          "cpa": 12.32,
           "flags": [
             "policy_limited",
             "rejected"
           ]
         }
       ],
-      "mejor_cpa": null,
-      "peor_cpa": null,
+      "mejor_cpa": {
+        "nombre": "SURA_MOTOS_SEARCH_RETENTION",
+        "cpa": 6.48,
+        "subtipo": "SEARCH_RETENTION"
+      },
+      "peor_cpa": {
+        "nombre": "SURA_MOTOS_SEARCH_SEGMENT",
+        "cpa": 16.22,
+        "subtipo": "SEARCH_SEGMENT"
+      },
       "serie_diaria": [
         {
           "fecha": "2023-04-01",
