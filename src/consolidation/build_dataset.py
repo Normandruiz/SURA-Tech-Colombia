@@ -225,12 +225,19 @@ def _parse_campaign_row(cells: list) -> dict | None:
     if cuota_perdida_budget > 0.20: flags.append("budget_constrained")
     if cuota_perdida_ranking > 0.30: flags.append("ranking_issue")
 
+    # optimization_score: cells[3] suele ser "add_add 85,1 %" o "84 %" o "—"
+    opt_raw = cells[3] if len(cells) > 3 else ""
+    m_opt = re.search(r"(\d{1,3}(?:[\.,]\d+)?)\s*%", opt_raw or "")
+    optimization_score = num(m_opt.group(1) + "%") if m_opt else 0
+
     return {
         "nombre": name, "subtipo": subtipo,
         "presupuesto_diario": presupuesto_num, "presupuesto_str": presupuesto_str,
         "estado": estado, "tipo": tipo,
+        "optimization_score": optimization_score,
         "impresiones": impresiones, "clicks": clicks, "ctr_pct": ctr_pct,
         "cpc": cpc, "coste": coste,
+        "cuota_imp_search": cuota_imp_search,
         "cuota_perdida_budget": cuota_perdida_budget,
         "cuota_perdida_ranking": cuota_perdida_ranking,
         "estrategia": estrategia, "conversiones": conversiones, "cpa": cpa,
