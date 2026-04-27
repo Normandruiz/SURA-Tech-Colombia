@@ -74,6 +74,11 @@ function renderKPIs(days) {
 
 /* ---------- eventos ---------- */
 function renderEventos() {
+  const obsEl = document.querySelector("#eventos-observacion");
+  if (obsEl && DATA.eventos_observacion) {
+    obsEl.innerHTML = `<strong>Observación clave:</strong> ${DATA.eventos_observacion}`;
+  }
+
   const wrap = document.querySelector("#eventos-grid");
   const seguros = getActiveSeguros();
   wrap.innerHTML = seguros.map(s => {
@@ -83,7 +88,8 @@ function renderEventos() {
         <h4>${s}</h4>
         <div class="evento-row"><span>Evento Google Ads</span><span><code>${e.google_ads_event || "—"}</code></span></div>
         <div class="evento-row"><span>Evento Meta</span><span><code>${e.meta_event || "—"}</code></span></div>
-        <div class="evento-row"><span>Valor objetivo</span><span>${e.valor_objetivo || "—"}</span></div>
+        <div class="evento-row"><span>Etapa del funnel</span><span><strong>${e.etapa_funnel || "—"}</strong></span></div>
+        <div class="evento-row"><span>Implicancia</span><span style="font-size:12px;color:var(--sura-gris-medio);text-align:right;max-width:60%;">${e.implicancia || "—"}</span></div>
         <div class="evento-row"><span>Ventana atribución</span><span>${e.ventana_atribucion || "—"}</span></div>
       </div>`;
   }).join("");

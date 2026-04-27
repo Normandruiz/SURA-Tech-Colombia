@@ -2,6 +2,18 @@
    Paid Media page · estilos especificos
    ============================================================ */
 
+.eventos-observacion {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef2f2 100%);
+  border-left: 4px solid var(--amarillo);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--sura-gris-oscuro);
+}
+.eventos-observacion strong { color: var(--sura-azul); }
+
 .eventos-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
 }

@@ -69,33 +69,48 @@ def load_sheet_diarios(slug: str) -> list[dict]:
     return json.loads(p.read_text(encoding="utf-8")).get("diarios", [])
 
 
-# Eventos de conversion por seguro (confirmar con el cliente si difieren)
+# Eventos de conversion principales (confirmados por el cliente, abr 2026).
+# OBSERVACION CLAVE: cada seguro optimiza contra un paso DISTINTO del funnel,
+# lo cual genera trade-off entre volumen y calidad del lead.
 EVENTOS_CONVERSION = {
     "Autos": {
-        "google_ads_event":  "Lead - Autos SF (importado de SF)",
-        "meta_event":        "Cliente potencial · Autos",
-        "valor_objetivo":    "Lead Salesforce",
+        "google_ads_event":  "SURA.CO/AUTOS - Paso 1",
+        "meta_event":        "SURA.CO/AUTOS - Paso 1",
+        "etapa_funnel":      "Paso 1 (top of funnel)",
+        "implicancia":       "Volumen alto, calidad baja - el evento es muy temprano en el flujo",
         "ventana_atribucion":"7 dias clic / 1 dia view",
     },
     "Motos": {
-        "google_ads_event":  "Lead - Motos SF",
-        "meta_event":        "Cliente potencial · Motos",
-        "valor_objetivo":    "Lead Salesforce",
+        "google_ads_event":  "SURA.CO/MOTOS - Paso 3",
+        "meta_event":        "SURA.CO/MOTOS - Paso 3 - Planes",
+        "etapa_funnel":      "Paso 3 (mid-bottom funnel)",
+        "implicancia":       "Lead cualificado, ya vio planes - bidding mas conservador",
         "ventana_atribucion":"7 dias clic / 1 dia view",
     },
     "Arrendamiento": {
-        "google_ads_event":  "Lead - Arrendamiento SF",
-        "meta_event":        "Mensaje WhatsApp · Arriendo",
-        "valor_objetivo":    "Lead Salesforce",
+        "google_ads_event":  "SURA.CO/Arriendo - Paso 2 - Datos Propietario",
+        "meta_event":        "SURA.CO/AD - Paso 3",
+        "etapa_funnel":      "Google: Paso 2 / Meta: Paso 3",
+        "implicancia":       "Inconsistencia: Google y Meta optimizan a etapas distintas - puede explicar diferencias de CPA",
         "ventana_atribucion":"7 dias clic / 1 dia view",
     },
     "Viajes": {
-        "google_ads_event":  "Lead - Viajes SF",
-        "meta_event":        "Cliente potencial · Viajes",
-        "valor_objetivo":    "Lead Salesforce",
+        "google_ads_event":  "SURA.CO/VIAJES - Paso 3",
+        "meta_event":        "SURA.CO/VIAJES - Paso 4",
+        "etapa_funnel":      "Google: Paso 3 / Meta: Paso 4",
+        "implicancia":       "Inconsistencia: Meta optimiza al Paso 4 (mas profundo) que Google al Paso 3",
         "ventana_atribucion":"7 dias clic / 1 dia view",
     },
 }
+
+# Observacion cross-seguros para mostrar en el dashboard
+EVENTOS_OBSERVACION_GLOBAL = (
+    "Cada seguro optimiza contra un paso distinto del funnel: Autos = Paso 1 (temprano, "
+    "alto volumen y baja calidad), Motos = Paso 3 (cualificado), Arrendamiento = Paso 2-3, "
+    "Viajes = Paso 3-4 (mas profundo). En Arrendamiento y Viajes hay INCONSISTENCIA entre "
+    "Google y Meta optimizando a pasos distintos - revisar si es intencional o si conviene "
+    "alinear para tener metrica comparable."
+)
 
 
 def build_seguro_block(seguro: str) -> dict:
@@ -323,6 +338,7 @@ def run() -> int:
         },
         "seguros":         seguros,
         "top10_recos":     generate_top10_recos(seguros),
+        "eventos_observacion": EVENTOS_OBSERVACION_GLOBAL,
     }
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
