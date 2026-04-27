@@ -52,7 +52,21 @@
     </div>
   </header>
 
-  <!-- Filtros -->
+  <!-- Filtro por producto -->
+  <section>
+    <div class="container">
+      <h2>Filtrar por producto</h2>
+      <div class="seguro-buttons" id="seguro-buttons">
+        <button class="seguro-btn active" data-seguro="all">Todos</button>
+        <button class="seguro-btn" data-seguro="Autos"         style="--c:#00359C">Autos</button>
+        <button class="seguro-btn" data-seguro="Motos"         style="--c:#00AEC7">Motos</button>
+        <button class="seguro-btn" data-seguro="Arrendamiento" style="--c:#2D6DF6">Arrendamiento</button>
+        <button class="seguro-btn" data-seguro="Viajes"        style="--c:#9333EA">Viajes</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtros de fecha -->
   <section>
     <div class="container">
       <h2>Filtros — <span class="accent">selección de fechas</span></h2>
@@ -62,15 +76,6 @@
         </label>
         <label>Hasta
           <input type="date" id="date-to">
-        </label>
-        <label>Seguro
-          <select id="filter-seguro">
-            <option value="all">Todos</option>
-            <option value="Autos">Autos</option>
-            <option value="Motos">Motos</option>
-            <option value="Arrendamiento">Arrendamiento</option>
-            <option value="Viajes">Viajes</option>
-          </select>
         </label>
         <div class="quick-buttons">
           <button class="quick-btn" data-range="7">Últimos 7 días</button>

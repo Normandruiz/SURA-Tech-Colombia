@@ -33,10 +33,12 @@ function parseISO(s) {
 }
 
 /* ---------- filtrado ---------- */
+let SEGURO_ACTIVO = "all";
+
 function getFilteredDays() {
   const from   = document.querySelector("#date-from").value;
   const to     = document.querySelector("#date-to").value;
-  const seguro = document.querySelector("#filter-seguro").value;
+  const seguro = SEGURO_ACTIVO;
 
   const seguros = (seguro === "all")
     ? Object.keys(DATA.seguros)
@@ -307,7 +309,15 @@ function refreshAll() {
     // listeners
     document.querySelector("#date-from").addEventListener("change", refreshAll);
     document.querySelector("#date-to").addEventListener("change", refreshAll);
-    document.querySelector("#filter-seguro").addEventListener("change", refreshAll);
+    // Botones por seguro
+    document.querySelectorAll(".seguro-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".seguro-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        SEGURO_ACTIVO = btn.dataset.seguro;
+        refreshAll();
+      });
+    });
     document.querySelectorAll(".quick-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".quick-btn").forEach(b => b.classList.remove("active"));
