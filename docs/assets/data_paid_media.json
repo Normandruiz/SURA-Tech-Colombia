@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-27T14:02:06",
+    "generated_at": "2026-04-27T14:09:29",
     "fuente": "Google Ads MCC SURATECH-COLOMBIA + Sheet diario por seguro",
     "seguros": [
       "Autos",
@@ -31,7 +31,12 @@
         "ctr": 0.0872,
         "cpc": 0.93,
         "cpa": 5.44,
-        "campanias_count": 4
+        "campanias_count": 4,
+        "cuota_imp_search": 0.0,
+        "cuota_perdida_budget": 0.5827,
+        "cuota_perdida_ranking": 0.1274,
+        "optimization_score": 0.0,
+        "cuota_max_alcanzable": 0.7101
       },
       "por_subtipo": {
         "SEARCH_SEGMENT": {
@@ -10341,7 +10346,12 @@
         "ctr": 0.04,
         "cpc": 0.56,
         "cpa": 11.97,
-        "campanias_count": 4
+        "campanias_count": 4,
+        "cuota_imp_search": 0.0,
+        "cuota_perdida_budget": 0.0,
+        "cuota_perdida_ranking": 0.2449,
+        "optimization_score": 0.0,
+        "cuota_max_alcanzable": 0.2449
       },
       "por_subtipo": {
         "SEARCH_SEGMENT": {
@@ -20648,7 +20658,12 @@
         "ctr": 0.0193,
         "cpc": 0.35,
         "cpa": 12.12,
-        "campanias_count": 3
+        "campanias_count": 3,
+        "cuota_imp_search": 0.0,
+        "cuota_perdida_budget": 0.0,
+        "cuota_perdida_ranking": 0.1337,
+        "optimization_score": 0.0,
+        "cuota_max_alcanzable": 0.1337
       },
       "por_subtipo": {
         "SEARCH_RETENTION": {
@@ -28448,7 +28463,12 @@
         "ctr": 0.0145,
         "cpc": 0.65,
         "cpa": 27.63,
-        "campanias_count": 3
+        "campanias_count": 3,
+        "cuota_imp_search": 0.0,
+        "cuota_perdida_budget": 0.7621,
+        "cuota_perdida_ranking": 0.1113,
+        "optimization_score": 0.0,
+        "cuota_max_alcanzable": 0.8734
       },
       "por_subtipo": {
         "SEARCH_SEGMENT": {

@@ -144,6 +144,15 @@ def build_seguro_block(seguro: str) -> dict:
     total_clicks = sum(c["clicks"] for c in campanias)
     total_imp = sum(c["impresiones"] for c in campanias)
 
+    # Cuotas/oportunidades agregadas (promedio ponderado por impresiones)
+    if total_imp:
+        cuota_imp_search_w  = sum((c.get("cuota_imp_search", 0) or 0) * c["impresiones"] for c in campanias) / total_imp
+        cuota_p_budget_w    = sum((c.get("cuota_perdida_budget", 0) or 0) * c["impresiones"] for c in campanias) / total_imp
+        cuota_p_ranking_w   = sum((c.get("cuota_perdida_ranking", 0) or 0) * c["impresiones"] for c in campanias) / total_imp
+    else:
+        cuota_imp_search_w = cuota_p_budget_w = cuota_p_ranking_w = 0
+    opt_score_avg = (sum(c.get("optimization_score", 0) or 0 for c in campanias) / len(campanias)) if campanias else 0
+
     # Daily series (consumo + leads por canal)
     serie_diaria = []
     for d in diarios:
@@ -174,6 +183,12 @@ def build_seguro_block(seguro: str) -> dict:
             "cpc":            round(total_coste/total_clicks, 2) if total_clicks else 0,
             "cpa":            round(total_coste/total_conv, 2) if total_conv else 0,
             "campanias_count": len(campanias),
+            "cuota_imp_search":     round(cuota_imp_search_w, 4),
+            "cuota_perdida_budget": round(cuota_p_budget_w, 4),
+            "cuota_perdida_ranking":round(cuota_p_ranking_w, 4),
+            "optimization_score":   round(opt_score_avg, 4),
+            # Oportunidad disponible: cuota maxima posible si se destraban budget+ranking
+            "cuota_max_alcanzable": round(min(1.0, cuota_imp_search_w + cuota_p_budget_w + cuota_p_ranking_w), 4),
         },
         "por_subtipo":         por_subtipo,
         "campanias":           campanias,

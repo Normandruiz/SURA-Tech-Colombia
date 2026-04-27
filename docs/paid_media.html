@@ -99,6 +99,40 @@
     </div>
   </section>
 
+  <!-- Cuotas de impresiones y oportunidades (Google Ads) -->
+  <section>
+    <div class="container">
+      <h2>Cuotas de impresiones y oportunidades — <span class="accent">Google Ads</span></h2>
+      <p class="section-intro">
+        Cuánto del market estás capturando hoy y cuánto más podrías capturar.
+        <strong>Cuota actual</strong> = % de impresiones que conseguís del total disponible.
+        <strong>Perdida por presupuesto</strong> = capturable subiendo budget.
+        <strong>Perdida por ranking</strong> = capturable mejorando QS / relevancia.
+      </p>
+      <div class="cuotas-grid" id="cuotas-grid"></div>
+      <div class="chart-card" style="max-height:400px;margin-top:14px;">
+        <h3>Comparativa por seguro</h3>
+        <canvas id="chart-cuotas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Auction Insights placeholder -->
+  <section>
+    <div class="container">
+      <h2>Comparativas de subasta — <span class="accent">Auction Insights</span></h2>
+      <div id="auction-insights-placeholder" class="eventos-observacion" style="background:linear-gradient(135deg,#eff6ff 0%,#fef2f2 100%);border-left-color:var(--sura-azul);">
+        <strong>Pendiente integración:</strong> Auction Insights de Google Ads vive a nivel campaña/ad group.
+        Para los 4 seguros + ~14 campañas ($1k+) habría que extraer manualmente o vía Google Ads API.
+        <br><br>
+        <strong>Lo que vamos a poder mostrar cuando esté:</strong> share de impresiones de cada competidor,
+        posición media, % de impresiones en la parte superior, % superpuesto y % superado.
+        Útil para entender contra quién competimos por seguro y si estamos perdiendo
+        terreno frente a algún competidor específico.
+      </div>
+    </div>
+  </section>
+
   <!-- Distribucion por subtipo (donde se va el budget) -->
   <section>
     <div class="container">

@@ -17,6 +17,55 @@
 .eventos-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
 }
+
+.cuotas-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 14px;
+}
+.cuota-card {
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--c, var(--sura-aqua));
+}
+.cuota-card h4 { margin: 0 0 12px; color: var(--c, var(--sura-azul)); font-size: 16px; display: flex; justify-content: space-between; align-items: baseline; }
+.cuota-card h4 small { color: var(--sura-gris-medio); font-size: 11px; font-weight: 400; }
+.cuota-bar {
+  height: 28px;
+  background: var(--sura-gris-claro);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  margin: 6px 0 14px;
+  position: relative;
+}
+.cuota-bar .seg {
+  height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--sura-blanco);
+  white-space: nowrap; overflow: hidden;
+  transition: width .3s ease;
+}
+.cuota-bar .seg.actual    { background: var(--verde); }
+.cuota-bar .seg.budget    { background: var(--amarillo); }
+.cuota-bar .seg.ranking   { background: var(--rojo); }
+.cuota-bar .seg.perdida   { background: var(--sura-gris-claro); color: var(--sura-gris-medio); }
+.cuota-legend {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  font-size: 11px; color: var(--sura-gris-medio); margin-top: 4px;
+}
+.cuota-legend > div::before {
+  content: '■'; margin-right: 4px;
+}
+.cuota-legend .l-actual::before  { color: var(--verde); }
+.cuota-legend .l-budget::before  { color: var(--amarillo); }
+.cuota-legend .l-ranking::before { color: var(--rojo); }
+.cuota-extra {
+  display: flex; justify-content: space-between; font-size: 12px;
+  border-top: 1px solid var(--sura-gris-claro); padding-top: 8px; margin-top: 4px;
+  color: var(--sura-gris-medio);
+}
+.cuota-extra strong { color: var(--sura-gris-oscuro); }
 .evento-card {
   background: var(--sura-blanco);
   border-radius: var(--radius);

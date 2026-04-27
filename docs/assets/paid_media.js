@@ -95,6 +95,62 @@ function renderEventos() {
   }).join("");
 }
 
+/* ---------- cuotas de impresiones ---------- */
+function renderCuotas() {
+  const wrap = document.querySelector("#cuotas-grid");
+  const seguros = getActiveSeguros();
+  wrap.innerHTML = seguros.map(s => {
+    const t = DATA.seguros[s]?.totales || {};
+    const actual = (t.cuota_imp_search || 0) * 100;
+    const budget = (t.cuota_perdida_budget || 0) * 100;
+    const ranking = (t.cuota_perdida_ranking || 0) * 100;
+    const perdida_otra = Math.max(0, 100 - actual - budget - ranking);
+    const opt_score = (t.optimization_score || 0) * 100;
+    const max = (t.cuota_max_alcanzable || 0) * 100;
+    return `
+      <div class="cuota-card" style="--c:${SEGURO_COLORS[s]}">
+        <h4>${s} <small>${t.campanias_count || 0} campañas</small></h4>
+        <div class="cuota-bar">
+          ${actual > 2 ? `<div class="seg actual" style="width:${actual}%">${actual.toFixed(0)}%</div>` : ''}
+          ${budget > 2 ? `<div class="seg budget" style="width:${budget}%">${budget.toFixed(0)}%</div>` : ''}
+          ${ranking > 2 ? `<div class="seg ranking" style="width:${ranking}%">${ranking.toFixed(0)}%</div>` : ''}
+          ${perdida_otra > 2 ? `<div class="seg perdida" style="width:${perdida_otra}%">${perdida_otra.toFixed(0)}%</div>` : ''}
+        </div>
+        <div class="cuota-legend">
+          <div class="l-actual">Capturado ${actual.toFixed(1)}%</div>
+          <div class="l-budget">Perdido por budget ${budget.toFixed(1)}%</div>
+          <div class="l-ranking">Perdido por ranking ${ranking.toFixed(1)}%</div>
+        </div>
+        <div class="cuota-extra"><span>Optimization Score</span><strong>${opt_score.toFixed(1)}%</strong></div>
+        <div class="cuota-extra"><span>Cuota máx alcanzable*</span><strong>${max.toFixed(1)}%</strong></div>
+        <div class="cuota-extra" style="font-size:11px;color:var(--sura-gris-medio);"><span>* destrabando budget + ranking</span><span></span></div>
+      </div>`;
+  }).join("");
+
+  // Bar chart comparativo
+  const labels = seguros;
+  const actuales = seguros.map(s => (DATA.seguros[s]?.totales?.cuota_imp_search || 0) * 100);
+  const budgets  = seguros.map(s => (DATA.seguros[s]?.totales?.cuota_perdida_budget || 0) * 100);
+  const rankings = seguros.map(s => (DATA.seguros[s]?.totales?.cuota_perdida_ranking || 0) * 100);
+  chart("chart-cuotas", "bar", {
+    labels,
+    datasets: [
+      { label: "Capturado",         data: actuales, backgroundColor: "#10B981", stack: "s" },
+      { label: "Perdido por budget", data: budgets,  backgroundColor: "#F59E0B", stack: "s" },
+      { label: "Perdido por ranking",data: rankings, backgroundColor: "#DC2626", stack: "s" },
+    ],
+  }, {
+    plugins: {
+      legend: { position: "bottom", labels: { font: { family: "Inter", size: 11 } } },
+      tooltip: { callbacks: { label: (it) => `${it.dataset.label}: ${it.parsed.y.toFixed(1)}%` } },
+    },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, max: 100, ticks: { callback: v => v + "%" } },
+    },
+  });
+}
+
 /* ---------- charts subtipo ---------- */
 function chart(canvasId, type, data, options = {}) {
   const ctx = document.getElementById(canvasId);
@@ -307,6 +363,7 @@ function refreshAll() {
   const days = getFilteredDays();
   renderKPIs(days);
   renderEventos();
+  renderCuotas();
   renderSubtipoCharts();
   renderCampanasTable();
   renderDailyCharts(days);
