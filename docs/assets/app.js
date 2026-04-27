@@ -244,6 +244,7 @@ function renderCharts() {
 /* ---------- cruces ---------- */
 function renderCruces() {
   const wrap = document.querySelector("#cruces");
+  if (!wrap) return;
   const data = DATA.cruces?.por_seguro || [];
   wrap.innerHTML = data.map(c => {
     const ratio = c.ratio_ga_conv_vs_sf;
@@ -269,6 +270,9 @@ function renderCruces() {
 
 /* ---------- optimizaciones ---------- */
 function renderOptimizaciones() {
+  // Esta seccion solo existe en paid_media.html, no en index. Skip si no hay tabla.
+  const tableEl = document.querySelector("#opt-table tbody");
+  if (!tableEl) return;
   const tabs = document.querySelectorAll(".opt-tab");
   let activeCat = "escalar";
   tabs.forEach(t => t.addEventListener("click", () => {
@@ -279,6 +283,7 @@ function renderOptimizaciones() {
   }));
   function drawTable() {
     const tbody = document.querySelector("#opt-table tbody");
+    if (!tbody) return;
     const items = DATA.optimizaciones?.[activeCat] || [];
     if (!items.length) {
       tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:20px;color:var(--sura-gris-medio);">Sin items en esta categoría.</td></tr>`;
@@ -304,6 +309,7 @@ function renderOptimizaciones() {
 /* ---------- discrepancias / caso negocio ---------- */
 function renderDiscrepancias() {
   const wrap = document.querySelector("#discrepancias");
+  if (!wrap) return;
   const d = DATA.discrepancias_y_gaps || {};
   wrap.innerHTML = `
     <ul class="gap-list">
@@ -315,6 +321,7 @@ function renderDiscrepancias() {
 }
 function renderCasoNegocio() {
   const wrap = document.querySelector("#caso-negocio");
+  if (!wrap) return;
   const c = DATA.caso_negocio || {};
   wrap.innerHTML = `
     <div class="caso-block">

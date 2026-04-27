@@ -50,6 +50,14 @@ function getFilteredDays() {
     for (const d of dias) {
       if (from && d.fecha < from) continue;
       if (to && d.fecha > to) continue;
+      // Filtrar dias vacios (futuros sin data: requeridos > 0 pero todo lo demas null/0)
+      const tieneData = (d.recibidos_sf || 0) > 0
+                     || (d.total_pauta || 0) > 0
+                     || (d.consumo_google || 0) > 0
+                     || (d.consumo_meta || 0) > 0
+                     || (d.leads_google || 0) > 0
+                     || (d.leads_meta || 0) > 0;
+      if (!tieneData) continue;
       out.push({ ...d, seguro: s });
     }
   }
