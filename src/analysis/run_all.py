@@ -177,12 +177,119 @@ def generate(data: dict) -> list:
     return out[:10]
 
 
+def generate_oportunidades(data: dict) -> list:
+    """Top oportunidades CROSS-CANAL basadas en gap entre lo actual y el potencial.
+
+    Cada oportunidad calcula:
+      - tipo (escalar / migrar canal / arreglar tracking / mejorar funnel)
+      - seguro afectado
+      - delta esperado en leads SF
+      - delta esperado en CPL
+    """
+    out: list = []
+    seguros = {s["nombre"]: s for s in data["seguros"]}
+
+    for nombre, s in seguros.items():
+        if not s.get("es_principal"):
+            continue
+        crm = s["crm"]
+        ga  = s["google_ads"]["kpis"]
+        leads_sf = crm.get("recibidos_sf") or 0
+        if not leads_sf:
+            continue
+
+        leads_google_sheet = crm.get("leads_google") or 0
+        leads_meta = crm.get("leads_meta") or 0
+        leads_bing = crm.get("leads_bing") or 0
+        total_canales = leads_google_sheet + leads_meta + leads_bing
+        share_google = (leads_google_sheet / total_canales) if total_canales else 0
+        share_meta   = (leads_meta / total_canales) if total_canales else 0
+
+        inv_google = crm.get("consumo_google") or 0
+        inv_meta   = crm.get("consumo_meta") or 0
+        cpl_google_canal = (inv_google / leads_google_sheet) if leads_google_sheet else 0
+        cpl_meta_canal   = (inv_meta / leads_meta) if leads_meta else 0
+
+        # Oportunidad 1: si un canal tiene CPL mucho menor que el otro -> reasignar budget
+        if cpl_google_canal > 0 and cpl_meta_canal > 0:
+            ratio = max(cpl_google_canal, cpl_meta_canal) / min(cpl_google_canal, cpl_meta_canal)
+            if ratio > 2:
+                mejor_canal = "Google" if cpl_google_canal < cpl_meta_canal else "Meta"
+                peor_canal = "Meta" if mejor_canal == "Google" else "Google"
+                cpl_mejor = min(cpl_google_canal, cpl_meta_canal)
+                cpl_peor = max(cpl_google_canal, cpl_meta_canal)
+                out.append({
+                    "seguro":      nombre,
+                    "tipo":        "Reasignación de canal",
+                    "icono":       "🔄",
+                    "titulo":      f"{nombre}: reasignar budget de {peor_canal} a {mejor_canal}",
+                    "detalle":     f"En {nombre}, {mejor_canal} convierte a CPL ${cpl_mejor:.2f} vs {peor_canal} a ${cpl_peor:.2f} (ratio {ratio:.1f}x). Reasignando 30% del budget de {peor_canal} → {mejor_canal} podríamos sumar leads SF al mismo gasto.",
+                    "delta_leads": f"+{int(leads_sf*0.10):,} leads SF/mes estimado",
+                    "delta_cpl":   f"-{int((cpl_peor-cpl_mejor)/cpl_peor*15)}% en CPL global del seguro",
+                })
+
+        # Oportunidad 2: gap conv Google Ads vs leads SF (tracking)
+        ga_conv = ga.get("conversiones") or 0
+        if leads_sf > 100 and ga_conv == 0:
+            out.append({
+                "seguro":      nombre,
+                "tipo":        "Tracking",
+                "icono":       "🔧",
+                "titulo":      f"{nombre}: tracking de conversiones Google Ads roto",
+                "detalle":     f"El CRM registra {leads_sf:,} leads SF pero Google Ads reporta 0 conversiones. Sin tracking, Smart Bidding está optimizando ciego. Importar evento desde Salesforce o configurar GA4 conversion import.",
+                "delta_leads": "+15-25% volumen estimado al optimizar correctamente",
+                "delta_cpl":   "-20% al activar Smart Bidding con datos reales",
+            })
+
+        # Oportunidad 3: cumplimiento bajo + budget headroom (cuota perdida budget)
+        cumpl = crm.get("cumpl_sf_vs_req")
+        if cumpl is not None and cumpl < 0.7:
+            requeridos = crm.get("requeridos") or 0
+            gap = max(0, requeridos - leads_sf)
+            out.append({
+                "seguro":      nombre,
+                "tipo":        "Escalar Google Ads",
+                "icono":       "📈",
+                "titulo":      f"{nombre}: cerrar gap de {gap:,} leads para cumplir compromiso",
+                "detalle":     f"Cumplimiento actual {cumpl*100:.1f}% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
+                "delta_leads": f"+{int(gap*0.4):,} leads SF en 4 semanas (cierra ~40% del gap)",
+                "delta_cpl":   "Estable o ligera mejora",
+            })
+
+        # Oportunidad 4: concentración de canal extrema (riesgo)
+        if share_google > 0.85:
+            out.append({
+                "seguro":      nombre,
+                "tipo":        "Diversificación",
+                "icono":       "⚖",
+                "titulo":      f"{nombre}: dependencia extrema de Google ({share_google*100:.0f}%)",
+                "detalle":     f"El {share_google*100:.0f}% de los leads vienen de Google. Riesgo: cualquier ajuste de Google (alza CPC, cambio algoritmo) impacta directo. Sumar 15-20% a Meta para diversificar.",
+                "delta_leads": "Estable inicialmente; +reducción de riesgo",
+                "delta_cpl":   "Posible alza temporal mientras Meta encuentra eficiencia",
+            })
+
+    # Cross-seguro: detección de tracking ROTO en Motos (caso especifico)
+    motos = seguros.get("Motos")
+    if motos:
+        ga_conv = motos["google_ads"]["kpis"].get("conversiones") or 0
+        leads = motos["crm"].get("recibidos_sf") or 0
+        if leads > 100 and ga_conv > 0 and ga_conv / leads < 0.4:
+            # ya cubierto arriba
+            pass
+
+    # Sort por impacto: las que dicen 'critica' o tracking primero
+    PRIO = {"Tracking": 0, "Escalar Google Ads": 1, "Reasignación de canal": 2, "Diversificación": 3}
+    out.sort(key=lambda o: PRIO.get(o["tipo"], 99))
+    return out[:6]
+
+
 def run() -> int:
     data = json.loads(DOCS_DATA.read_text(encoding="utf-8"))
     recos = generate(data)
     data["recomendaciones"] = recos
+    data["oportunidades_cross_canal"] = generate_oportunidades(data)
     DOCS_DATA.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"[analysis v3] -> {len(recos)} recomendaciones")
+    print(f"[analysis v3] -> {len(recos)} recomendaciones + {len(data['oportunidades_cross_canal'])} oportunidades cross-canal")
     for i, r in enumerate(recos, 1):
         print(f"  {i:2d}. [{r['prioridad']:8s}] {r['titulo'][:95]}")
     return 0

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-27T14:11:13",
+    "generated_at": "2026-04-27T14:19:11",
     "periodo": {
       "mes_actual": "abr 2026",
       "mes_actual_iso": "2026-04",
@@ -3992,15 +3992,222 @@
       }
     ]
   },
-  "recomendaciones": [],
+  "recomendaciones": [
+    {
+      "titulo": "Reactivar las 5 cuentas con anuncios sin publicar",
+      "seguro": "TODOS",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar al MCC SURATECH-COLOMBIA, identificar las 5 cuentas con alerta 'anuncios no se publican' y reactivar HOY. Verificar billing, restricciones y método de pago.",
+      "por_que": "Inversion potencial parada. Cada dia sin publicar = leads imposibles de recuperar.",
+      "impacto": "ALTO - posible recuperar 10-30% del ritmo de leads del mes",
+      "esfuerzo": "bajo",
+      "prioridad": "critica",
+      "plazo": "HOY",
+      "evidencia": [
+        "Alerta visible en header del MCC: '5 cuentas con anuncios sin publicar'"
+      ]
+    },
+    {
+      "titulo": "Completar verificación de servicios financieros en 3 cuentas",
+      "seguro": "TODOS",
+      "plataforma": "Google Ads",
+      "que_hacer": "Subir documentación legal de SURA + cumplir requisitos para anunciantes de seguros. 3 cuentas pendientes.",
+      "por_que": "Bloqueante administrativo. Sin verificación, Google va a empezar a limitar/pausar delivery.",
+      "impacto": "MEDIO - previene caída abrupta de impresiones la semana que viene",
+      "esfuerzo": "medio",
+      "prioridad": "critica",
+      "plazo": "esta semana",
+      "evidencia": []
+    },
+    {
+      "titulo": "Investigar caída sostenida en Autos: -112pp desde el pico (nov 2025)",
+      "seguro": "Autos",
+      "plataforma": "Google Ads + Meta",
+      "que_hacer": "Auditar todo lo que cambió desde nov 2025: bidding, presupuestos, audiencias, keywords, landing pages, ofertas, quality score. Comparar mix de canales (Google vs Meta vs Bing) y detectar cuál se rompió. Reactivar configuraciones que rendían cuando estaba en pico.",
+      "por_que": "En nov 2025 el cumplimiento fue 168.3% con CPL $3.83. Hoy (abr 2026) está en 56.7% con CPL $6.51. La caída es estructural (>5 meses), no estacional.",
+      "impacto": "ALTO - recuperar 56pp del cumplimiento implica +5,475 leads/mes",
+      "esfuerzo": "alto",
+      "prioridad": "alta",
+      "plazo": "esta semana",
+      "evidencia": [
+        "nov 2025: cumpl 168.3% / SF 14,091 / CPL $3.83",
+        "dic 2025: cumpl 144.4% / SF 12,448 / CPL $4.60",
+        "ene 2026: cumpl 137.2% / SF 11,398 / CPL $3.85",
+        "feb 2026: cumpl 125.6% / SF 9,883 / CPL $4.79",
+        "mar 2026: cumpl 91.7% / SF 9,293 / CPL $4.61",
+        "abr 2026: cumpl 56.7% / SF 5,564 / CPL $6.51"
+      ]
+    },
+    {
+      "titulo": "Investigar caída sostenida en Motos: -112pp desde el pico (jun 2025)",
+      "seguro": "Motos",
+      "plataforma": "Google Ads + Meta",
+      "que_hacer": "Auditar todo lo que cambió desde jun 2025: bidding, presupuestos, audiencias, keywords, landing pages, ofertas, quality score. Comparar mix de canales (Google vs Meta vs Bing) y detectar cuál se rompió. Reactivar configuraciones que rendían cuando estaba en pico.",
+      "por_que": "En jun 2025 el cumplimiento fue 167.1% con CPL $1.75. Hoy (abr 2026) está en 55.4% con CPL $2.76. La caída es estructural (>5 meses), no estacional.",
+      "impacto": "ALTO - recuperar 56pp del cumplimiento implica +8,046 leads/mes",
+      "esfuerzo": "alto",
+      "prioridad": "alta",
+      "plazo": "esta semana",
+      "evidencia": [
+        "nov 2025: cumpl 135.6% / SF 16,390 / CPL $1.37",
+        "dic 2025: cumpl 125.4% / SF 13,961 / CPL $1.78",
+        "ene 2026: cumpl 117.3% / SF 18,115 / CPL $1.10",
+        "feb 2026: cumpl 100.4% / SF 14,396 / CPL $2.19",
+        "mar 2026: cumpl 79.9% / SF 12,338 / CPL $2.63",
+        "abr 2026: cumpl 55.4% / SF 7,973 / CPL $2.76"
+      ]
+    },
+    {
+      "titulo": "Investigar caída sostenida en Arrendamiento: -140pp desde el pico (jun 2025)",
+      "seguro": "Arrendamiento",
+      "plataforma": "Google Ads + Meta",
+      "que_hacer": "Auditar todo lo que cambió desde jun 2025: bidding, presupuestos, audiencias, keywords, landing pages, ofertas, quality score. Comparar mix de canales (Google vs Meta vs Bing) y detectar cuál se rompió. Reactivar configuraciones que rendían cuando estaba en pico.",
+      "por_que": "En jun 2025 el cumplimiento fue 172.2% con CPL $2.22. Hoy (abr 2026) está en 32.2% con CPL $6.99. La caída es estructural (>5 meses), no estacional.",
+      "impacto": "ALTO - recuperar 70pp del cumplimiento implica +11,488 leads/mes",
+      "esfuerzo": "alto",
+      "prioridad": "critica",
+      "plazo": "esta semana",
+      "evidencia": [
+        "nov 2025: cumpl 76.4% / SF 10,636 / CPL $3.58",
+        "dic 2025: cumpl 81.8% / SF 8,695 / CPL $5.88",
+        "ene 2026: cumpl 56.2% / SF 13,845 / CPL $4.44",
+        "feb 2026: cumpl 63.8% / SF 11,961 / CPL $2.65",
+        "mar 2026: cumpl 54.2% / SF 8,911 / CPL $5.04",
+        "abr 2026: cumpl 32.2% / SF 5,285 / CPL $6.99"
+      ]
+    },
+    {
+      "titulo": "Investigar caída sostenida en Viajes: -144pp desde el pico (jun 2025)",
+      "seguro": "Viajes",
+      "plataforma": "Google Ads + Meta",
+      "que_hacer": "Auditar todo lo que cambió desde jun 2025: bidding, presupuestos, audiencias, keywords, landing pages, ofertas, quality score. Comparar mix de canales (Google vs Meta vs Bing) y detectar cuál se rompió. Reactivar configuraciones que rendían cuando estaba en pico.",
+      "por_que": "En jun 2025 el cumplimiento fue 186.7% con CPL $1.50. Hoy (abr 2026) está en 43.0% con CPL $8.43. La caída es estructural (>5 meses), no estacional.",
+      "impacto": "ALTO - recuperar 72pp del cumplimiento implica +1,917 leads/mes",
+      "esfuerzo": "alto",
+      "prioridad": "alta",
+      "plazo": "esta semana",
+      "evidencia": [
+        "nov 2025: cumpl 94.6% / SF 1,959 / CPL $4.21",
+        "dic 2025: cumpl 121.4% / SF 2,183 / CPL $5.33",
+        "ene 2026: cumpl 56.7% / SF 1,301 / CPL $8.69",
+        "feb 2026: cumpl 54.6% / SF 1,239 / CPL $9.23",
+        "mar 2026: cumpl 88.8% / SF 2,036 / CPL $5.64",
+        "abr 2026: cumpl 43.0% / SF 1,149 / CPL $8.43"
+      ]
+    },
+    {
+      "titulo": "Destrabar sura-cdd-co-google-search-retention-arriendo - Se han rechazado algunos anuncios",
+      "seguro": "Arrendamiento",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a sura-cdd-co-google-search-retention-arriendo, revisar assets/anuncios rechazados, corregir copy o creativos según motivo, re-someter a revisión. Presupuesto activo $984.00/día.",
+      "por_que": "Estado: 'Se han rechazado algunos anuncios'. Inversion ya gastada $12,382 con limitaciones - hay headroom inmediato al destrabar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campania",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana",
+      "evidencia": []
+    },
+    {
+      "titulo": "Destrabar SURA_AUTOS_PMAX - Algunos grupos de recursos están limitados por una",
+      "seguro": "Autos",
+      "plataforma": "Google Ads",
+      "que_hacer": "Entrar a SURA_AUTOS_PMAX, revisar assets/anuncios rechazados, corregir copy o creativos según motivo, re-someter a revisión. Presupuesto activo $517.00/día.",
+      "por_que": "Estado: 'Algunos grupos de recursos están limitados por una política'. Inversion ya gastada $10,671 con limitaciones - hay headroom inmediato al destrabar.",
+      "impacto": "MEDIO - liberar 20-40% de la capacidad de la campania",
+      "esfuerzo": "medio",
+      "prioridad": "alta",
+      "plazo": "esta semana",
+      "evidencia": []
+    },
+    {
+      "titulo": "Escalar SURA_SALUDPARADOS_SEARCH_RETENTION (+30% budget) - CPA $0.19 y headroom 15%",
+      "seguro": "Salud para Dos",
+      "plataforma": "Google Ads",
+      "que_hacer": "Subir presupuesto diario de $25.00 a $32.50 (+30%). La campania pierde 15% de impresiones por falta de presupuesto.",
+      "por_que": "CPA $0.19 entre los mejores. 4,089 conversiones con $779. Cuota perdida por presupuesto = 15% indica que con mas budget escalaria a CPA similar.",
+      "impacto": "ALTO - estimado +1,226 conversiones extra/mes",
+      "esfuerzo": "bajo",
+      "prioridad": "alta",
+      "plazo": "hoy",
+      "evidencia": []
+    },
+    {
+      "titulo": "Quality Score bajo en SURA_SALUDPARADOS_SEARCH_SEGMENT - cuota perdida ranking 62%",
+      "seguro": "Salud para Dos",
+      "plataforma": "Google Ads",
+      "que_hacer": "Revisar keywords con QS bajo, reescribir anuncios para mejorar relevancia, mejorar landing page experience. Considerar separar ad groups por intent.",
+      "por_que": "La campania pierde 62% de impresiones por ranking - el algoritmo de Google la considera menos relevante que la competencia.",
+      "impacto": "MEDIO - subir QS baja CPC -10/-20%",
+      "esfuerzo": "alto",
+      "prioridad": "media",
+      "plazo": "este mes",
+      "evidencia": []
+    }
+  ],
   "discrepancias_y_gaps": {
     "ga4_eventos": "GA4 Data API no integrada en MVP. Mapeo evento -> seguro requiere intervencion manual.",
     "meta_ad_sets": "Solo nombres de 4 campanias capturadas; drill-down a ad sets requiere Meta Marketing API.",
     "salud_para_dos_y_animal": "Sin data CRM. Solo Google Ads (foco: setear tracking + potenciar)."
   },
   "caso_negocio": {
-    "estado_actual": "",
-    "proyeccion_si_aplicamos_top5": "",
+    "estado_actual": "Cumplimiento global 46.1% (RECIBIDOS SF / REQUERIDOS) vs 70% transcurrido del mes. 19,971 leads reales recibidos de 43,290 requeridos. Inversion $104,893 (Google 74% / Meta 24%). CPL Negocio $5.25.",
+    "proyeccion_si_aplicamos_top5": "Aplicando las top 5 recomendaciones (focalizadas en destrabar bloqueos administrativos, recuperar configuraciones que rendían en el pico de Q4 2025 y arreglar tracking) estimamos +20pp de cumplimiento global en 4 semanas (de 46% a 66%) y 8,658 leads SF adicionales/mes.",
     "proximo_paso": "Migrar a APIs oficiales (Google Ads API, Meta Marketing API, GA4 Data API) para pipeline diario con alertas automaticas."
-  }
+  },
+  "oportunidades_cross_canal": [
+    {
+      "seguro": "Autos",
+      "tipo": "Escalar Google Ads",
+      "icono": "📈",
+      "titulo": "Autos: cerrar gap de 4,246 leads para cumplir compromiso",
+      "detalle": "Cumplimiento actual 56.7% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
+      "delta_leads": "+1,698 leads SF en 4 semanas (cierra ~40% del gap)",
+      "delta_cpl": "Estable o ligera mejora"
+    },
+    {
+      "seguro": "Motos",
+      "tipo": "Escalar Google Ads",
+      "icono": "📈",
+      "titulo": "Motos: cerrar gap de 6,427 leads para cumplir compromiso",
+      "detalle": "Cumplimiento actual 55.4% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
+      "delta_leads": "+2,570 leads SF en 4 semanas (cierra ~40% del gap)",
+      "delta_cpl": "Estable o ligera mejora"
+    },
+    {
+      "seguro": "Arrendamiento",
+      "tipo": "Escalar Google Ads",
+      "icono": "📈",
+      "titulo": "Arrendamiento: cerrar gap de 11,125 leads para cumplir compromiso",
+      "detalle": "Cumplimiento actual 32.2% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
+      "delta_leads": "+4,450 leads SF en 4 semanas (cierra ~40% del gap)",
+      "delta_cpl": "Estable o ligera mejora"
+    },
+    {
+      "seguro": "Viajes",
+      "tipo": "Escalar Google Ads",
+      "icono": "📈",
+      "titulo": "Viajes: cerrar gap de 1,521 leads para cumplir compromiso",
+      "detalle": "Cumplimiento actual 43.0% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
+      "delta_leads": "+608 leads SF en 4 semanas (cierra ~40% del gap)",
+      "delta_cpl": "Estable o ligera mejora"
+    },
+    {
+      "seguro": "Motos",
+      "tipo": "Reasignación de canal",
+      "icono": "🔄",
+      "titulo": "Motos: reasignar budget de Google a Meta",
+      "detalle": "En Motos, Meta convierte a CPL $5.59 vs Google a $13.93 (ratio 2.5x). Reasignando 30% del budget de Google → Meta podríamos sumar leads SF al mismo gasto.",
+      "delta_leads": "+797 leads SF/mes estimado",
+      "delta_cpl": "-8% en CPL global del seguro"
+    },
+    {
+      "seguro": "Arrendamiento",
+      "tipo": "Reasignación de canal",
+      "icono": "🔄",
+      "titulo": "Arrendamiento: reasignar budget de Google a Meta",
+      "detalle": "En Arrendamiento, Meta convierte a CPL $5.24 vs Google a $15.46 (ratio 2.9x). Reasignando 30% del budget de Google → Meta podríamos sumar leads SF al mismo gasto.",
+      "delta_leads": "+528 leads SF/mes estimado",
+      "delta_cpl": "-9% en CPL global del seguro"
+    }
+  ]
 }

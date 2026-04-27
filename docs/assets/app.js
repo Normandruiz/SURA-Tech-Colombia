@@ -328,6 +328,77 @@ function renderCasoNegocio() {
 function renderForMonth() {
   renderHeader();
   renderSeguros();
+  renderMixCanales();
+}
+
+/* ---------- Oportunidades cross-canal ---------- */
+function renderOportunidades() {
+  const wrap = document.querySelector("#oportunidades");
+  if (!wrap) return;
+  const items = DATA.oportunidades_cross_canal || [];
+  if (!items.length) { wrap.innerHTML = `<div class="empty-state">Sin oportunidades detectadas.</div>`; return; }
+  wrap.innerHTML = items.map(o => `
+    <div class="oport-card">
+      <div class="oport-icon">${o.icono || "💡"}</div>
+      <div class="oport-content">
+        <div class="oport-tipo">${o.tipo}</div>
+        <div class="oport-titulo">${o.titulo}</div>
+        <div class="oport-detalle">${o.detalle}</div>
+        <div class="oport-impacto">
+          <div><span class="label">Δ Leads</span><strong>${o.delta_leads || "—"}</strong></div>
+          <div><span class="label">Δ CPL</span><strong>${o.delta_cpl || "—"}</strong></div>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* ---------- Mix de canales ---------- */
+function renderMixCanales() {
+  const seguros_p = DATA.meta.scope.seguros_principales;
+  // leads y inv por canal por seguro
+  const dataLeads = {Google: [], Meta: [], Bing: []};
+  const dataInv   = {Google: [], Meta: [], Bing: []};
+  seguros_p.forEach(s => {
+    const cur = findMonthData(s, MES_ACTIVO_ISO) || {};
+    dataLeads.Google.push(cur.leads_google || 0);
+    dataLeads.Meta.push(cur.leads_meta || 0);
+    dataLeads.Bing.push(cur.leads_bing || 0);
+    dataInv.Google.push(cur.consumo_google || 0);
+    dataInv.Meta.push(cur.consumo_meta || 0);
+    dataInv.Bing.push(cur.consumo_bing || 0);
+  });
+  const C = {
+    Google: "#0033A0",
+    Meta:   "#9333EA",
+    Bing:   "#00AEC7",
+  };
+  const lineChartBar = (canvasId, datasets, valueFmt) => {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    if (CHARTS[canvasId]) CHARTS[canvasId].destroy();
+    CHARTS[canvasId] = new Chart(ctx, {
+      type: "bar",
+      data: { labels: seguros_p, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "bottom", labels: { font: { family: "Inter", size: 11 } } },
+          tooltip: { callbacks: { label: (it) => `${it.dataset.label}: ${valueFmt(it.parsed.y)}` } },
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false } },
+          y: { stacked: true, ticks: { callback: valueFmt } },
+        },
+      },
+    });
+  };
+  lineChartBar("chart-mix-leads", Object.entries(dataLeads).map(([k, v]) => ({
+    label: k, data: v, backgroundColor: C[k], borderRadius: 4,
+  })), v => fmtNumber(v));
+  lineChartBar("chart-mix-inv", Object.entries(dataInv).map(([k, v]) => ({
+    label: k, data: v, backgroundColor: C[k], borderRadius: 4,
+  })), v => "$" + fmtNumber(v));
 }
 
 (async function main() {
@@ -337,10 +408,11 @@ function renderForMonth() {
     renderMesSelector();
     renderForMonth();
     renderAlertas();
+    renderOportunidades();
     renderRecos();
     renderCharts();
     renderCruces();
-    renderOptimizaciones();
+    if (typeof renderOptimizaciones === "function") renderOptimizaciones();
     renderDiscrepancias();
     renderCasoNegocio();
   } catch (e) {
