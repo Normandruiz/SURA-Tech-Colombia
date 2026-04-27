@@ -1,5 +1,6 @@
 /* ============================================================
-   SURA Tech Colombia · Dashboard v2 · app.js
+   SURA Tech Colombia · Dashboard v3 · app.js
+   Fuente de verdad: RECIBIDOS (SF) - leads que llegan a Salesforce.
    ============================================================ */
 
 const SURA = { azul: "#00359C", aqua: "#00AEC7", azul_vivo: "#2D6DF6", verde: "#10B981", amarillo: "#F59E0B", rojo: "#DC2626" };
@@ -10,14 +11,14 @@ const SEGURO_COLORS = {
   "Viajes":        "#9333EA",
 };
 
-const fmtCurrency = (v) => v == null ? "—" : "$" + new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 }).format(v);
+const fmtCurrency  = (v) => v == null ? "—" : "$" + new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 }).format(v);
 const fmtCurrencyD = (v) => v == null ? "—" : "$" + new Intl.NumberFormat("es-CO", { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(v);
-const fmtNumber = (v) => v == null ? "—" : new Intl.NumberFormat("es-CO").format(v);
-const fmtPct = (v) => v == null ? "—" : (v * 100).toFixed(1) + "%";
-const fmtDelta = (v) => v == null ? "" : ((v >= 0 ? "↑" : "↓") + " " + Math.abs(v * 100).toFixed(1) + "% MoM");
+const fmtNumber    = (v) => v == null ? "—" : new Intl.NumberFormat("es-CO").format(v);
+const fmtPct       = (v) => v == null ? "—" : (v * 100).toFixed(1) + "%";
+const fmtDelta     = (v) => v == null ? "" : ((v >= 0 ? "↑" : "↓") + " " + Math.abs(v * 100).toFixed(1) + "% MoM");
 
 let DATA = null;
-let MES_ACTIVO = null;
+let MES_ACTIVO_ISO = null;
 
 function semaforoFrom(cumpl, transcurrido = 0.7) {
   if (cumpl == null) return "amarillo";
@@ -36,70 +37,71 @@ async function loadData() {
 function renderMesSelector() {
   const sel = document.querySelector("#mes-selector");
   const meses = (DATA.evolucion_mom?.meses || []).slice().reverse();
-  sel.innerHTML = meses.map(m => `<option value="${m}">${m}</option>`).join("");
-  sel.value = MES_ACTIVO;
+  const mesesIso = (DATA.evolucion_mom?.meses_iso || []).slice().reverse();
+  sel.innerHTML = meses.map((m, i) => `<option value="${mesesIso[i]}">${m}</option>`).join("");
+  sel.value = MES_ACTIVO_ISO;
   sel.addEventListener("change", (e) => {
-    MES_ACTIVO = e.target.value;
+    MES_ACTIVO_ISO = e.target.value;
     renderForMonth();
   });
 }
 
-function findMonthData(seguro, mes) {
+function findMonthData(seguro, mesIso) {
   const serie = DATA.evolucion_mom?.por_seguro?.[seguro] || [];
-  return serie.find(s => s.mes === mes && !s.vacio);
+  return serie.find(s => s.mes_iso === mesIso && !s.vacio);
 }
 
-/* ---------- header KPIs (recalculados por mes activo) ---------- */
+/* ---------- header KPIs ---------- */
 function renderHeader() {
   const seguros_p = DATA.meta.scope.seguros_principales;
-  let inv = 0, leads = 0, compromiso = 0;
-  const cpls = [];
-  let inv_prev = 0, leads_prev = 0, compromiso_prev = 0;
-  const cpls_prev = [];
+  let inv = 0, sf = 0, requeridos = 0, pauta = 0, leads_google = 0, leads_meta = 0;
+  let sf_prev = 0, requeridos_prev = 0, pauta_prev = 0, inv_prev = 0;
 
-  const meses = DATA.evolucion_mom.meses; // antiguo->nuevo
-  const idx = meses.indexOf(MES_ACTIVO);
-  const mes_prev = idx > 0 ? meses[idx - 1] : null;
+  const mesesIso = DATA.evolucion_mom.meses_iso;
+  const idx = mesesIso.indexOf(MES_ACTIVO_ISO);
+  const mes_prev_iso = idx > 0 ? mesesIso[idx - 1] : null;
 
   for (const seguro of seguros_p) {
-    const cur = findMonthData(seguro, MES_ACTIVO);
+    const cur = findMonthData(seguro, MES_ACTIVO_ISO);
     if (cur) {
-      inv += cur.inversion_total || 0;
-      leads += cur.leads_crm || 0;
-      compromiso += cur.compromiso || 0;
-      if (cur.cpl_negocio) cpls.push(cur.cpl_negocio);
+      inv += (cur.consumo_google || 0) + (cur.consumo_meta || 0) + (cur.consumo_bing || 0);
+      sf += cur.recibidos_sf || 0;
+      requeridos += cur.requeridos || 0;
+      pauta += cur.total_pauta || 0;
+      leads_google += cur.leads_google || 0;
+      leads_meta += cur.leads_meta || 0;
     }
-    if (mes_prev) {
-      const p = findMonthData(seguro, mes_prev);
+    if (mes_prev_iso) {
+      const p = findMonthData(seguro, mes_prev_iso);
       if (p) {
-        inv_prev += p.inversion_total || 0;
-        leads_prev += p.leads_crm || 0;
-        compromiso_prev += p.compromiso || 0;
-        if (p.cpl_negocio) cpls_prev.push(p.cpl_negocio);
+        inv_prev += (p.consumo_google || 0) + (p.consumo_meta || 0) + (p.consumo_bing || 0);
+        sf_prev += p.recibidos_sf || 0;
+        requeridos_prev += p.requeridos || 0;
+        pauta_prev += p.total_pauta || 0;
       }
     }
   }
 
-  const cumpl = compromiso ? leads / compromiso : 0;
-  const cumpl_prev = compromiso_prev ? leads_prev / compromiso_prev : 0;
-  const cpl_avg = cpls.length ? cpls.reduce((a,b)=>a+b)/cpls.length : 0;
-  const cpl_avg_prev = cpls_prev.length ? cpls_prev.reduce((a,b)=>a+b)/cpls_prev.length : 0;
+  const cumpl = requeridos ? sf / requeridos : 0;
+  const cumpl_prev = requeridos_prev ? sf_prev / requeridos_prev : 0;
+  const cpl = sf ? inv / sf : 0;
+  const cpl_prev = sf_prev ? inv_prev / sf_prev : 0;
 
   const set = (sel, val, prev) => {
     const el = document.querySelector(sel);
     if (!el) return;
     el.querySelector(".value").textContent = val;
     const dEl = el.querySelector(".delta");
-    if (prev == null || prev === 0) { dEl.textContent = ""; return; }
+    if (prev == null || prev === 0 || isNaN(prev)) { dEl.textContent = ""; return; }
     dEl.textContent = fmtDelta(prev);
     dEl.classList.toggle("up", prev >= 0);
     dEl.classList.toggle("down", prev < 0);
   };
 
-  set("#kpi-inversion",     fmtCurrency(inv),    inv_prev    ? (inv-inv_prev)/inv_prev : null);
-  set("#kpi-leads",         fmtNumber(leads),    leads_prev  ? (leads-leads_prev)/leads_prev : null);
-  set("#kpi-cumplimiento",  fmtPct(cumpl),       cumpl_prev  ? (cumpl-cumpl_prev) : null);
-  set("#kpi-cpl",           fmtCurrencyD(cpl_avg),cpl_avg_prev? (cpl_avg-cpl_avg_prev)/cpl_avg_prev : null);
+  set("#kpi-inversion",    fmtCurrency(inv),     inv_prev    ? (inv-inv_prev)/inv_prev : null);
+  set("#kpi-leads",        fmtNumber(sf),        sf_prev     ? (sf-sf_prev)/sf_prev : null);
+  set("#kpi-cumplimiento", fmtPct(cumpl),        cumpl_prev  ? (cumpl-cumpl_prev) : null);
+  set("#kpi-cpl",          fmtCurrencyD(cpl),    cpl_prev    ? (cpl-cpl_prev)/cpl_prev : null);
 }
 
 /* ---------- alertas ---------- */
@@ -119,37 +121,39 @@ function renderSeguros() {
   const transcurrido = DATA.meta.periodo.porcentaje_transcurrido || 0.7;
 
   wrap.innerHTML = DATA.seguros.map(s => {
-    const cur = findMonthData(s.nombre, MES_ACTIVO) || {};
+    const cur = findMonthData(s.nombre, MES_ACTIVO_ISO) || {};
     const ga = s.google_ads || { kpis: {} };
     const isExtra = !s.es_principal;
-    const cump = cur.cumplimiento;
-    const color = semaforoFrom(cump, transcurrido);
-    const prog = cump == null ? 0 : Math.min(100, Math.max(0, cump * 100));
+    const cumpl = cur.cumpl_sf_vs_req;
+    const color = semaforoFrom(cumpl, transcurrido);
+    const prog = cumpl == null ? 0 : Math.min(100, Math.max(0, cumpl * 100));
 
     return `
       <div class="seguro-card ${isExtra ? 'extra' : ''}">
         <div class="head">
           <span class="nombre">${s.nombre} ${isExtra ? '<small>(extra)</small>' : ''}</span>
-          <span class="semaforo ${color}" title="${fmtPct(cump)}"></span>
+          <span class="semaforo ${color}" title="${fmtPct(cumpl)}"></span>
         </div>
-        ${cump != null ? `
-        <div class="progress-bar"><span style="width:${prog}%"></span></div>
-        <div class="metric-row"><span>Leads CRM / Compromiso</span><strong>${fmtNumber(cur.leads_crm)} / ${fmtNumber(cur.compromiso)}</strong></div>
-        <div class="metric-row"><span>Cumplimiento</span><strong>${fmtPct(cump)} <small>(meta ${fmtPct(transcurrido)})</small></strong></div>
-        <div class="metric-row"><span>CPL Negocio</span><strong>${fmtCurrencyD(cur.cpl_negocio)}</strong></div>
-        <div class="metric-row"><span>Inversión total</span><strong>${fmtCurrency(cur.inversion_total)}</strong></div>
+        ${cumpl != null ? `
+        <div class="progress-bar"><span style="width:${Math.min(100,prog)}%"></span></div>
+        <div class="metric-row"><span>RECIBIDOS (SF) / Req.</span><strong>${fmtNumber(cur.recibidos_sf)} / ${fmtNumber(cur.requeridos)}</strong></div>
+        <div class="metric-row"><span>Cumplimiento SF/Req</span><strong>${fmtPct(cumpl)} <small>(meta ${fmtPct(transcurrido)})</small></strong></div>
+        <div class="metric-row"><span>Pauta total</span><strong>${fmtNumber(cur.total_pauta)} <small>(${fmtPct(cur.cumpl_pauta_vs_req)})</small></strong></div>
+        <div class="metric-row"><span>CPL Negocio (SF)</span><strong>${fmtCurrencyD(cur.cpl_negocio_sf)}</strong></div>
         ` : `
         <div class="empty-state" style="padding:8px 0;background:transparent;border:none;">Sin tracking CRM — solo data Ads</div>
         `}
         <hr style="border:0;border-top:1px solid var(--sura-gris-claro);margin:10px 0;">
-        <div class="metric-row"><span>Google Ads inv.</span><strong>${fmtCurrency(ga.kpis.coste_usd)}</strong></div>
-        <div class="metric-row"><span>Google Ads conv.</span><strong>${fmtNumber(Math.round(ga.kpis.conversiones || 0))}</strong></div>
-        <div class="metric-row"><span>Campañas activas</span><strong>${ga.campanias_count || 0}</strong></div>
+        <div class="metric-row"><span>Inversión Google</span><strong>${fmtCurrency(cur.consumo_google)}</strong></div>
+        <div class="metric-row"><span>Leads Google</span><strong>${fmtNumber(cur.leads_google)}</strong></div>
+        <div class="metric-row"><span>Inversión Meta</span><strong>${fmtCurrency(cur.consumo_meta)}</strong></div>
+        <div class="metric-row"><span>Leads Meta</span><strong>${fmtNumber(cur.leads_meta)}</strong></div>
+        <div class="metric-row"><span>Campañas Google Ads</span><strong>${ga.campanias_count || 0}</strong></div>
       </div>`;
   }).join("");
 }
 
-/* ---------- TOP 10 recomendaciones ---------- */
+/* ---------- TOP 10 recos ---------- */
 function renderRecos() {
   const list = document.querySelector("#reco-list");
   const recos = DATA.recomendaciones || [];
@@ -168,9 +172,9 @@ function renderRecos() {
     const items = recos.filter(r => {
       if (activeFilter === "all") return true;
       if (["critica","alta","media"].includes(activeFilter)) return r.prioridad === activeFilter;
-      return r.plataforma === activeFilter;
+      return (r.plataforma || "").includes(activeFilter);
     });
-    list.innerHTML = items.map((r, i) => {
+    list.innerHTML = items.map(r => {
       const realIdx = recos.indexOf(r) + 1;
       const evidencia = (r.evidencia || []).map(e => `<li>${e}</li>`).join("");
       return `
@@ -195,31 +199,29 @@ function renderRecos() {
   drawList();
 }
 
-/* ---------- gráficos MoM ---------- */
+/* ---------- gráficos ---------- */
 let CHARTS = {};
-function lineChart(canvasId, datasets, yPctOrCurrency = "number") {
+function lineChart(canvasId, datasets, yMode = "number") {
   const ctx = document.getElementById(canvasId);
   if (!ctx) return;
   if (CHARTS[canvasId]) CHARTS[canvasId].destroy();
-  const meses = DATA.evolucion_mom.meses;
-  const yFmt = (v) => yPctOrCurrency === "pct" ? (v*100).toFixed(0)+"%"
-                  : yPctOrCurrency === "currency" ? "$"+fmtNumber(v)
+  const labels = DATA.evolucion_mom.meses;
+  const yFmt = (v) => yMode === "pct" ? (v*100).toFixed(0)+"%"
+                  : yMode === "currency" ? "$"+fmtNumber(v)
                   : fmtNumber(v);
   CHARTS[canvasId] = new Chart(ctx, {
     type: "line",
-    data: { labels: meses, datasets },
+    data: { labels, datasets },
     options: {
-      responsive: true,
+      responsive: true, maintainAspectRatio: false,
       interaction: { mode: "index", intersect: false },
       plugins: {
         legend: { position: "bottom", labels: { font: { family: "Inter", size: 11 } } },
-        tooltip: {
-          callbacks: { label: (it) => `${it.dataset.label}: ${yFmt(it.parsed.y)}` },
-        },
+        tooltip: { callbacks: { label: (it) => `${it.dataset.label}: ${yFmt(it.parsed.y)}` } },
       },
       scales: {
         y: { ticks: { callback: yFmt, font: { family: "Inter" } }, grid: { color: "rgba(0,53,156,0.05)" } },
-        x: { ticks: { font: { family: "Inter" } }, grid: { display: false } },
+        x: { ticks: { font: { family: "Inter", size: 10 }, maxRotation: 50 }, grid: { display: false } },
       },
     },
   });
@@ -227,16 +229,16 @@ function lineChart(canvasId, datasets, yPctOrCurrency = "number") {
 
 function renderCharts() {
   const seguros_p = DATA.meta.scope.seguros_principales;
-  const buildDataset = (key, factor=1) => seguros_p.map(seg => ({
+  const buildDataset = (key) => seguros_p.map(seg => ({
     label: seg,
-    data: (DATA.evolucion_mom.por_seguro[seg] || []).map(p => p.vacio ? null : (p[key] || 0) * factor),
+    data: (DATA.evolucion_mom.por_seguro[seg] || []).map(p => p.vacio ? null : (p[key] || 0)),
     borderColor: SEGURO_COLORS[seg], backgroundColor: SEGURO_COLORS[seg] + "22",
-    tension: 0.3, borderWidth: 2.5, pointRadius: 4, pointHoverRadius: 6,
+    tension: 0.3, borderWidth: 2.5, pointRadius: 3, pointHoverRadius: 6, spanGaps: true,
   }));
-  lineChart("chart-cumpl", buildDataset("cumplimiento"), "pct");
-  lineChart("chart-cpl",   buildDataset("cpl_negocio"),  "currency");
-  lineChart("chart-leads", buildDataset("leads_crm"),    "number");
-  lineChart("chart-inv",   buildDataset("inversion_total"), "currency");
+  lineChart("chart-cumpl", buildDataset("cumpl_sf_vs_req"),  "pct");
+  lineChart("chart-cpl",   buildDataset("cpl_negocio_sf"),   "currency");
+  lineChart("chart-leads", buildDataset("recibidos_sf"),     "number");
+  lineChart("chart-inv",   buildDataset("consumo_google"),   "currency");
 }
 
 /* ---------- cruces ---------- */
@@ -244,24 +246,23 @@ function renderCruces() {
   const wrap = document.querySelector("#cruces");
   const data = DATA.cruces?.por_seguro || [];
   wrap.innerHTML = data.map(c => {
-    const ratio = c.ratio_ga_conv_vs_crm;
+    const ratio = c.ratio_ga_conv_vs_sf;
     const flag = ratio === 0 ? "rojo" : (ratio < 0.5 ? "amarillo" : "verde");
-    const flagText = ratio === 0
-      ? "TRACKING ROTO"
-      : (ratio < 0.5 ? "Google Ads minoritario" : "OK");
+    const flagText = ratio === 0 ? "TRACKING ROTO" : (ratio < 0.5 ? "Google minoritario" : "OK");
     return `
       <div class="cruce-card cruce-${flag}">
         <div class="cruce-head">
           <strong>${c.seguro}</strong>
           <span class="cruce-flag flag-${flag}">${flagText}</span>
         </div>
-        <div class="cruce-row"><span>Leads CRM</span><strong>${fmtNumber(c.leads_crm)}</strong></div>
-        <div class="cruce-row"><span>Conversiones Google Ads</span><strong>${fmtNumber(c.google_ads_conv)}</strong></div>
-        <div class="cruce-row"><span>Ratio GA / CRM</span><strong>${(ratio*100).toFixed(0)}%</strong></div>
-        <div class="cruce-row"><span>Leads via Meta (CRM)</span><strong>${fmtNumber(c.leads_meta_crm)}</strong></div>
-        <div class="cruce-row"><span>Leads via otros canales</span><strong>${fmtNumber(c.leads_otros)}</strong></div>
-        <div class="cruce-row"><span>Inv. Google (extractor)</span><strong>${fmtCurrency(c.inversion_ga_extractor)}</strong></div>
-        <div class="cruce-row"><span>Inv. Google (CRM)</span><strong>${fmtCurrency(c.inversion_ga_crm)}</strong></div>
+        <div class="cruce-row"><span>RECIBIDOS (SF)</span><strong>${fmtNumber(c.recibidos_sf)}</strong></div>
+        <div class="cruce-row"><span>Total Pauta</span><strong>${fmtNumber(c.total_pauta)} (${(c.ratio_pauta_vs_sf*100).toFixed(0)}% del SF)</strong></div>
+        <div class="cruce-row"><span>Conv. Google Ads</span><strong>${fmtNumber(c.google_ads_conv)} (${(ratio*100).toFixed(0)}% del SF)</strong></div>
+        <div class="cruce-row"><span>Leads Google (Sheet)</span><strong>${fmtNumber(c.leads_google_sheet)}</strong></div>
+        <div class="cruce-row"><span>Leads Meta (Sheet)</span><strong>${fmtNumber(c.leads_meta_sheet)}</strong></div>
+        <div class="cruce-row"><span>Leads Bing (Sheet)</span><strong>${fmtNumber(c.leads_bing_sheet)}</strong></div>
+        <div class="cruce-row"><span>Inv. Google extractor</span><strong>${fmtCurrency(c.inversion_ga_extractor)}</strong></div>
+        <div class="cruce-row"><span>Inv. Google Sheet</span><strong>${fmtCurrency(c.inversion_ga_sheet)}</strong></div>
       </div>`;
   }).join("");
 }
@@ -300,7 +301,7 @@ function renderOptimizaciones() {
   drawTable();
 }
 
-/* ---------- discrepancias y caso negocio ---------- */
+/* ---------- discrepancias / caso negocio ---------- */
 function renderDiscrepancias() {
   const wrap = document.querySelector("#discrepancias");
   const d = DATA.discrepancias_y_gaps || {};
@@ -324,17 +325,15 @@ function renderCasoNegocio() {
   `;
 }
 
-/* ---------- render por mes ---------- */
 function renderForMonth() {
   renderHeader();
   renderSeguros();
 }
 
-/* ---------- main ---------- */
 (async function main() {
   try {
     DATA = await loadData();
-    MES_ACTIVO = DATA.meta.periodo.mes_actual;
+    MES_ACTIVO_ISO = DATA.meta.periodo.mes_actual_iso;
     renderMesSelector();
     renderForMonth();
     renderAlertas();

@@ -62,11 +62,16 @@ def write_resumen(wb: Workbook, data: dict) -> None:
     ws["A4"].font = H2
     k = data["kpis_globales"]
     rows = [
-        ("Inversión total (USD)", k["inversion_total"]),
-        ("Leads CRM totales",     k["leads_crm_totales"]),
-        ("Compromiso leads",      k["compromiso_leads_total"]),
-        ("Cumplimiento global",   f"{k['cumplimiento_global_pct']*100:.1f}%"),
-        ("CPL Negocio promedio (USD)", k["cpl_negocio_promedio"]),
+        ("Inversión total (USD)",       k["inversion_total"]),
+        ("  Inversión Google",          k["inversion_google"]),
+        ("  Inversión Meta",            k["inversion_meta"]),
+        ("  Inversión Bing",            k["inversion_bing"]),
+        ("RECIBIDOS (SF) - leads reales", k["leads_recibidos_sf"]),
+        ("Total Pauta",                 k["leads_pauta_total"]),
+        ("Requeridos (compromiso)",     k["leads_requeridos"]),
+        ("Cumplimiento SF/Req",         f"{k['cumpl_sf_vs_req']*100:.1f}%"),
+        ("Cumplimiento Pauta/Req",      f"{k['cumpl_pauta_vs_req']*100:.1f}%"),
+        ("CPL Negocio promedio (SF)",   k["cpl_negocio_promedio"]),
     ]
     for i, (label, val) in enumerate(rows, start=5):
         ws.cell(row=i, column=1, value=label).font = NORMAL
@@ -76,16 +81,14 @@ def write_resumen(wb: Workbook, data: dict) -> None:
     # Por seguro
     start_row = 12
     ws.cell(row=start_row, column=1, value="Por seguro").font = H2
-    headers = ["Seguro","Tipo","Compromiso","Leads CRM","Cumplimiento %","CPL Negocio","Inv. Google Ads","Conv. Ads","Campañas"]
+    headers = ["Seguro","Tipo","Requeridos","RECIBIDOS (SF)","Total Pauta","Cumpl SF/Req","Cumpl Pauta/Req","CPL Negocio (SF)","Inv. Google","Inv. Meta","Inv. Bing","Campañas Google"]
     _header_row(ws, start_row + 1, headers)
     r = start_row + 2
     transcurrido = data["meta"]["periodo"].get("porcentaje_transcurrido", 0.7)
     for s in data["seguros"]:
         c = s["crm"]
-        ga = s["google_ads"]["kpis"]
-        cump = c.get("cumplimiento_pct")
-        # color por semaforo
-        if cump is not None:
+        cump = c.get("cumpl_sf_vs_req")
+        if cump:
             ratio = cump / transcurrido
             fill = FILL_VER if ratio >= 0.9 else (FILL_AMA if ratio >= 0.6 else FILL_ROJO)
         else:
@@ -93,12 +96,15 @@ def write_resumen(wb: Workbook, data: dict) -> None:
         vals = [
             s["nombre"],
             "Principal" if s["es_principal"] else "Extra (solo ads)",
-            c.get("compromiso_leads") or "—",
-            c.get("leads_crm") or "—",
-            f"{cump*100:.1f}%" if cump is not None else "—",
-            c.get("cpl_negocio") or "—",
-            ga.get("coste_usd") or 0,
-            int(ga.get("conversiones") or 0),
+            c.get("requeridos") or "—",
+            c.get("recibidos_sf") or "—",
+            c.get("total_pauta") or "—",
+            f"{cump*100:.1f}%" if cump else "—",
+            f"{(c.get('cumpl_pauta_vs_req') or 0)*100:.1f}%" if c.get('cumpl_pauta_vs_req') else "—",
+            c.get("cpl_negocio_sf") or "—",
+            c.get("consumo_google") or 0,
+            c.get("consumo_meta") or 0,
+            c.get("consumo_bing") or 0,
             s["google_ads"]["campanias_count"],
         ]
         for i, v in enumerate(vals, 1):
@@ -178,15 +184,18 @@ def write_recomendaciones(wb: Workbook, data: dict) -> None:
 
 def write_evolucion(wb: Workbook, data: dict) -> None:
     ws = wb.create_sheet("Evolución MoM")
-    headers = ["Seguro","Mes","Compromiso","Leads CRM","Cumplimiento %","CPL Negocio","Inv. Google Ads","Inv. Meta","Inv. Total","Leads Total"]
+    headers = ["Seguro","Mes","Requeridos","RECIBIDOS (SF)","Total Pauta","Cumpl SF/Req","Cumpl Pauta/Req","CPL Neg (SF)","Inv Google","Leads Google","Inv Meta","Leads Meta","Inv Bing","Leads Bing"]
     _header_row(ws, 1, headers)
     r = 2
     for seguro, serie in data.get("evolucion_mom", {}).get("por_seguro", {}).items():
         for p in serie:
             if p.get("vacio"): continue
-            row = [seguro, p["mes"], p["compromiso"], p["leads_crm"],
-                   f"{p['cumplimiento']*100:.1f}%", p["cpl_negocio"],
-                   p["inv_google_ads"], p["inv_meta"], p["inversion_total"], p["leads_total"]]
+            row = [seguro, p["mes"], p["requeridos"], p["recibidos_sf"], p["total_pauta"],
+                   f"{p['cumpl_sf_vs_req']*100:.1f}%", f"{p['cumpl_pauta_vs_req']*100:.1f}%",
+                   p["cpl_negocio_sf"],
+                   p["consumo_google"], p["leads_google"],
+                   p["consumo_meta"], p["leads_meta"],
+                   p["consumo_bing"], p["leads_bing"]]
             for i, v in enumerate(row, 1):
                 cell = ws.cell(row=r, column=i, value=v)
                 cell.border = BORDER
@@ -197,15 +206,16 @@ def write_evolucion(wb: Workbook, data: dict) -> None:
 
 def write_cruces(wb: Workbook, data: dict) -> None:
     ws = wb.create_sheet("Cruces")
-    headers = ["Seguro","Leads CRM","Conv. Google Ads","Ratio GA/CRM","Leads Meta","Leads Otros","Inv. GA Extractor","Inv. GA CRM","Δ Inversión"]
+    headers = ["Seguro","RECIBIDOS (SF)","Total Pauta","Conv. Google Ads","Ratio GA/SF","Ratio Pauta/SF","Leads Google Sheet","Leads Meta Sheet","Leads Bing Sheet","Inv GA Extractor","Inv GA Sheet","Δ Inversión"]
     _header_row(ws, 1, headers)
     r = 2
     for c in data.get("cruces", {}).get("por_seguro", []):
-        ratio = c["ratio_ga_conv_vs_crm"]
+        ratio = c.get("ratio_ga_conv_vs_sf", 0)
         fill = FILL_ROJO if ratio == 0 else (FILL_AMA if ratio < 0.5 else FILL_VER)
-        row = [c["seguro"], c["leads_crm"], c["google_ads_conv"],
-               f"{ratio*100:.0f}%", c["leads_meta_crm"], c["leads_otros"],
-               c["inversion_ga_extractor"], c["inversion_ga_crm"], c["delta_inversion"]]
+        row = [c["seguro"], c["recibidos_sf"], c["total_pauta"], c["google_ads_conv"],
+               f"{ratio*100:.0f}%", f"{c.get('ratio_pauta_vs_sf',0)*100:.0f}%",
+               c["leads_google_sheet"], c["leads_meta_sheet"], c["leads_bing_sheet"],
+               c["inversion_ga_extractor"], c["inversion_ga_sheet"], c["delta_inversion"]]
         for i, v in enumerate(row, 1):
             cell = ws.cell(row=r, column=i, value=v)
             cell.fill = fill; cell.border = BORDER; cell.font = NORMAL

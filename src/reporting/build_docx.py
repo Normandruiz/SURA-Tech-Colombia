@@ -83,14 +83,15 @@ def build_docx(data: dict) -> Document:
     k = data["kpis_globales"]
     transcurrido = data["meta"]["periodo"].get("porcentaje_transcurrido", 0.7)
 
-    _p(doc, f"Inversión total: ${k['inversion_total']:,.2f} USD")
-    _p(doc, f"Leads CRM totales: {k['leads_crm_totales']:,} de {k['compromiso_leads_total']:,} comprometidos")
-    cumpl = k['cumplimiento_global_pct']
-    txt = f"Cumplimiento global: {cumpl*100:.1f}% (vs {transcurrido*100:.0f}% transcurrido del mes)"
+    _p(doc, f"Inversión total: ${k['inversion_total']:,.2f} USD (Google ${k['inversion_google']:,.0f} / Meta ${k['inversion_meta']:,.0f} / Bing ${k['inversion_bing']:,.0f})")
+    _p(doc, f"RECIBIDOS (SF): {k['leads_recibidos_sf']:,} leads reales de {k['leads_requeridos']:,} requeridos")
+    _p(doc, f"Total Pauta: {k['leads_pauta_total']:,} (cumplimiento Pauta/Req: {k['cumpl_pauta_vs_req']*100:.1f}%)")
+    cumpl = k['cumpl_sf_vs_req']
+    txt = f"Cumplimiento SF/Req: {cumpl*100:.1f}% (vs {transcurrido*100:.0f}% transcurrido del mes)"
     p = doc.add_paragraph(); r = p.add_run(txt)
     r.font.size = Pt(11); r.font.bold = True
     r.font.color.rgb = ROJO if cumpl/transcurrido < 0.7 else (AMARILLO if cumpl/transcurrido < 0.9 else VERDE)
-    _p(doc, f"CPL Negocio promedio: ${k['cpl_negocio_promedio']:.2f} USD")
+    _p(doc, f"CPL Negocio promedio (SF): ${k['cpl_negocio_promedio']:.2f} USD")
 
     # Alertas
     _h2(doc, "Alertas críticas")
@@ -106,20 +107,21 @@ def build_docx(data: dict) -> Document:
     for s in data["seguros"]:
         c = s["crm"]; ga = s["google_ads"]["kpis"]
         _h2(doc, s["nombre"] + ("" if s["es_principal"] else "  (extra · solo ads)"))
-        cump = c.get("cumplimiento_pct")
-        if cump is not None:
+        cump = c.get("cumpl_sf_vs_req")
+        if cump:
             ratio = cump/transcurrido
             color = ROJO if ratio < 0.6 else (AMARILLO if ratio < 0.9 else VERDE)
             label = "CRÍTICO" if ratio < 0.6 else ("EN RIESGO" if ratio < 0.9 else "EN OBJETIVO")
-            p = doc.add_paragraph(); r = p.add_run(f"  {label} · Cumplimiento {cump*100:.1f}%")
+            p = doc.add_paragraph(); r = p.add_run(f"  {label} · Cumplimiento SF/Req {cump*100:.1f}%")
             r.font.bold = True; r.font.color.rgb = color; r.font.size = Pt(12)
-            _p(doc, f"  Leads CRM: {c.get('leads_crm'):,} / Compromiso: {c.get('compromiso_leads'):,}")
-            _p(doc, f"  CPL Negocio: ${c.get('cpl_negocio') or 0:.2f}")
+            _p(doc, f"  RECIBIDOS (SF): {c.get('recibidos_sf', 0):,} / Requeridos: {c.get('requeridos', 0):,}")
+            _p(doc, f"  Total Pauta: {c.get('total_pauta', 0):,} (Pauta/Req: {(c.get('cumpl_pauta_vs_req') or 0)*100:.1f}%)")
+            _p(doc, f"  CPL Negocio (SF): ${c.get('cpl_negocio_sf') or 0:.2f}")
         else:
             _p(doc, "  Sin tracking CRM. Solo se mide actividad de Google Ads.", italic=True)
-        _p(doc, f"  Google Ads: ${ga.get('coste_usd', 0):,.2f} USD invertido · "
-                f"{int(ga.get('conversiones') or 0):,} conversiones · "
-                f"{s['google_ads']['campanias_count']} campañas activas")
+        _p(doc, f"  Inversión: Google ${c.get('consumo_google', 0):,.0f} / Meta ${c.get('consumo_meta', 0):,.0f} / Bing ${c.get('consumo_bing', 0):,.0f}")
+        _p(doc, f"  Leads inferidos: Google {c.get('leads_google', 0):,} · Meta {c.get('leads_meta', 0):,} · Bing {c.get('leads_bing', 0):,}")
+        _p(doc, f"  Google Ads (extractor MCC): ${ga.get('coste_usd', 0):,.0f} · {int(ga.get('conversiones') or 0):,} conv · {s['google_ads']['campanias_count']} campañas")
 
     doc.add_page_break()
 
