@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!-- v0.5-dev paid media -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paid Media · SURA Tech Colombia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/crm.css">
+  <link rel="stylesheet" href="assets/paid_media.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-top">
+        <div>
+          <a href="index.html" class="back-link">← Volver al informe</a>
+          <h1>Paid Media · Foco en performance</h1>
+          <div class="subtitle">
+            Análisis accionable de Google Ads + Meta Ads — <strong>qué tocar para potenciar conversiones y bajar CPL</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi" id="kpi-inv-rango">
+          <div class="label">Inversión en rango</div>
+          <div class="value">—</div>
+          <div class="delta">Google + Meta + Bing</div>
+        </div>
+        <div class="kpi" id="kpi-conv-rango">
+          <div class="label">Conversiones Google Ads</div>
+          <div class="value">—</div>
+          <div class="delta">extractor MCC (mes actual)</div>
+        </div>
+        <div class="kpi" id="kpi-cpa-rango">
+          <div class="label">CPA promedio</div>
+          <div class="value">—</div>
+          <div class="delta">inv Google / conversiones</div>
+        </div>
+        <div class="kpi" id="kpi-leads-rango">
+          <div class="label">Leads pagos en rango</div>
+          <div class="value">—</div>
+          <div class="delta">Google + Meta + Bing del Sheet</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filtro por producto -->
+  <section>
+    <div class="container">
+      <h2>Filtrar por producto</h2>
+      <div class="seguro-buttons" id="seguro-buttons">
+        <button class="seguro-btn active" data-seguro="all">Todos</button>
+        <button class="seguro-btn" data-seguro="Autos"         style="--c:#00359C">Autos</button>
+        <button class="seguro-btn" data-seguro="Motos"         style="--c:#00AEC7">Motos</button>
+        <button class="seguro-btn" data-seguro="Arrendamiento" style="--c:#2D6DF6">Arrendamiento</button>
+        <button class="seguro-btn" data-seguro="Viajes"        style="--c:#9333EA">Viajes</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtros de fecha -->
+  <section>
+    <div class="container">
+      <h2>Filtros — <span class="accent">selección de fechas</span></h2>
+      <div class="filter-row">
+        <label>Desde
+          <input type="date" id="date-from">
+        </label>
+        <label>Hasta
+          <input type="date" id="date-to">
+        </label>
+        <div class="quick-buttons">
+          <button class="quick-btn" data-range="7">Últimos 7 días</button>
+          <button class="quick-btn" data-range="30">Últimos 30 días</button>
+          <button class="quick-btn" data-range="month">Mes actual</button>
+          <button class="quick-btn" data-range="prev-month">Mes anterior</button>
+          <button class="quick-btn" data-range="ytd">Año actual</button>
+          <button class="quick-btn" data-range="all">Todo el histórico</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Eventos de conversion por seguro -->
+  <section>
+    <div class="container">
+      <h2>Eventos de conversión configurados</h2>
+      <p class="section-intro">El bidding se optimiza contra estos eventos. Cada seguro está apuntando a un paso distinto del funnel — eso impacta volumen y calidad del lead.</p>
+      <div id="eventos-observacion" class="eventos-observacion"></div>
+      <div class="eventos-grid" id="eventos-grid"></div>
+    </div>
+  </section>
+
+  <!-- Cuotas de impresiones y oportunidades (Google Ads) -->
+  <section>
+    <div class="container">
+      <h2>Cuotas de impresiones y oportunidades — <span class="accent">Google Ads</span></h2>
+      <p class="section-intro">
+        Cuánto del market estás capturando hoy y cuánto más podrías capturar.
+        <strong>Cuota actual</strong> = % de impresiones que conseguís del total disponible.
+        <strong>Perdida por presupuesto</strong> = capturable subiendo budget.
+        <strong>Perdida por ranking</strong> = capturable mejorando QS / relevancia.
+      </p>
+      <div class="cuotas-grid" id="cuotas-grid"></div>
+      <div class="chart-card" style="max-height:400px;margin-top:14px;">
+        <h3>Comparativa por seguro</h3>
+        <canvas id="chart-cuotas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Auction Insights placeholder -->
+  <section>
+    <div class="container">
+      <h2>Comparativas de subasta — <span class="accent">Auction Insights</span></h2>
+      <div id="auction-insights-placeholder" class="eventos-observacion" style="background:linear-gradient(135deg,#eff6ff 0%,#fef2f2 100%);border-left-color:var(--sura-azul);">
+        <strong>Pendiente integración:</strong> Auction Insights de Google Ads vive a nivel campaña/ad group.
+        Para los 4 seguros + ~14 campañas ($1k+) habría que extraer manualmente o vía Google Ads API.
+        <br><br>
+        <strong>Lo que vamos a poder mostrar cuando esté:</strong> share de impresiones de cada competidor,
+        posición media, % de impresiones en la parte superior, % superpuesto y % superado.
+        Útil para entender contra quién competimos por seguro y si estamos perdiendo
+        terreno frente a algún competidor específico.
+      </div>
+    </div>
+  </section>
+
+  <!-- Distribucion por subtipo (donde se va el budget) -->
+  <section>
+    <div class="container">
+      <h2>Distribución por subtipo — <span class="accent">¿dónde se va el dinero?</span></h2>
+      <p class="section-intro">Por seguro: cuánto invierte cada formato (PMax / Search Segment / Search Retention / Search Conquest) y qué CPA logra. Útil para reasignar budget al formato que mejor convierte.</p>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Inversión por subtipo (rango)</h3>
+          <canvas id="chart-subtipo-inv"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>CPA por subtipo (rango)</h3>
+          <canvas id="chart-subtipo-cpa"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabla de campañas con flags accionables -->
+  <section>
+    <div class="container">
+      <h2>Campañas — <span class="accent">flags accionables</span></h2>
+      <p class="section-intro">Foco en performance. Las columnas <strong>% Lost Budget</strong> (escalar) y <strong>% Lost Rank</strong> (mejorar QS) son las palancas más rápidas. Ordenadas por inversión.</p>
+      <div class="table-wrap">
+        <table class="opt-table" id="campanias-table">
+          <thead>
+            <tr>
+              <th>Seguro</th>
+              <th>Campaña</th>
+              <th>Subtipo</th>
+              <th>Estado</th>
+              <th>Budget/día</th>
+              <th>Coste</th>
+              <th>Impresiones</th>
+              <th>CTR</th>
+              <th>CPC</th>
+              <th>Conv.</th>
+              <th>CPA</th>
+              <th>% Lost Budget</th>
+              <th>% Lost Rank</th>
+              <th>Acción sugerida</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evolucion diaria de leads por canal -->
+  <section>
+    <div class="container">
+      <h2>Evolución diaria — <span class="accent">leads por canal</span></h2>
+      <p class="section-intro">Leads pagos diarios reportados en el Sheet (no en MCC) — útil para detectar caídas abruptas por canal y horas-días específicos donde el tracking falló.</p>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Leads diarios por canal</h3>
+          <canvas id="chart-leads-canal"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Inversión diaria por canal</h3>
+          <canvas id="chart-inv-canal"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOP 10 RECOMENDACIONES -->
+  <section>
+    <div class="container">
+      <h2>TOP 10 — <span class="accent">para potenciar conversiones y bajar CPL</span></h2>
+      <p class="section-intro">Acciones priorizadas por impacto y velocidad. Cada una indica el efecto esperado en CPL y en volumen de conversiones.</p>
+      <div class="recos">
+        <div class="filters" id="reco-pm-filters">
+          <span class="chip active" data-f="all">Todas</span>
+          <span class="chip" data-f="escalar">Escalar</span>
+          <span class="chip" data-f="pausar">Pausar/recortar</span>
+          <span class="chip" data-f="destrabar">Destrabar</span>
+          <span class="chip" data-f="reasignar">Reasignar</span>
+          <span class="chip" data-f="quality">Quality Score</span>
+          <span class="chip" data-f="tracking">Tracking</span>
+        </div>
+        <div id="reco-pm-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      Elaborado por <strong>Beyond Media Agency</strong> · Dashboard SURA Tech Colombia ·
+      <a href="index.html" style="color:var(--sura-aqua)">Volver al informe</a> ·
+      <a href="crm.html" style="color:var(--sura-aqua)">Página CRM</a>
+    </div>
+  </footer>
+
+  <script src="assets/paid_media.js"></script>
+</body>
+</html>

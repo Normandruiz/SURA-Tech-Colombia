@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SURA Tech Colombia · Informe mensual</title>
-  <meta name="description" content="Informe estratégico mensual SURA Tech Colombia — 4 seguros, cruce Google Ads + Meta + CRM + GA4. Beyond Media Agency.">
+  <meta name="description" content="Informe estratégico mensual SURA Tech Colombia — vista 360° Google + Meta + CRM. Beyond Media Agency.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,30 +13,31 @@
 </head>
 <body>
 
-  <!-- ========== HERO HEADER ========== -->
+  <!-- HERO -->
   <header class="hero">
     <div class="container">
       <div class="hero-top">
         <div>
           <h1>SURA Tech Colombia · Informe mensual</h1>
           <div class="subtitle">
-            Cruce Google Ads · Meta · CRM · GA4 — <strong>Periodo:</strong>
+            Vista 360° — <strong>Google Ads · Meta · CRM</strong> · Periodo:
             <select id="mes-selector" class="mes-selector"></select>
           </div>
         </div>
         <div class="hero-actions">
+          <a href="paid_media.html" class="btn-primary">Paid Media →</a>
           <a href="crm.html" class="btn-primary">CRM →</a>
         </div>
       </div>
 
       <div class="kpi-grid">
         <div class="kpi" id="kpi-inversion">
-          <div class="label">Inversión total (USD)</div>
+          <div class="label">Inversión total</div>
           <div class="value">—</div>
           <div class="delta"></div>
         </div>
         <div class="kpi" id="kpi-leads">
-          <div class="label">Leads CRM</div>
+          <div class="label">Leads SF (CRM)</div>
           <div class="value">—</div>
           <div class="delta"></div>
         </div>
@@ -46,7 +47,7 @@
           <div class="delta"></div>
         </div>
         <div class="kpi" id="kpi-cpl">
-          <div class="label">CPL Negocio promedio</div>
+          <div class="label">CPL Negocio (SF)</div>
           <div class="value">—</div>
           <div class="delta"></div>
         </div>
@@ -54,20 +55,30 @@
     </div>
   </header>
 
-  <!-- ========== ALERTAS CRÍTICAS ========== -->
+  <!-- ALERTAS CRÍTICAS -->
   <div class="container">
     <div id="alertas" class="alert-banner"></div>
   </div>
 
-  <!-- ========== 6 SEGUROS ========== -->
+  <!-- VISTA 360° POR SEGURO (mix Google + Meta + CRM) -->
   <section>
     <div class="container">
-      <h2>Seguros — <span class="accent">cumplimiento del mes</span></h2>
+      <h2>Vista 360° — <span class="accent">Google + Meta + CRM por seguro</span></h2>
+      <p class="section-intro">Estado integral del mes activo. Cada tarjeta muestra: SF que llega al CRM, mix de canales pagos (Google / Meta / Bing) y cumplimiento del compromiso.</p>
       <div class="seguros-grid" id="seguros"></div>
     </div>
   </section>
 
-  <!-- ========== TOP 10 RECOMENDACIONES ========== -->
+  <!-- OPORTUNIDADES DE MEJORA (NEW) -->
+  <section>
+    <div class="container">
+      <h2>Oportunidades de mejora — <span class="accent">cross-canal</span></h2>
+      <p class="section-intro">Las palancas de mayor impacto detectadas automáticamente cruzando los datos de los 3 mundos: Google, Meta y CRM.</p>
+      <div class="oportunidades-grid" id="oportunidades"></div>
+    </div>
+  </section>
+
+  <!-- TOP 10 RECOMENDACIONES -->
   <section>
     <div class="container">
       <h2>TOP 10 — <span class="accent">recomendaciones accionables</span></h2>
@@ -86,71 +97,58 @@
     </div>
   </section>
 
-  <!-- ========== EVOLUCIÓN MoM ========== -->
+  <!-- MIX DE CANALES POR SEGURO -->
   <section>
     <div class="container">
-      <h2>Evolución mensual <span class="accent">2026</span></h2>
+      <h2>Mix de canales — <span class="accent">¿de dónde vienen los leads?</span></h2>
+      <p class="section-intro">Por seguro, distribución de leads entre Google, Meta y Bing reportada en el CRM. Útil para entender concentración y diversificación de canales.</p>
       <div class="charts-grid">
         <div class="chart-card">
-          <h3>Cumplimiento por seguro</h3>
-          <canvas id="chart-cumpl" height="180"></canvas>
+          <h3>Distribución de leads por canal</h3>
+          <canvas id="chart-mix-leads"></canvas>
         </div>
         <div class="chart-card">
-          <h3>CPL Negocio por seguro</h3>
-          <canvas id="chart-cpl" height="180"></canvas>
-        </div>
-        <div class="chart-card">
-          <h3>Leads CRM por seguro</h3>
-          <canvas id="chart-leads" height="180"></canvas>
-        </div>
-        <div class="chart-card">
-          <h3>Inversión total por seguro</h3>
-          <canvas id="chart-inv" height="180"></canvas>
+          <h3>Distribución de inversión por canal</h3>
+          <canvas id="chart-mix-inv"></canvas>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== CRUCES PLATAFORMAS ========== -->
+  <!-- EVOLUCIÓN MoM -->
   <section>
     <div class="container">
-      <h2>Cruces — <span class="accent">CRM vs Google Ads vs otros canales</span></h2>
-      <p class="section-intro">Compara los leads del CRM con las conversiones reportadas por Google Ads y la atribución entre canales. Detecta tracking roto y discrepancias.</p>
+      <h2>Evolución mensual <span class="accent">2024 — 2026</span></h2>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Cumplimiento SF/Req por seguro</h3>
+          <canvas id="chart-cumpl"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>CPL Negocio por seguro</h3>
+          <canvas id="chart-cpl"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Leads SF por seguro</h3>
+          <canvas id="chart-leads"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Inversión Google por seguro</h3>
+          <canvas id="chart-inv"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRUCES -->
+  <section>
+    <div class="container">
+      <h2>Cruces — <span class="accent">SF vs Pauta vs Google Ads conv</span></h2>
       <div class="cruces-grid" id="cruces"></div>
     </div>
   </section>
 
-  <!-- ========== OPTIMIZACIONES POR CAMPAÑA ========== -->
-  <section>
-    <div class="container">
-      <h2>Optimizaciones — <span class="accent">acciones por campaña</span></h2>
-      <div class="opt-tabs">
-        <button class="opt-tab active" data-cat="escalar">📈 Escalar (CPA bajo + headroom)</button>
-        <button class="opt-tab" data-cat="pausar">⛔ Pausar / reformular (CPA alto)</button>
-        <button class="opt-tab" data-cat="destrabar">🚧 Destrabar (rechazos / políticas)</button>
-        <button class="opt-tab" data-cat="quality_issues">⚠ Quality Score bajo</button>
-      </div>
-      <table class="opt-table" id="opt-table">
-        <thead>
-          <tr>
-            <th>Seguro</th>
-            <th>Campaña</th>
-            <th>Tipo</th>
-            <th>Budget/día</th>
-            <th>Coste</th>
-            <th>Conv.</th>
-            <th>CPA</th>
-            <th>% Lost Budget</th>
-            <th>% Lost Rank</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- ========== DISCREPANCIAS Y GAPS ========== -->
+  <!-- DISCREPANCIAS Y CASO DE NEGOCIO -->
   <section>
     <div class="container">
       <h2>Discrepancias y gaps</h2>
@@ -158,7 +156,6 @@
     </div>
   </section>
 
-  <!-- ========== CASO DE NEGOCIO ========== -->
   <section>
     <div class="container">
       <h2>Caso de negocio — <span class="accent">próximo paso</span></h2>
@@ -166,12 +163,12 @@
     </div>
   </section>
 
-  <!-- ========== FOOTER ========== -->
   <footer>
     <div class="container">
-      Elaborado por <strong>Beyond Media Agency</strong> ·
-      Dashboard SURA Tech Colombia ·
-      <a href="https://github.com/Normandruiz/SURA-Tech-Colombia" style="color:var(--sura-aqua)">Ver repositorio</a>
+      Elaborado por <strong>Beyond Media Agency</strong> · Dashboard SURA Tech Colombia ·
+      <a href="paid_media.html">Paid Media</a> ·
+      <a href="crm.html">CRM</a> ·
+      <a href="https://github.com/Normandruiz/SURA-Tech-Colombia">Repositorio</a>
     </div>
   </footer>
 

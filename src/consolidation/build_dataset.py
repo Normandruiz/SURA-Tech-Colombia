@@ -47,7 +47,16 @@ def _latest_json(d: Path, prefix: str) -> Path | None:
 
 
 def _parse_campaign_row(cells: list) -> dict | None:
-    """Parser de filas de Google Ads UI (idem v2). Devuelve None si no es campania."""
+    """Parser robusto de filas de Google Ads UI.
+
+    Estrategia: usa el indice de la celda que contiene la estrategia de bidding
+    ("Maximiza las conversiones" / "Manual" / etc.) como ancla. A partir de ahi
+    las siguientes columnas son [clicks, ctr_conv, conversiones, cpc_avg, cpa].
+
+    Las columnas de "cuotas perdidas" entre la celda 10 y la estrategia pueden
+    venir vacias (mostrando '—') lo cual desplaza indices fijos - por eso el
+    parser viejo fallaba en Motos y otras cuentas.
+    """
     import re
     if not cells or len(cells) < 6:
         return None
@@ -77,6 +86,7 @@ def _parse_campaign_row(cells: list) -> dict | None:
         try: return float(s)
         except: return default
 
+    # Presupuesto
     presupuesto_num = 0
     presupuesto_str = ""
     if len(cells) > 1:
@@ -85,21 +95,122 @@ def _parse_campaign_row(cells: list) -> dict | None:
             presupuesto_num = num(m.group(1))
             presupuesto_str = f"${presupuesto_num:.2f}/día"
 
-    estado    = cells[2] if len(cells) > 2 else ""
-    tipo      = cells[4] if len(cells) > 4 else ""
+    # Posiciones FIJAS y consistentes en todas las cuentas
+    estado      = cells[2] if len(cells) > 2 else ""
+    tipo        = cells[4] if len(cells) > 4 else ""
     impresiones = num(cells[5]) if len(cells) > 5 else 0
-    clicks    = num(cells[15]) if len(cells) > 15 else 0
-    if not clicks and len(cells) > 6:
+    # cells[6] = "X.XXXclics" -> extraer numero
+    clicks_interaccion = 0
+    if len(cells) > 6:
         m2 = re.match(r"^([\d\.,]+)", cells[6])
-        if m2: clicks = num(m2.group(1))
-    ctr_pct      = num(cells[7])  if len(cells) > 7  else 0
-    cpc          = num(cells[8])  if len(cells) > 8  else 0
-    coste        = num(cells[9])  if len(cells) > 9  else 0
+        if m2: clicks_interaccion = num(m2.group(1))
+    ctr_pct = num(cells[7])  if len(cells) > 7  else 0
+    cpc     = num(cells[8])  if len(cells) > 8  else 0
+    coste   = num(cells[9])  if len(cells) > 9  else 0
+
+    # ANCLA: estrategia de bidding. Buscar dinamicamente.
+    BIDDING_KEYWORDS = ["Maximiza", "Maximizar", "Manual", "Smart Bidding",
+                        "Target ", "Maximum ", "Lance", "tCPA", "tROAS",
+                        "Generar el m"]  # "Generar el máximo de..."
+    strat_idx = -1
+    for i in range(10, len(cells)):
+        cell_text = cells[i] or ""
+        if any(kw in cell_text for kw in BIDDING_KEYWORDS):
+            strat_idx = i
+            break
+
+    # Cuotas perdidas: estan en cells[10..strat_idx-1] pero pueden ser '—' (None)
+    # Pattern observado: 4 columnas %.
+    # cell[10] = cuota impr search
+    # cell[11] = cuota perdida budget
+    # cell[12] = cuota impr search abs
+    # cell[13] = cuota perdida ranking
+    cuota_imp_search        = num(cells[10]) if len(cells) > 10 else 0
     cuota_perdida_budget    = num(cells[11]) if len(cells) > 11 else 0
+    cuota_imp_abs           = num(cells[12]) if len(cells) > 12 else 0
     cuota_perdida_ranking   = num(cells[13]) if len(cells) > 13 else 0
-    estrategia    = cells[14] if len(cells) > 14 else ""
-    conversiones  = num(cells[17]) if len(cells) > 17 else 0
-    cpa           = num(cells[19]) if len(cells) > 19 else 0
+
+    # Despues del ancla buscamos hacia atras: CPA es siempre la ULTIMA celda con
+    # patron "X,XX US$" (numero + US$). Antes esta CPC medio (otro US$),
+    # antes conversiones (decimal con coma), antes CTR conv (%), antes clicks (entero).
+    estrategia = cells[strat_idx] if strat_idx >= 0 else ""
+    clicks_post = 0
+    ctr_conv    = 0
+    conversiones= 0
+    cpc_avg     = 0
+    cpa         = 0
+
+    if strat_idx >= 0:
+        # Recolectar celdas no vacias despues del ancla, preservando indices
+        post = [(i, (cells[i] or "").strip()) for i in range(strat_idx + 1, len(cells))]
+        non_empty = [(i, v) for i, v in post if v and v not in ("-", "—")]
+
+        # CPA: ultima celda que matchea "X,XX US$" o "X.XX US$"
+        cpa_pos = -1
+        for j in range(len(non_empty) - 1, -1, -1):
+            v = non_empty[j][1]
+            if re.match(r"^[\d][\d\.,]*\s*US\$\s*$", v):
+                cpa = num(v)
+                cpa_pos = j
+                break
+
+        if cpa_pos >= 0:
+            # CPC medio: penultima celda US$ antes del CPA, si existe y no es CPA mismo
+            for j in range(cpa_pos - 1, -1, -1):
+                v = non_empty[j][1]
+                if re.match(r"^[\d][\d\.,]*\s*US\$\s*$", v):
+                    cpc_avg = num(v)
+                    break
+
+            # Conversiones: ultimo numero decimal SIN US$ SIN % antes del CPA
+            for j in range(cpa_pos - 1, -1, -1):
+                v = non_empty[j][1]
+                if "US$" in v or "%" in v:
+                    continue
+                if re.match(r"^[\d\.,]+$", v):
+                    conversiones = num(v)
+                    conv_pos = j
+                    break
+
+            # CTR conv: ultima celda con % antes de las conversiones
+            for j in range(non_empty.index(non_empty[cpa_pos]) - 1, -1, -1):
+                v = non_empty[j][1]
+                if "%" in v and "US$" not in v:
+                    ctr_conv = num(v)
+                    break
+
+            # clicks: primera celda numerica entera/decimal sin US$/% en el bloque
+            for i, v in non_empty[:cpa_pos]:
+                if "US$" in v or "%" in v:
+                    continue
+                if re.match(r"^[\d\.,]+$", v):
+                    clicks_post = num(v)
+                    break
+
+            # Si clicks_post coincide con conversiones (layout degradado sin clicks puro),
+            # descartarlo para usar el de cells[6] como fallback.
+            if conversiones and clicks_post and abs(clicks_post - conversiones) < 0.5:
+                clicks_post = 0
+        else:
+            # fallback: no hay US$ post-ancla. Layout muy degradado (ej Salud Animal)
+            # Tomar primer numero como clicks o conv segun orden
+            if non_empty:
+                clicks_post = num(non_empty[0][1])
+                if len(non_empty) > 1: ctr_conv = num(non_empty[1][1])
+                if len(non_empty) > 2: conversiones = num(non_empty[2][1])
+
+    # clicks definitivos: priorizar post-ancla. Si no hay, usar fallback solo si es coherente (clicks <= impresiones).
+    if clicks_post:
+        clicks = clicks_post
+    elif clicks_interaccion and clicks_interaccion <= impresiones * 1.05:
+        clicks = clicks_interaccion
+    else:
+        clicks = 0  # mejor 0 que dato incoherente
+
+    # Salud Animal y otros casos: si no hay clicks_post, conv puede no estar.
+    # Recomputar CPA si tenemos coste y conv pero no cpa explicito
+    if not cpa and conversiones and coste:
+        cpa = coste / conversiones
 
     name_up = name.upper()
     subtipo = "OTRO"
@@ -114,12 +225,19 @@ def _parse_campaign_row(cells: list) -> dict | None:
     if cuota_perdida_budget > 0.20: flags.append("budget_constrained")
     if cuota_perdida_ranking > 0.30: flags.append("ranking_issue")
 
+    # optimization_score: cells[3] suele ser "add_add 85,1 %" o "84 %" o "—"
+    opt_raw = cells[3] if len(cells) > 3 else ""
+    m_opt = re.search(r"(\d{1,3}(?:[\.,]\d+)?)\s*%", opt_raw or "")
+    optimization_score = num(m_opt.group(1) + "%") if m_opt else 0
+
     return {
         "nombre": name, "subtipo": subtipo,
         "presupuesto_diario": presupuesto_num, "presupuesto_str": presupuesto_str,
         "estado": estado, "tipo": tipo,
+        "optimization_score": optimization_score,
         "impresiones": impresiones, "clicks": clicks, "ctr_pct": ctr_pct,
         "cpc": cpc, "coste": coste,
+        "cuota_imp_search": cuota_imp_search,
         "cuota_perdida_budget": cuota_perdida_budget,
         "cuota_perdida_ranking": cuota_perdida_ranking,
         "estrategia": estrategia, "conversiones": conversiones, "cpa": cpa,

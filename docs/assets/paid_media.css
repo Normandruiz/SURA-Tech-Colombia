@@ -1,0 +1,131 @@
+/* ============================================================
+   Paid Media page · estilos especificos
+   ============================================================ */
+
+.eventos-observacion {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef2f2 100%);
+  border-left: 4px solid var(--amarillo);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--sura-gris-oscuro);
+}
+.eventos-observacion strong { color: var(--sura-azul); }
+
+.eventos-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+}
+
+.cuotas-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 14px;
+}
+.cuota-card {
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--c, var(--sura-aqua));
+}
+.cuota-card h4 { margin: 0 0 12px; color: var(--c, var(--sura-azul)); font-size: 16px; display: flex; justify-content: space-between; align-items: baseline; }
+.cuota-card h4 small { color: var(--sura-gris-medio); font-size: 11px; font-weight: 400; }
+.cuota-bar {
+  height: 28px;
+  background: var(--sura-gris-claro);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  margin: 6px 0 14px;
+  position: relative;
+}
+.cuota-bar .seg {
+  height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--sura-blanco);
+  white-space: nowrap; overflow: hidden;
+  transition: width .3s ease;
+}
+.cuota-bar .seg.actual    { background: var(--verde); }
+.cuota-bar .seg.budget    { background: var(--amarillo); }
+.cuota-bar .seg.ranking   { background: var(--rojo); }
+.cuota-bar .seg.perdida   { background: var(--sura-gris-claro); color: var(--sura-gris-medio); }
+.cuota-legend {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  font-size: 11px; color: var(--sura-gris-medio); margin-top: 4px;
+}
+.cuota-legend > div::before {
+  content: '■'; margin-right: 4px;
+}
+.cuota-legend .l-actual::before  { color: var(--verde); }
+.cuota-legend .l-budget::before  { color: var(--amarillo); }
+.cuota-legend .l-ranking::before { color: var(--rojo); }
+.cuota-extra {
+  display: flex; justify-content: space-between; font-size: 12px;
+  border-top: 1px solid var(--sura-gris-claro); padding-top: 8px; margin-top: 4px;
+  color: var(--sura-gris-medio);
+}
+.cuota-extra strong { color: var(--sura-gris-oscuro); }
+.evento-card {
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--c, var(--sura-aqua));
+}
+.evento-card h4 {
+  margin: 0 0 10px;
+  color: var(--c, var(--sura-azul));
+  font-size: 16px;
+}
+.evento-row {
+  display: flex; justify-content: space-between;
+  padding: 6px 0;
+  font-size: 13px;
+  border-top: 1px solid var(--sura-gris-claro);
+}
+.evento-row:first-of-type { border-top: 0; }
+.evento-row span:first-child { color: var(--sura-gris-medio); }
+.evento-row span:last-child { color: var(--sura-gris-oscuro); font-weight: 500; }
+
+.opt-table .accion {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.accion.escalar    { background: #ecfdf5; color: var(--verde); }
+.accion.pausar     { background: #fef2f2; color: var(--rojo); }
+.accion.destrabar  { background: #fffbeb; color: var(--amarillo); }
+.accion.quality    { background: #eff6ff; color: var(--sura-azul-vivo); }
+.accion.ok         { background: var(--sura-gris-claro); color: var(--sura-gris-medio); }
+
+/* TOP 10 con badges adicionales por tipo */
+.reco-item .reco-impact {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--sura-gris-claro);
+}
+.reco-item .reco-impact > div {
+  background: var(--sura-gris-claro);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+.reco-item .reco-impact .label {
+  color: var(--sura-gris-medio);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.reco-item .reco-impact .value {
+  color: var(--sura-gris-oscuro);
+  font-weight: 600;
+}
+
+@media (max-width: 800px) {
+  .eventos-grid { grid-template-columns: 1fr; }
+}
