@@ -287,6 +287,9 @@ section h2 .accent { color: var(--sura-aqua); }
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
+  /* Importante: altura limitada para que Chart.js con maintainAspectRatio:false NO crezca infinito */
+  max-height: 360px;
+  display: flex; flex-direction: column;
 }
 .chart-card h3 {
   margin: 0 0 12px;
@@ -294,6 +297,12 @@ section h2 .accent { color: var(--sura-aqua); }
   color: var(--sura-azul);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.chart-card canvas {
+  max-height: 280px !important;
+  height: 280px !important;
+  width: 100% !important;
 }
 
 /* ---------- Cruces grid ---------- */
