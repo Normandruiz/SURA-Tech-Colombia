@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-27T14:19:11",
+    "generated_at": "2026-04-27T15:59:28",
     "periodo": {
       "mes_actual": "abr 2026",
       "mes_actual_iso": "2026-04",
@@ -107,16 +107,16 @@
     }
   },
   "kpis_globales": {
-    "inversion_total": 104893.14,
+    "inversion_total": 108712.98,
     "inversion_google": 77352.04,
-    "inversion_meta": 24857.77,
-    "inversion_bing": 2683.33,
-    "leads_recibidos_sf": 19971,
-    "leads_pauta_total": 12904,
+    "inversion_meta": 28142.2,
+    "inversion_bing": 3218.74,
+    "leads_recibidos_sf": 25582,
+    "leads_pauta_total": 13537,
     "leads_requeridos": 43290,
-    "cumpl_sf_vs_req": 0.4613,
-    "cumpl_pauta_vs_req": 0.2981,
-    "cpl_negocio_promedio": 5.25
+    "cumpl_sf_vs_req": 0.5909,
+    "cumpl_pauta_vs_req": 0.3127,
+    "cpl_negocio_promedio": 4.25
   },
   "alertas_criticas": [
     {
@@ -141,46 +141,46 @@
       "google_ads": {
         "kpis": {
           "impresiones": 323755.0,
-          "clicks": 28230.0,
-          "coste_usd": 26251.949999999997,
-          "conversiones": 4824.039999999999,
-          "ctr": 0.08719556454726568,
-          "cpc": 0.9299309245483527,
-          "cpa": 5.441901393852456
+          "clicks": 28231.0,
+          "coste_usd": 26252.699999999997,
+          "conversiones": 4846.379999999999,
+          "ctr": 0.0871986533026517,
+          "cpc": 0.9299245510254683,
+          "cpa": 5.416971017542991
         },
         "campanias_count": 4,
         "por_subtipo": {
           "SEARCH_SEGMENT": {
             "coste": 9197.96,
-            "conv": 1364.1,
+            "conv": 1369.1,
             "imp": 50031.0,
             "clicks": 8318.0,
             "n": 1,
-            "cpa": 6.742878088116707
+            "cpa": 6.718252866846833
           },
           "SEARCH_RETENTION": {
             "coste": 4194.0,
-            "conv": 393.14,
+            "conv": 396.14,
             "imp": 9955.0,
             "clicks": 2933.0,
             "n": 1,
-            "cpa": 10.667955435722643
+            "cpa": 10.58716615338012
           },
           "SEARCH_CONQUEST": {
             "coste": 2188.75,
-            "conv": 340.53,
+            "conv": 341.7,
             "imp": 51380.0,
             "clicks": 2093.0,
             "n": 1,
-            "cpa": 6.4274806918626854
+            "cpa": 6.4054726368159205
           },
           "PMAX": {
-            "coste": 10671.24,
-            "conv": 2726.27,
+            "coste": 10671.99,
+            "conv": 2739.44,
             "imp": 212389.0,
-            "clicks": 14886.0,
+            "clicks": 14887.0,
             "n": 1,
-            "cpa": 3.914227130841773
+            "cpa": 3.895683059311392
           }
         },
         "campanias": [
@@ -191,7 +191,7 @@
             "presupuesto_str": "$326.00/día",
             "estado": "Apto",
             "tipo": "Búsqueda",
-            "optimization_score": 0.851,
+            "optimization_score": 0.728,
             "impresiones": 50031.0,
             "clicks": 8318.0,
             "ctr_pct": 0.1663,
@@ -201,8 +201,8 @@
             "cuota_perdida_budget": 0.1459,
             "cuota_perdida_ranking": 0.23199999999999998,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 1364.1,
-            "cpa": 6.74,
+            "conversiones": 1369.1,
+            "cpa": 6.72,
             "flags": []
           },
           {
@@ -212,7 +212,7 @@
             "presupuesto_str": "$147.00/día",
             "estado": "Apto",
             "tipo": "Búsqueda",
-            "optimization_score": 0.861,
+            "optimization_score": 0.565,
             "impresiones": 9955.0,
             "clicks": 2933.0,
             "ctr_pct": 0.29460000000000003,
@@ -222,8 +222,8 @@
             "cuota_perdida_budget": 0.2289,
             "cuota_perdida_ranking": 0.1769,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 393.14,
-            "cpa": 10.67,
+            "conversiones": 396.14,
+            "cpa": 10.59,
             "flags": [
               "budget_constrained"
             ]
@@ -235,7 +235,7 @@
             "presupuesto_str": "$52.00/día",
             "estado": "Apto",
             "tipo": "Búsqueda",
-            "optimization_score": 0.857,
+            "optimization_score": 0.736,
             "impresiones": 51380.0,
             "clicks": 2093.0,
             "ctr_pct": 0.0407,
@@ -245,8 +245,8 @@
             "cuota_perdida_budget": 0.4165,
             "cuota_perdida_ranking": 0.3588,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 340.53,
-            "cpa": 6.43,
+            "conversiones": 341.7,
+            "cpa": 6.41,
             "flags": [
               "budget_constrained",
               "ranking_issue"
@@ -259,18 +259,18 @@
             "presupuesto_str": "$517.00/día",
             "estado": "Algunos grupos de recursos están limitados por una política",
             "tipo": "Máximo rendimiento",
-            "optimization_score": 0.8109999999999999,
+            "optimization_score": 0.644,
             "impresiones": 212389.0,
-            "clicks": 14886.0,
+            "clicks": 14887.0,
             "ctr_pct": 0.1407,
             "cpc": 0.36,
-            "coste": 10671.24,
+            "coste": 10671.99,
             "cuota_imp_search": 0.21309999999999998,
             "cuota_perdida_budget": 0.7424,
             "cuota_perdida_ranking": 0.044500000000000005,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 2726.27,
-            "cpa": 3.91,
+            "conversiones": 2739.44,
+            "cpa": 3.9,
             "flags": [
               "policy_limited",
               "budget_constrained"
@@ -279,21 +279,21 @@
         ]
       },
       "crm": {
-        "recibidos_sf": 5564,
+        "recibidos_sf": 7251,
         "recibidos_ga": 0,
         "requeridos": 9810,
-        "total_pauta": 7180,
+        "total_pauta": 7504,
         "leads_google": 4337,
         "consumo_google": 26132.19,
-        "leads_meta": 2293,
-        "consumo_meta": 9112.46,
-        "leads_bing": 550,
-        "consumo_bing": 973.03,
-        "cumpl_sf_vs_req": 0.5672,
-        "cumpl_pauta_vs_req": 0.7319,
-        "cumpl_sf_vs_pauta": 0.7749,
-        "cpl_negocio_sf": 6.51,
-        "cpl_pauta": 5.04,
+        "leads_meta": 2544,
+        "consumo_meta": 10244.45,
+        "leads_bing": 623,
+        "consumo_bing": 1120.42,
+        "cumpl_sf_vs_req": 0.7391,
+        "cumpl_pauta_vs_req": 0.7649,
+        "cumpl_sf_vs_pauta": 0.9663,
+        "cpl_negocio_sf": 5.17,
+        "cpl_pauta": 5.0,
         "recibidos_sf_prev": 9293,
         "cumpl_sf_vs_req_prev": 0.9167,
         "cpl_negocio_sf_prev": 4.61
@@ -304,47 +304,47 @@
       "es_principal": true,
       "google_ads": {
         "kpis": {
-          "impresiones": 710198.0,
-          "clicks": 28412.0,
+          "impresiones": 710194.0,
+          "clicks": 308507.0,
           "coste_usd": 15787.52,
-          "conversiones": 1318.46,
-          "ctr": 0.04000574487678084,
-          "cpc": 0.5556638040264678,
-          "cpa": 11.974212338637502
+          "conversiones": 1342.6599999999999,
+          "ctr": 0.43439820668718687,
+          "cpc": 0.05117394418927285,
+          "cpa": 11.758390061519671
         },
         "campanias_count": 4,
         "por_subtipo": {
           "SEARCH_SEGMENT": {
             "coste": 4595.78,
-            "conv": 283.43,
-            "imp": 69131.0,
+            "conv": 293.51,
+            "imp": 69133.0,
             "clicks": 8779.0,
             "n": 1,
-            "cpa": 16.21486786860953
+            "cpa": 15.658001430956356
           },
           "SEARCH_RETENTION": {
             "coste": 1993.64,
-            "conv": 307.84,
+            "conv": 308.84,
             "imp": 10759.0,
             "clicks": 3925.0,
             "n": 1,
-            "cpa": 6.476221413721414
+            "cpa": 6.4552519103743045
           },
           "SEARCH_CONQUEST": {
             "coste": 1366.13,
-            "conv": 91.6,
+            "conv": 97.6,
             "imp": 19789.0,
             "clicks": 2315.0,
             "n": 1,
-            "cpa": 14.914082969432316
+            "cpa": 13.997233606557378
           },
           "PMAX": {
             "coste": 7831.97,
-            "conv": 635.59,
-            "imp": 610519.0,
-            "clicks": 13393.0,
+            "conv": 642.71,
+            "imp": 610513.0,
+            "clicks": 293488.0,
             "n": 1,
-            "cpa": 12.32236189996696
+            "cpa": 12.185853650946772
           }
         },
         "campanias": [
@@ -355,20 +355,21 @@
             "presupuesto_str": "$357.00/día",
             "estado": "AptoSe han rechazado algunos anuncios",
             "tipo": "Búsqueda",
-            "optimization_score": 0.84,
-            "impresiones": 69131.0,
+            "optimization_score": 0.537,
+            "impresiones": 69133.0,
             "clicks": 8779.0,
             "ctr_pct": 0.127,
             "cpc": 0.52,
             "coste": 4595.78,
             "cuota_imp_search": 0.24170000000000003,
-            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_budget": 0.6555,
             "cuota_perdida_ranking": 0.10279999999999999,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 283.43,
-            "cpa": 16.22,
+            "conversiones": 293.51,
+            "cpa": 15.66,
             "flags": [
-              "rejected"
+              "rejected",
+              "budget_constrained"
             ]
           },
           {
@@ -378,18 +379,18 @@
             "presupuesto_str": "$183.00/día",
             "estado": "Apto",
             "tipo": "Búsqueda",
-            "optimization_score": 0.8640000000000001,
+            "optimization_score": 0.74,
             "impresiones": 10759.0,
             "clicks": 3925.0,
             "ctr_pct": 0.36479999999999996,
             "cpc": 0.51,
             "coste": 1993.64,
             "cuota_imp_search": 0.9549,
-            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_budget": 0.0384,
             "cuota_perdida_ranking": 0.0067,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 307.84,
-            "cpa": 6.48,
+            "conversiones": 308.84,
+            "cpa": 6.46,
             "flags": []
           },
           {
@@ -399,19 +400,21 @@
             "presupuesto_str": "$75.00/día",
             "estado": "Apto",
             "tipo": "Búsqueda",
-            "optimization_score": 0.74,
+            "optimization_score": 0.565,
             "impresiones": 19789.0,
             "clicks": 2315.0,
             "ctr_pct": 0.11699999999999999,
             "cpc": 0.59,
             "coste": 1366.13,
             "cuota_imp_search": 0.1032,
-            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_budget": 0.7295999999999999,
             "cuota_perdida_ranking": 0.1672,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 91.6,
-            "cpa": 14.91,
-            "flags": []
+            "conversiones": 97.6,
+            "cpa": 14.0,
+            "flags": [
+              "budget_constrained"
+            ]
           },
           {
             "nombre": "SURA_MOTOS_PMAX",
@@ -420,41 +423,42 @@
             "presupuesto_str": "$397.00/día",
             "estado": "AptoAlgunos grupos de recursos se han rechazado y Algunos grupos de recursos están limitados por una política",
             "tipo": "Máximo rendimiento",
-            "optimization_score": 0.782,
-            "impresiones": 610519.0,
-            "clicks": 13393.0,
-            "ctr_pct": 0.4808,
+            "optimization_score": 0.7859999999999999,
+            "impresiones": 610513.0,
+            "clicks": 293488.0,
+            "ctr_pct": 0.4807,
             "cpc": 0.03,
             "coste": 7831.97,
             "cuota_imp_search": 0.1565,
-            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_budget": 0.5758,
             "cuota_perdida_ranking": 0.2677,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 635.59,
-            "cpa": 12.32,
+            "conversiones": 642.71,
+            "cpa": 12.19,
             "flags": [
               "policy_limited",
-              "rejected"
+              "rejected",
+              "budget_constrained"
             ]
           }
         ]
       },
       "crm": {
-        "recibidos_sf": 7973,
+        "recibidos_sf": 10014,
         "recibidos_ga": 0,
         "requeridos": 14400,
-        "total_pauta": 2194,
+        "total_pauta": 2348,
         "leads_google": 1117,
         "consumo_google": 15555.21,
-        "leads_meta": 1043,
-        "consumo_meta": 5825.19,
-        "leads_bing": 32,
-        "consumo_bing": 658.56,
-        "cumpl_sf_vs_req": 0.5537,
-        "cumpl_pauta_vs_req": 0.1524,
-        "cumpl_sf_vs_pauta": 3.634,
-        "cpl_negocio_sf": 2.76,
-        "cpl_pauta": 10.05,
+        "leads_meta": 1192,
+        "consumo_meta": 6629.26,
+        "leads_bing": 37,
+        "consumo_bing": 753.32,
+        "cumpl_sf_vs_req": 0.6954,
+        "cumpl_pauta_vs_req": 0.1631,
+        "cumpl_sf_vs_pauta": 4.2649,
+        "cpl_negocio_sf": 2.29,
+        "cpl_pauta": 9.77,
         "recibidos_sf_prev": 12338,
         "cumpl_sf_vs_req_prev": 0.7992,
         "cpl_negocio_sf_prev": 2.63
@@ -465,39 +469,39 @@
       "es_principal": true,
       "google_ads": {
         "kpis": {
-          "impresiones": 4162076.0,
-          "clicks": 80255.0,
-          "coste_usd": 27828.230000000003,
-          "conversiones": 2296.54,
-          "ctr": 0.01928244462619135,
-          "cpc": 0.3467476169709053,
-          "cpa": 12.117459308350824
+          "impresiones": 4162443.0,
+          "clicks": 80250.0,
+          "coste_usd": 27829.21,
+          "conversiones": 2322.76,
+          "ctr": 0.019279543287439613,
+          "cpc": 0.34678143302180686,
+          "cpa": 11.98109576538256
         },
         "campanias_count": 3,
         "por_subtipo": {
           "SEARCH_RETENTION": {
-            "coste": 12382.18,
-            "conv": 1667.98,
+            "coste": 12383.3,
+            "conv": 1690.66,
             "imp": 36612.0,
-            "clicks": 16965.0,
+            "clicks": 16967.0,
             "n": 1,
-            "cpa": 7.4234583148479
+            "cpa": 7.324535980031466
           },
           "SEARCH_SEGMENT": {
             "coste": 8208.29,
-            "conv": 317.07,
+            "conv": 324.78,
             "imp": 25838.0,
             "clicks": 6406.0,
             "n": 1,
-            "cpa": 25.887942725581105
+            "cpa": 25.273385060656448
           },
           "PMAX": {
-            "coste": 7237.76,
-            "conv": 311.49,
-            "imp": 4099626.0,
-            "clicks": 56884.0,
+            "coste": 7237.62,
+            "conv": 307.32,
+            "imp": 4099993.0,
+            "clicks": 56877.0,
             "n": 1,
-            "cpa": 23.235930527464767
+            "cpa": 23.550761421319798
           }
         },
         "campanias": [
@@ -508,18 +512,18 @@
             "presupuesto_str": "$984.00/día",
             "estado": "Se han rechazado algunos anuncios",
             "tipo": "Búsqueda",
-            "optimization_score": 0.863,
+            "optimization_score": 0.6779999999999999,
             "impresiones": 36612.0,
-            "clicks": 16965.0,
+            "clicks": 16967.0,
             "ctr_pct": 0.46340000000000003,
             "cpc": 0.73,
-            "coste": 12382.18,
+            "coste": 12383.3,
             "cuota_imp_search": 0.8602,
-            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_budget": 0.0579,
             "cuota_perdida_ranking": 0.0819,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 1667.98,
-            "cpa": 7.42,
+            "conversiones": 1690.66,
+            "cpa": 7.32,
             "flags": [
               "rejected"
             ]
@@ -531,18 +535,18 @@
             "presupuesto_str": "$900.00/día",
             "estado": "Se han rechazado algunos anuncios",
             "tipo": "Búsqueda",
-            "optimization_score": 0.748,
+            "optimization_score": 0.675,
             "impresiones": 25838.0,
             "clicks": 6406.0,
             "ctr_pct": 0.24789999999999998,
             "cpc": 1.28,
             "coste": 8208.29,
             "cuota_imp_search": 0.8005,
-            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_budget": 0.1399,
             "cuota_perdida_ranking": 0.059500000000000004,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 317.07,
-            "cpa": 25.89,
+            "conversiones": 324.78,
+            "cpa": 25.27,
             "flags": [
               "rejected"
             ]
@@ -554,40 +558,41 @@
             "presupuesto_str": "$376.00/día",
             "estado": "Algunos grupos de recursos están limitados por una política",
             "tipo": "Máximo rendimiento",
-            "optimization_score": 0.9329999999999999,
-            "impresiones": 4099626.0,
-            "clicks": 56884.0,
+            "optimization_score": 0.85,
+            "impresiones": 4099993.0,
+            "clicks": 56877.0,
             "ctr_pct": 0.1975,
             "cpc": 0.01,
-            "coste": 7237.76,
+            "coste": 7237.62,
             "cuota_imp_search": 0.1368,
-            "cuota_perdida_budget": 0.0,
+            "cuota_perdida_budget": 0.7286,
             "cuota_perdida_ranking": 0.1346,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 311.49,
-            "cpa": 23.24,
+            "conversiones": 307.32,
+            "cpa": 23.55,
             "flags": [
-              "policy_limited"
+              "policy_limited",
+              "budget_constrained"
             ]
           }
         ]
       },
       "crm": {
-        "recibidos_sf": 5285,
+        "recibidos_sf": 6833,
         "recibidos_ga": 0,
         "requeridos": 16410,
-        "total_pauta": 3250,
+        "total_pauta": 3396,
         "leads_google": 1870,
         "consumo_google": 28902.29,
-        "leads_meta": 1363,
-        "consumo_meta": 7148.38,
-        "leads_bing": 15,
-        "consumo_bing": 895.14,
-        "cumpl_sf_vs_req": 0.3221,
-        "cumpl_pauta_vs_req": 0.198,
-        "cumpl_sf_vs_pauta": 1.6262,
-        "cpl_negocio_sf": 6.99,
-        "cpl_pauta": 11.37,
+        "leads_meta": 1508,
+        "consumo_meta": 8082.61,
+        "leads_bing": 16,
+        "consumo_bing": 1166.66,
+        "cumpl_sf_vs_req": 0.4164,
+        "cumpl_pauta_vs_req": 0.2069,
+        "cumpl_sf_vs_pauta": 2.0121,
+        "cpl_negocio_sf": 5.58,
+        "cpl_pauta": 11.23,
         "recibidos_sf_prev": 8911,
         "cumpl_sf_vs_req_prev": 0.5424,
         "cpl_negocio_sf_prev": 5.04
@@ -598,39 +603,39 @@
       "es_principal": true,
       "google_ads": {
         "kpis": {
-          "impresiones": 709517.0,
-          "clicks": 10275.0,
-          "coste_usd": 6705.120000000001,
-          "conversiones": 242.66,
-          "ctr": 0.014481682609437125,
-          "cpc": 0.6525664233576643,
-          "cpa": 27.63174812494849
+          "impresiones": 709506.0,
+          "clicks": 10273.0,
+          "coste_usd": 6704.360000000001,
+          "conversiones": 258.38,
+          "ctr": 0.014479088267047777,
+          "cpc": 0.6526194879781954,
+          "cpa": 25.947673968573422
         },
         "campanias_count": 3,
         "por_subtipo": {
           "SEARCH_SEGMENT": {
-            "coste": 1775.47,
-            "conv": 32.54,
+            "coste": 1774.72,
+            "conv": 32.55,
             "imp": 9676.0,
-            "clicks": 1192.0,
+            "clicks": 1191.0,
             "n": 1,
-            "cpa": 54.562692071296865
+            "cpa": 54.52288786482335
           },
           "SEARCH_RETENTION": {
             "coste": 2970.71,
-            "conv": 124.03,
+            "conv": 131.03,
             "imp": 5234.0,
             "clicks": 2262.0,
             "n": 1,
-            "cpa": 23.951543981294847
+            "cpa": 22.67198351522552
           },
           "PMAX": {
-            "coste": 1958.94,
-            "conv": 86.09,
-            "imp": 694607.0,
-            "clicks": 6821.0,
+            "coste": 1958.93,
+            "conv": 94.8,
+            "imp": 694596.0,
+            "clicks": 6820.0,
             "n": 1,
-            "cpa": 22.754559182251132
+            "cpa": 20.663818565400845
           }
         },
         "campanias": [
@@ -641,18 +646,18 @@
             "presupuesto_str": "$106.00/día",
             "estado": "Apto",
             "tipo": "Búsqueda",
-            "optimization_score": 0.777,
+            "optimization_score": 0.633,
             "impresiones": 9676.0,
-            "clicks": 1192.0,
-            "ctr_pct": 0.1232,
+            "clicks": 1191.0,
+            "ctr_pct": 0.1231,
             "cpc": 1.49,
-            "coste": 1775.47,
+            "coste": 1774.72,
             "cuota_imp_search": 0.27699999999999997,
             "cuota_perdida_budget": 0.5768,
             "cuota_perdida_ranking": 0.1461,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 32.54,
-            "cpa": 54.57,
+            "conversiones": 32.55,
+            "cpa": 54.52,
             "flags": [
               "budget_constrained"
             ]
@@ -674,8 +679,8 @@
             "cuota_perdida_budget": 0.201,
             "cuota_perdida_ranking": 0.04650000000000001,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 124.03,
-            "cpa": 23.95,
+            "conversiones": 131.03,
+            "cpa": 22.67,
             "flags": [
               "budget_constrained"
             ]
@@ -687,18 +692,18 @@
             "presupuesto_str": "$155.00/día",
             "estado": "Limitada por el presupuesto",
             "tipo": "Máximo rendimiento",
-            "optimization_score": 0.8540000000000001,
-            "impresiones": 694607.0,
-            "clicks": 6821.0,
-            "ctr_pct": 0.5527000000000001,
+            "optimization_score": 0.696,
+            "impresiones": 694596.0,
+            "clicks": 6820.0,
+            "ctr_pct": 0.5526,
             "cpc": 0.01,
-            "coste": 1958.94,
+            "coste": 1958.93,
             "cuota_imp_search": 0.1198,
             "cuota_perdida_budget": 0.7689,
             "cuota_perdida_ranking": 0.11130000000000001,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 86.09,
-            "cpa": 22.76,
+            "conversiones": 94.8,
+            "cpa": 20.66,
             "flags": [
               "policy_limited",
               "budget_constrained"
@@ -707,21 +712,21 @@
         ]
       },
       "crm": {
-        "recibidos_sf": 1149,
+        "recibidos_sf": 1484,
         "recibidos_ga": 0,
         "requeridos": 2670,
-        "total_pauta": 280,
+        "total_pauta": 289,
         "leads_google": 204,
         "consumo_google": 6762.35,
-        "leads_meta": 74,
-        "consumo_meta": 2771.74,
+        "leads_meta": 83,
+        "consumo_meta": 3185.88,
         "leads_bing": 0,
-        "consumo_bing": 156.6,
-        "cumpl_sf_vs_req": 0.4303,
-        "cumpl_pauta_vs_req": 0.1049,
-        "cumpl_sf_vs_pauta": 4.1036,
-        "cpl_negocio_sf": 8.43,
-        "cpl_pauta": 34.61,
+        "consumo_bing": 178.34,
+        "cumpl_sf_vs_req": 0.5558,
+        "cumpl_pauta_vs_req": 0.1082,
+        "cumpl_sf_vs_pauta": 5.1349,
+        "cpl_negocio_sf": 6.82,
+        "cpl_pauta": 35.04,
         "recibidos_sf_prev": 2036,
         "cumpl_sf_vs_req_prev": 0.8875,
         "cpl_negocio_sf_prev": 5.64
@@ -735,28 +740,28 @@
           "impresiones": 31175.0,
           "clicks": 0,
           "coste_usd": 1195.22,
-          "conversiones": 4760.74,
+          "conversiones": 4775.44,
           "ctr": 0.0,
           "cpc": 0,
-          "cpa": 0.25105760869108584
+          "cpa": 0.2502847905114503
         },
         "campanias_count": 2,
         "por_subtipo": {
           "SEARCH_RETENTION": {
             "coste": 778.92,
-            "conv": 4089.08,
+            "conv": 4102.78,
             "imp": 26951.0,
             "clicks": 0,
             "n": 1,
-            "cpa": 0.19048783589462664
+            "cpa": 0.18985175905117993
           },
           "SEARCH_SEGMENT": {
             "coste": 416.3,
-            "conv": 671.66,
+            "conv": 672.66,
             "imp": 4224.0,
             "clicks": 0,
             "n": 1,
-            "cpa": 0.619807640770628
+            "cpa": 0.618886212945619
           }
         },
         "campanias": [
@@ -767,17 +772,17 @@
             "presupuesto_str": "$25.00/día",
             "estado": "Apto",
             "tipo": "Búsqueda",
-            "optimization_score": 0.847,
+            "optimization_score": 0.723,
             "impresiones": 26951.0,
             "clicks": 0,
             "ctr_pct": 0.3765,
             "cpc": 0.03,
             "coste": 778.92,
             "cuota_imp_search": 0.0,
-            "cuota_perdida_budget": 0.1517,
+            "cuota_perdida_budget": 0.1522,
             "cuota_perdida_ranking": 0.19,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 4089.08,
+            "conversiones": 4102.78,
             "cpa": 0.19,
             "flags": []
           },
@@ -786,21 +791,22 @@
             "subtipo": "SEARCH_SEGMENT",
             "presupuesto_diario": 10.0,
             "presupuesto_str": "$10.00/día",
-            "estado": "Apto",
+            "estado": "Limitada por el presupuesto",
             "tipo": "Búsqueda",
-            "optimization_score": 0.838,
+            "optimization_score": 0.682,
             "impresiones": 4224.0,
             "clicks": 0,
             "ctr_pct": 0.1604,
             "cpc": 0.1,
             "coste": 416.3,
             "cuota_imp_search": 0.0,
-            "cuota_perdida_budget": 0.159,
+            "cuota_perdida_budget": 0.1592,
             "cuota_perdida_ranking": 0.62,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 671.66,
+            "conversiones": 672.66,
             "cpa": 0.62,
             "flags": [
+              "policy_limited",
               "ranking_issue"
             ]
           }
@@ -832,39 +838,39 @@
       "es_principal": false,
       "google_ads": {
         "kpis": {
-          "impresiones": 153384.0,
-          "clicks": 28064.0,
-          "coste_usd": 1380.95,
-          "conversiones": 1855.56,
-          "ctr": 0.18296562874876127,
-          "cpc": 0.049207169327252,
-          "cpa": 0.7442227683286987
+          "impresiones": 153383.0,
+          "clicks": 28062.0,
+          "coste_usd": 1380.9,
+          "conversiones": 1893.3500000000001,
+          "ctr": 0.1829537823618002,
+          "cpc": 0.0492088945905495,
+          "cpa": 0.7293421712837035
         },
         "campanias_count": 3,
         "por_subtipo": {
           "SEARCH_SEGMENT": {
             "coste": 283.06,
-            "conv": 339.9,
+            "conv": 345.1,
             "imp": 11104.0,
             "clicks": 2913.0,
             "n": 1,
-            "cpa": 0.8327743453957047
+            "cpa": 0.8202260214430599
           },
           "SEARCH_RETENTION": {
             "coste": 709.82,
-            "conv": 935.49,
+            "conv": 950.95,
             "imp": 10929.0,
             "clicks": 4888.0,
             "n": 1,
-            "cpa": 0.758768132208789
+            "cpa": 0.7464325148535675
           },
           "PMAX": {
-            "coste": 388.07,
-            "conv": 580.17,
-            "imp": 131351.0,
-            "clicks": 20263.0,
+            "coste": 388.02,
+            "conv": 597.3,
+            "imp": 131350.0,
+            "clicks": 20261.0,
             "n": 1,
-            "cpa": 0.668890152886223
+            "cpa": 0.6496233048719237
           }
         },
         "campanias": [
@@ -885,8 +891,8 @@
             "cuota_perdida_budget": 0.33990000000000004,
             "cuota_perdida_ranking": 0.11349999999999999,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 339.9,
-            "cpa": 0.83,
+            "conversiones": 345.1,
+            "cpa": 0.82,
             "flags": [
               "policy_limited",
               "budget_constrained"
@@ -899,7 +905,7 @@
             "presupuesto_str": "$29.00/día",
             "estado": "Apto",
             "tipo": "Búsqueda",
-            "optimization_score": 0.691,
+            "optimization_score": 0.54,
             "impresiones": 10929.0,
             "clicks": 4888.0,
             "ctr_pct": 0.4473,
@@ -909,8 +915,8 @@
             "cuota_perdida_budget": 0.0676,
             "cuota_perdida_ranking": 0.042699999999999995,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 935.49,
-            "cpa": 0.76,
+            "conversiones": 950.95,
+            "cpa": 0.75,
             "flags": []
           },
           {
@@ -920,18 +926,18 @@
             "presupuesto_str": "$15.00/día",
             "estado": "Apto",
             "tipo": "Máximo rendimiento",
-            "optimization_score": 0.94,
-            "impresiones": 131351.0,
-            "clicks": 20263.0,
+            "optimization_score": 0.938,
+            "impresiones": 131350.0,
+            "clicks": 20261.0,
             "ctr_pct": 0.1543,
             "cpc": 0.02,
-            "coste": 388.07,
+            "coste": 388.02,
             "cuota_imp_search": 0.3367,
-            "cuota_perdida_budget": 0.5640999999999999,
+            "cuota_perdida_budget": 0.5642,
             "cuota_perdida_ranking": 0.0992,
             "estrategia": "Maximiza las conversiones",
-            "conversiones": 580.17,
-            "cpa": 0.67,
+            "conversiones": 597.3,
+            "cpa": 0.65,
             "flags": [
               "budget_constrained"
             ]
@@ -1728,21 +1734,21 @@
         {
           "mes": "abr 2026",
           "mes_iso": "2026-04",
-          "recibidos_sf": 5564,
+          "recibidos_sf": 7251,
           "recibidos_ga": 0,
           "requeridos": 9810,
-          "total_pauta": 7180,
+          "total_pauta": 7504,
           "leads_google": 4337,
           "consumo_google": 26132.19,
-          "leads_meta": 2293,
-          "consumo_meta": 9112.46,
-          "leads_bing": 550,
-          "consumo_bing": 973.03,
-          "cumpl_sf_vs_req": 0.5672,
-          "cumpl_pauta_vs_req": 0.7319,
-          "cumpl_sf_vs_pauta": 0.7749,
-          "cpl_negocio_sf": 6.51,
-          "cpl_pauta": 5.04
+          "leads_meta": 2544,
+          "consumo_meta": 10244.45,
+          "leads_bing": 623,
+          "consumo_bing": 1120.42,
+          "cumpl_sf_vs_req": 0.7391,
+          "cumpl_pauta_vs_req": 0.7649,
+          "cumpl_sf_vs_pauta": 0.9663,
+          "cpl_negocio_sf": 5.17,
+          "cpl_pauta": 5.0
         }
       ],
       "Motos": [
@@ -2433,21 +2439,21 @@
         {
           "mes": "abr 2026",
           "mes_iso": "2026-04",
-          "recibidos_sf": 7973,
+          "recibidos_sf": 10014,
           "recibidos_ga": 0,
           "requeridos": 14400,
-          "total_pauta": 2194,
+          "total_pauta": 2348,
           "leads_google": 1117,
           "consumo_google": 15555.21,
-          "leads_meta": 1043,
-          "consumo_meta": 5825.19,
-          "leads_bing": 32,
-          "consumo_bing": 658.56,
-          "cumpl_sf_vs_req": 0.5537,
-          "cumpl_pauta_vs_req": 0.1524,
-          "cumpl_sf_vs_pauta": 3.634,
-          "cpl_negocio_sf": 2.76,
-          "cpl_pauta": 10.05
+          "leads_meta": 1192,
+          "consumo_meta": 6629.26,
+          "leads_bing": 37,
+          "consumo_bing": 753.32,
+          "cumpl_sf_vs_req": 0.6954,
+          "cumpl_pauta_vs_req": 0.1631,
+          "cumpl_sf_vs_pauta": 4.2649,
+          "cpl_negocio_sf": 2.29,
+          "cpl_pauta": 9.77
         }
       ],
       "Arrendamiento": [
@@ -3012,21 +3018,21 @@
         {
           "mes": "abr 2026",
           "mes_iso": "2026-04",
-          "recibidos_sf": 5285,
+          "recibidos_sf": 6833,
           "recibidos_ga": 0,
           "requeridos": 16410,
-          "total_pauta": 3250,
+          "total_pauta": 3396,
           "leads_google": 1870,
           "consumo_google": 28902.29,
-          "leads_meta": 1363,
-          "consumo_meta": 7148.38,
-          "leads_bing": 15,
-          "consumo_bing": 895.14,
-          "cumpl_sf_vs_req": 0.3221,
-          "cumpl_pauta_vs_req": 0.198,
-          "cumpl_sf_vs_pauta": 1.6262,
-          "cpl_negocio_sf": 6.99,
-          "cpl_pauta": 11.37
+          "leads_meta": 1508,
+          "consumo_meta": 8082.61,
+          "leads_bing": 16,
+          "consumo_bing": 1166.66,
+          "cumpl_sf_vs_req": 0.4164,
+          "cumpl_pauta_vs_req": 0.2069,
+          "cumpl_sf_vs_pauta": 2.0121,
+          "cpl_negocio_sf": 5.58,
+          "cpl_pauta": 11.23
         }
       ],
       "Viajes": [
@@ -3591,21 +3597,21 @@
         {
           "mes": "abr 2026",
           "mes_iso": "2026-04",
-          "recibidos_sf": 1149,
+          "recibidos_sf": 1484,
           "recibidos_ga": 0,
           "requeridos": 2670,
-          "total_pauta": 280,
+          "total_pauta": 289,
           "leads_google": 204,
           "consumo_google": 6762.35,
-          "leads_meta": 74,
-          "consumo_meta": 2771.74,
+          "leads_meta": 83,
+          "consumo_meta": 3185.88,
           "leads_bing": 0,
-          "consumo_bing": 156.6,
-          "cumpl_sf_vs_req": 0.4303,
-          "cumpl_pauta_vs_req": 0.1049,
-          "cumpl_sf_vs_pauta": 4.1036,
-          "cpl_negocio_sf": 8.43,
-          "cpl_pauta": 34.61
+          "consumo_bing": 178.34,
+          "cumpl_sf_vs_req": 0.5558,
+          "cumpl_pauta_vs_req": 0.1082,
+          "cumpl_sf_vs_pauta": 5.1349,
+          "cpl_negocio_sf": 6.82,
+          "cpl_pauta": 35.04
         }
       ]
     }
@@ -3616,63 +3622,63 @@
     "por_seguro": [
       {
         "seguro": "Autos",
-        "recibidos_sf": 5564,
-        "total_pauta": 7180,
-        "google_ads_conv": 4824,
+        "recibidos_sf": 7251,
+        "total_pauta": 7504,
+        "google_ads_conv": 4846,
         "leads_google_sheet": 4337,
-        "leads_meta_sheet": 2293,
-        "leads_bing_sheet": 550,
-        "ratio_ga_conv_vs_sf": 0.867,
-        "ratio_pauta_vs_sf": 1.29,
-        "gap_conv_vs_sf": 739,
-        "inversion_ga_extractor": 26251.95,
+        "leads_meta_sheet": 2544,
+        "leads_bing_sheet": 623,
+        "ratio_ga_conv_vs_sf": 0.668,
+        "ratio_pauta_vs_sf": 1.035,
+        "gap_conv_vs_sf": 2404,
+        "inversion_ga_extractor": 26252.7,
         "inversion_ga_sheet": 26132.19,
-        "delta_inversion": 119.76
+        "delta_inversion": 120.51
       },
       {
         "seguro": "Motos",
-        "recibidos_sf": 7973,
-        "total_pauta": 2194,
-        "google_ads_conv": 1318,
+        "recibidos_sf": 10014,
+        "total_pauta": 2348,
+        "google_ads_conv": 1342,
         "leads_google_sheet": 1117,
-        "leads_meta_sheet": 1043,
-        "leads_bing_sheet": 32,
-        "ratio_ga_conv_vs_sf": 0.165,
-        "ratio_pauta_vs_sf": 0.275,
-        "gap_conv_vs_sf": 6654,
+        "leads_meta_sheet": 1192,
+        "leads_bing_sheet": 37,
+        "ratio_ga_conv_vs_sf": 0.134,
+        "ratio_pauta_vs_sf": 0.234,
+        "gap_conv_vs_sf": 8671,
         "inversion_ga_extractor": 15787.52,
         "inversion_ga_sheet": 15555.21,
         "delta_inversion": 232.31
       },
       {
         "seguro": "Arrendamiento",
-        "recibidos_sf": 5285,
-        "total_pauta": 3250,
-        "google_ads_conv": 2296,
+        "recibidos_sf": 6833,
+        "total_pauta": 3396,
+        "google_ads_conv": 2322,
         "leads_google_sheet": 1870,
-        "leads_meta_sheet": 1363,
-        "leads_bing_sheet": 15,
-        "ratio_ga_conv_vs_sf": 0.435,
-        "ratio_pauta_vs_sf": 0.615,
-        "gap_conv_vs_sf": 2988,
-        "inversion_ga_extractor": 27828.23,
+        "leads_meta_sheet": 1508,
+        "leads_bing_sheet": 16,
+        "ratio_ga_conv_vs_sf": 0.34,
+        "ratio_pauta_vs_sf": 0.497,
+        "gap_conv_vs_sf": 4510,
+        "inversion_ga_extractor": 27829.21,
         "inversion_ga_sheet": 28902.29,
-        "delta_inversion": -1074.06
+        "delta_inversion": -1073.08
       },
       {
         "seguro": "Viajes",
-        "recibidos_sf": 1149,
-        "total_pauta": 280,
-        "google_ads_conv": 242,
+        "recibidos_sf": 1484,
+        "total_pauta": 289,
+        "google_ads_conv": 258,
         "leads_google_sheet": 204,
-        "leads_meta_sheet": 74,
+        "leads_meta_sheet": 83,
         "leads_bing_sheet": 0,
-        "ratio_ga_conv_vs_sf": 0.211,
-        "ratio_pauta_vs_sf": 0.244,
-        "gap_conv_vs_sf": 906,
-        "inversion_ga_extractor": 6705.12,
+        "ratio_ga_conv_vs_sf": 0.174,
+        "ratio_pauta_vs_sf": 0.195,
+        "gap_conv_vs_sf": 1225,
+        "inversion_ga_extractor": 6704.36,
         "inversion_ga_sheet": 6762.35,
-        "delta_inversion": -57.23
+        "delta_inversion": -57.99
       }
     ]
   },
@@ -3685,9 +3691,9 @@
         "estado": "Apto",
         "presupuesto_diario": 25.0,
         "coste": 778.92,
-        "conversiones": 4089.08,
+        "conversiones": 4102.78,
         "cpa": 0.19,
-        "cuota_perdida_budget": 0.1517,
+        "cuota_perdida_budget": 0.1522,
         "cuota_perdida_ranking": 0.19,
         "flags": []
       },
@@ -3695,14 +3701,15 @@
         "seguro": "Salud para Dos",
         "nombre": "SURA_SALUDPARADOS_SEARCH_SEGMENT",
         "subtipo": "SEARCH_SEGMENT",
-        "estado": "Apto",
+        "estado": "Limitada por el presupuesto",
         "presupuesto_diario": 10.0,
         "coste": 416.3,
-        "conversiones": 671.66,
+        "conversiones": 672.66,
         "cpa": 0.62,
-        "cuota_perdida_budget": 0.159,
+        "cuota_perdida_budget": 0.1592,
         "cuota_perdida_ranking": 0.62,
         "flags": [
+          "policy_limited",
           "ranking_issue"
         ]
       },
@@ -3712,10 +3719,10 @@
         "subtipo": "PMAX",
         "estado": "Apto",
         "presupuesto_diario": 15.0,
-        "coste": 388.07,
-        "conversiones": 580.17,
-        "cpa": 0.67,
-        "cuota_perdida_budget": 0.5640999999999999,
+        "coste": 388.02,
+        "conversiones": 597.3,
+        "cpa": 0.65,
+        "cuota_perdida_budget": 0.5642,
         "cuota_perdida_ranking": 0.0992,
         "flags": [
           "budget_constrained"
@@ -3728,8 +3735,8 @@
         "estado": "Entidad apta (limitada)Faltan suficientes palabras clave relevantes",
         "presupuesto_diario": 11.0,
         "coste": 283.06,
-        "conversiones": 339.9,
-        "cpa": 0.83,
+        "conversiones": 345.1,
+        "cpa": 0.82,
         "cuota_perdida_budget": 0.33990000000000004,
         "cuota_perdida_ranking": 0.11349999999999999,
         "flags": [
@@ -3743,9 +3750,9 @@
         "subtipo": "PMAX",
         "estado": "Algunos grupos de recursos están limitados por una política",
         "presupuesto_diario": 517.0,
-        "coste": 10671.24,
-        "conversiones": 2726.27,
-        "cpa": 3.91,
+        "coste": 10671.99,
+        "conversiones": 2739.44,
+        "cpa": 3.9,
         "cuota_perdida_budget": 0.7424,
         "cuota_perdida_ranking": 0.044500000000000005,
         "flags": [
@@ -3761,9 +3768,9 @@
         "subtipo": "SEARCH_SEGMENT",
         "estado": "Apto",
         "presupuesto_diario": 106.0,
-        "coste": 1775.47,
-        "conversiones": 32.54,
-        "cpa": 54.57,
+        "coste": 1774.72,
+        "conversiones": 32.55,
+        "cpa": 54.52,
         "cuota_perdida_budget": 0.5768,
         "cuota_perdida_ranking": 0.1461,
         "flags": [
@@ -3777,12 +3784,28 @@
         "estado": "Se han rechazado algunos anuncios",
         "presupuesto_diario": 900.0,
         "coste": 8208.29,
-        "conversiones": 317.07,
-        "cpa": 25.89,
-        "cuota_perdida_budget": 0.0,
+        "conversiones": 324.78,
+        "cpa": 25.27,
+        "cuota_perdida_budget": 0.1399,
         "cuota_perdida_ranking": 0.059500000000000004,
         "flags": [
           "rejected"
+        ]
+      },
+      {
+        "seguro": "Arrendamiento",
+        "nombre": "SURA_ARRIENDO_PMAX",
+        "subtipo": "PMAX",
+        "estado": "Algunos grupos de recursos están limitados por una política",
+        "presupuesto_diario": 376.0,
+        "coste": 7237.62,
+        "conversiones": 307.32,
+        "cpa": 23.55,
+        "cuota_perdida_budget": 0.7286,
+        "cuota_perdida_ranking": 0.1346,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
         ]
       },
       {
@@ -3792,27 +3815,12 @@
         "estado": "Apto",
         "presupuesto_diario": 251.0,
         "coste": 2970.71,
-        "conversiones": 124.03,
-        "cpa": 23.95,
+        "conversiones": 131.03,
+        "cpa": 22.67,
         "cuota_perdida_budget": 0.201,
         "cuota_perdida_ranking": 0.04650000000000001,
         "flags": [
           "budget_constrained"
-        ]
-      },
-      {
-        "seguro": "Arrendamiento",
-        "nombre": "SURA_ARRIENDO_PMAX",
-        "subtipo": "PMAX",
-        "estado": "Algunos grupos de recursos están limitados por una política",
-        "presupuesto_diario": 376.0,
-        "coste": 7237.76,
-        "conversiones": 311.49,
-        "cpa": 23.24,
-        "cuota_perdida_budget": 0.0,
-        "cuota_perdida_ranking": 0.1346,
-        "flags": [
-          "policy_limited"
         ]
       },
       {
@@ -3821,9 +3829,9 @@
         "subtipo": "PMAX",
         "estado": "Limitada por el presupuesto",
         "presupuesto_diario": 155.0,
-        "coste": 1958.94,
-        "conversiones": 86.09,
-        "cpa": 22.76,
+        "coste": 1958.93,
+        "conversiones": 94.8,
+        "cpa": 20.66,
         "cuota_perdida_budget": 0.7689,
         "cuota_perdida_ranking": 0.11130000000000001,
         "flags": [
@@ -3839,10 +3847,10 @@
         "subtipo": "SEARCH_RETENTION",
         "estado": "Se han rechazado algunos anuncios",
         "presupuesto_diario": 984.0,
-        "coste": 12382.18,
-        "conversiones": 1667.98,
-        "cpa": 7.42,
-        "cuota_perdida_budget": 0.0,
+        "coste": 12383.3,
+        "conversiones": 1690.66,
+        "cpa": 7.32,
+        "cuota_perdida_budget": 0.0579,
         "cuota_perdida_ranking": 0.0819,
         "flags": [
           "rejected"
@@ -3854,9 +3862,9 @@
         "subtipo": "PMAX",
         "estado": "Algunos grupos de recursos están limitados por una política",
         "presupuesto_diario": 517.0,
-        "coste": 10671.24,
-        "conversiones": 2726.27,
-        "cpa": 3.91,
+        "coste": 10671.99,
+        "conversiones": 2739.44,
+        "cpa": 3.9,
         "cuota_perdida_budget": 0.7424,
         "cuota_perdida_ranking": 0.044500000000000005,
         "flags": [
@@ -3871,9 +3879,9 @@
         "estado": "Se han rechazado algunos anuncios",
         "presupuesto_diario": 900.0,
         "coste": 8208.29,
-        "conversiones": 317.07,
-        "cpa": 25.89,
-        "cuota_perdida_budget": 0.0,
+        "conversiones": 324.78,
+        "cpa": 25.27,
+        "cuota_perdida_budget": 0.1399,
         "cuota_perdida_ranking": 0.059500000000000004,
         "flags": [
           "rejected"
@@ -3886,13 +3894,14 @@
         "estado": "AptoAlgunos grupos de recursos se han rechazado y Algunos grupos de recursos están limitados por una política",
         "presupuesto_diario": 397.0,
         "coste": 7831.97,
-        "conversiones": 635.59,
-        "cpa": 12.32,
-        "cuota_perdida_budget": 0.0,
+        "conversiones": 642.71,
+        "cpa": 12.19,
+        "cuota_perdida_budget": 0.5758,
         "cuota_perdida_ranking": 0.2677,
         "flags": [
           "policy_limited",
-          "rejected"
+          "rejected",
+          "budget_constrained"
         ]
       },
       {
@@ -3901,13 +3910,14 @@
         "subtipo": "PMAX",
         "estado": "Algunos grupos de recursos están limitados por una política",
         "presupuesto_diario": 376.0,
-        "coste": 7237.76,
-        "conversiones": 311.49,
-        "cpa": 23.24,
-        "cuota_perdida_budget": 0.0,
+        "coste": 7237.62,
+        "conversiones": 307.32,
+        "cpa": 23.55,
+        "cuota_perdida_budget": 0.7286,
         "cuota_perdida_ranking": 0.1346,
         "flags": [
-          "policy_limited"
+          "policy_limited",
+          "budget_constrained"
         ]
       },
       {
@@ -3917,12 +3927,13 @@
         "estado": "AptoSe han rechazado algunos anuncios",
         "presupuesto_diario": 357.0,
         "coste": 4595.78,
-        "conversiones": 283.43,
-        "cpa": 16.22,
-        "cuota_perdida_budget": 0.0,
+        "conversiones": 293.51,
+        "cpa": 15.66,
+        "cuota_perdida_budget": 0.6555,
         "cuota_perdida_ranking": 0.10279999999999999,
         "flags": [
-          "rejected"
+          "rejected",
+          "budget_constrained"
         ]
       },
       {
@@ -3931,9 +3942,9 @@
         "subtipo": "PMAX",
         "estado": "Limitada por el presupuesto",
         "presupuesto_diario": 155.0,
-        "coste": 1958.94,
-        "conversiones": 86.09,
-        "cpa": 22.76,
+        "coste": 1958.93,
+        "conversiones": 94.8,
+        "cpa": 20.66,
         "cuota_perdida_budget": 0.7689,
         "cuota_perdida_ranking": 0.11130000000000001,
         "flags": [
@@ -3942,19 +3953,19 @@
         ]
       },
       {
-        "seguro": "Salud Animal",
-        "nombre": "SURA_SALUD_MASCOTAS_SEARCH_SEGMENT",
+        "seguro": "Salud para Dos",
+        "nombre": "SURA_SALUDPARADOS_SEARCH_SEGMENT",
         "subtipo": "SEARCH_SEGMENT",
-        "estado": "Entidad apta (limitada)Faltan suficientes palabras clave relevantes",
-        "presupuesto_diario": 11.0,
-        "coste": 283.06,
-        "conversiones": 339.9,
-        "cpa": 0.83,
-        "cuota_perdida_budget": 0.33990000000000004,
-        "cuota_perdida_ranking": 0.11349999999999999,
+        "estado": "Limitada por el presupuesto",
+        "presupuesto_diario": 10.0,
+        "coste": 416.3,
+        "conversiones": 672.66,
+        "cpa": 0.62,
+        "cuota_perdida_budget": 0.1592,
+        "cuota_perdida_ranking": 0.62,
         "flags": [
           "policy_limited",
-          "budget_constrained"
+          "ranking_issue"
         ]
       }
     ],
@@ -3963,14 +3974,15 @@
         "seguro": "Salud para Dos",
         "nombre": "SURA_SALUDPARADOS_SEARCH_SEGMENT",
         "subtipo": "SEARCH_SEGMENT",
-        "estado": "Apto",
+        "estado": "Limitada por el presupuesto",
         "presupuesto_diario": 10.0,
         "coste": 416.3,
-        "conversiones": 671.66,
+        "conversiones": 672.66,
         "cpa": 0.62,
-        "cuota_perdida_budget": 0.159,
+        "cuota_perdida_budget": 0.1592,
         "cuota_perdida_ranking": 0.62,
         "flags": [
+          "policy_limited",
           "ranking_issue"
         ]
       },
@@ -3981,8 +3993,8 @@
         "estado": "Apto",
         "presupuesto_diario": 52.0,
         "coste": 2188.75,
-        "conversiones": 340.53,
-        "cpa": 6.43,
+        "conversiones": 341.7,
+        "cpa": 6.41,
         "cuota_perdida_budget": 0.4165,
         "cuota_perdida_ranking": 0.3588,
         "flags": [
@@ -4020,12 +4032,12 @@
       "evidencia": []
     },
     {
-      "titulo": "Investigar caída sostenida en Autos: -112pp desde el pico (nov 2025)",
+      "titulo": "Investigar caída sostenida en Autos: -94pp desde el pico (nov 2025)",
       "seguro": "Autos",
       "plataforma": "Google Ads + Meta",
       "que_hacer": "Auditar todo lo que cambió desde nov 2025: bidding, presupuestos, audiencias, keywords, landing pages, ofertas, quality score. Comparar mix de canales (Google vs Meta vs Bing) y detectar cuál se rompió. Reactivar configuraciones que rendían cuando estaba en pico.",
-      "por_que": "En nov 2025 el cumplimiento fue 168.3% con CPL $3.83. Hoy (abr 2026) está en 56.7% con CPL $6.51. La caída es estructural (>5 meses), no estacional.",
-      "impacto": "ALTO - recuperar 56pp del cumplimiento implica +5,475 leads/mes",
+      "por_que": "En nov 2025 el cumplimiento fue 168.3% con CPL $3.83. Hoy (abr 2026) está en 73.9% con CPL $5.17. La caída es estructural (>5 meses), no estacional.",
+      "impacto": "ALTO - recuperar 47pp del cumplimiento implica +4,632 leads/mes",
       "esfuerzo": "alto",
       "prioridad": "alta",
       "plazo": "esta semana",
@@ -4035,16 +4047,16 @@
         "ene 2026: cumpl 137.2% / SF 11,398 / CPL $3.85",
         "feb 2026: cumpl 125.6% / SF 9,883 / CPL $4.79",
         "mar 2026: cumpl 91.7% / SF 9,293 / CPL $4.61",
-        "abr 2026: cumpl 56.7% / SF 5,564 / CPL $6.51"
+        "abr 2026: cumpl 73.9% / SF 7,251 / CPL $5.17"
       ]
     },
     {
-      "titulo": "Investigar caída sostenida en Motos: -112pp desde el pico (jun 2025)",
+      "titulo": "Investigar caída sostenida en Motos: -98pp desde el pico (jun 2025)",
       "seguro": "Motos",
       "plataforma": "Google Ads + Meta",
       "que_hacer": "Auditar todo lo que cambió desde jun 2025: bidding, presupuestos, audiencias, keywords, landing pages, ofertas, quality score. Comparar mix de canales (Google vs Meta vs Bing) y detectar cuál se rompió. Reactivar configuraciones que rendían cuando estaba en pico.",
-      "por_que": "En jun 2025 el cumplimiento fue 167.1% con CPL $1.75. Hoy (abr 2026) está en 55.4% con CPL $2.76. La caída es estructural (>5 meses), no estacional.",
-      "impacto": "ALTO - recuperar 56pp del cumplimiento implica +8,046 leads/mes",
+      "por_que": "En jun 2025 el cumplimiento fue 167.1% con CPL $1.75. Hoy (abr 2026) está en 69.5% con CPL $2.29. La caída es estructural (>5 meses), no estacional.",
+      "impacto": "ALTO - recuperar 49pp del cumplimiento implica +7,026 leads/mes",
       "esfuerzo": "alto",
       "prioridad": "alta",
       "plazo": "esta semana",
@@ -4054,16 +4066,16 @@
         "ene 2026: cumpl 117.3% / SF 18,115 / CPL $1.10",
         "feb 2026: cumpl 100.4% / SF 14,396 / CPL $2.19",
         "mar 2026: cumpl 79.9% / SF 12,338 / CPL $2.63",
-        "abr 2026: cumpl 55.4% / SF 7,973 / CPL $2.76"
+        "abr 2026: cumpl 69.5% / SF 10,014 / CPL $2.29"
       ]
     },
     {
-      "titulo": "Investigar caída sostenida en Arrendamiento: -140pp desde el pico (jun 2025)",
+      "titulo": "Investigar caída sostenida en Arrendamiento: -131pp desde el pico (jun 2025)",
       "seguro": "Arrendamiento",
       "plataforma": "Google Ads + Meta",
       "que_hacer": "Auditar todo lo que cambió desde jun 2025: bidding, presupuestos, audiencias, keywords, landing pages, ofertas, quality score. Comparar mix de canales (Google vs Meta vs Bing) y detectar cuál se rompió. Reactivar configuraciones que rendían cuando estaba en pico.",
-      "por_que": "En jun 2025 el cumplimiento fue 172.2% con CPL $2.22. Hoy (abr 2026) está en 32.2% con CPL $6.99. La caída es estructural (>5 meses), no estacional.",
-      "impacto": "ALTO - recuperar 70pp del cumplimiento implica +11,488 leads/mes",
+      "por_que": "En jun 2025 el cumplimiento fue 172.2% con CPL $2.22. Hoy (abr 2026) está en 41.6% con CPL $5.58. La caída es estructural (>5 meses), no estacional.",
+      "impacto": "ALTO - recuperar 65pp del cumplimiento implica +10,714 leads/mes",
       "esfuerzo": "alto",
       "prioridad": "critica",
       "plazo": "esta semana",
@@ -4073,16 +4085,16 @@
         "ene 2026: cumpl 56.2% / SF 13,845 / CPL $4.44",
         "feb 2026: cumpl 63.8% / SF 11,961 / CPL $2.65",
         "mar 2026: cumpl 54.2% / SF 8,911 / CPL $5.04",
-        "abr 2026: cumpl 32.2% / SF 5,285 / CPL $6.99"
+        "abr 2026: cumpl 41.6% / SF 6,833 / CPL $5.58"
       ]
     },
     {
-      "titulo": "Investigar caída sostenida en Viajes: -144pp desde el pico (jun 2025)",
+      "titulo": "Investigar caída sostenida en Viajes: -131pp desde el pico (jun 2025)",
       "seguro": "Viajes",
       "plataforma": "Google Ads + Meta",
       "que_hacer": "Auditar todo lo que cambió desde jun 2025: bidding, presupuestos, audiencias, keywords, landing pages, ofertas, quality score. Comparar mix de canales (Google vs Meta vs Bing) y detectar cuál se rompió. Reactivar configuraciones que rendían cuando estaba en pico.",
-      "por_que": "En jun 2025 el cumplimiento fue 186.7% con CPL $1.50. Hoy (abr 2026) está en 43.0% con CPL $8.43. La caída es estructural (>5 meses), no estacional.",
-      "impacto": "ALTO - recuperar 72pp del cumplimiento implica +1,917 leads/mes",
+      "por_que": "En jun 2025 el cumplimiento fue 186.7% con CPL $1.50. Hoy (abr 2026) está en 55.6% con CPL $6.82. La caída es estructural (>5 meses), no estacional.",
+      "impacto": "ALTO - recuperar 66pp del cumplimiento implica +1,750 leads/mes",
       "esfuerzo": "alto",
       "prioridad": "alta",
       "plazo": "esta semana",
@@ -4092,7 +4104,7 @@
         "ene 2026: cumpl 56.7% / SF 1,301 / CPL $8.69",
         "feb 2026: cumpl 54.6% / SF 1,239 / CPL $9.23",
         "mar 2026: cumpl 88.8% / SF 2,036 / CPL $5.64",
-        "abr 2026: cumpl 43.0% / SF 1,149 / CPL $8.43"
+        "abr 2026: cumpl 55.6% / SF 1,484 / CPL $6.82"
       ]
     },
     {
@@ -4100,7 +4112,7 @@
       "seguro": "Arrendamiento",
       "plataforma": "Google Ads",
       "que_hacer": "Entrar a sura-cdd-co-google-search-retention-arriendo, revisar assets/anuncios rechazados, corregir copy o creativos según motivo, re-someter a revisión. Presupuesto activo $984.00/día.",
-      "por_que": "Estado: 'Se han rechazado algunos anuncios'. Inversion ya gastada $12,382 con limitaciones - hay headroom inmediato al destrabar.",
+      "por_que": "Estado: 'Se han rechazado algunos anuncios'. Inversion ya gastada $12,383 con limitaciones - hay headroom inmediato al destrabar.",
       "impacto": "MEDIO - liberar 20-40% de la capacidad de la campania",
       "esfuerzo": "medio",
       "prioridad": "alta",
@@ -4112,7 +4124,7 @@
       "seguro": "Autos",
       "plataforma": "Google Ads",
       "que_hacer": "Entrar a SURA_AUTOS_PMAX, revisar assets/anuncios rechazados, corregir copy o creativos según motivo, re-someter a revisión. Presupuesto activo $517.00/día.",
-      "por_que": "Estado: 'Algunos grupos de recursos están limitados por una política'. Inversion ya gastada $10,671 con limitaciones - hay headroom inmediato al destrabar.",
+      "por_que": "Estado: 'Algunos grupos de recursos están limitados por una política'. Inversion ya gastada $10,672 con limitaciones - hay headroom inmediato al destrabar.",
       "impacto": "MEDIO - liberar 20-40% de la capacidad de la campania",
       "esfuerzo": "medio",
       "prioridad": "alta",
@@ -4124,8 +4136,8 @@
       "seguro": "Salud para Dos",
       "plataforma": "Google Ads",
       "que_hacer": "Subir presupuesto diario de $25.00 a $32.50 (+30%). La campania pierde 15% de impresiones por falta de presupuesto.",
-      "por_que": "CPA $0.19 entre los mejores. 4,089 conversiones con $779. Cuota perdida por presupuesto = 15% indica que con mas budget escalaria a CPA similar.",
-      "impacto": "ALTO - estimado +1,226 conversiones extra/mes",
+      "por_que": "CPA $0.19 entre los mejores. 4,102 conversiones con $779. Cuota perdida por presupuesto = 15% indica que con mas budget escalaria a CPA similar.",
+      "impacto": "ALTO - estimado +1,230 conversiones extra/mes",
       "esfuerzo": "bajo",
       "prioridad": "alta",
       "plazo": "hoy",
@@ -4150,45 +4162,36 @@
     "salud_para_dos_y_animal": "Sin data CRM. Solo Google Ads (foco: setear tracking + potenciar)."
   },
   "caso_negocio": {
-    "estado_actual": "Cumplimiento global 46.1% (RECIBIDOS SF / REQUERIDOS) vs 70% transcurrido del mes. 19,971 leads reales recibidos de 43,290 requeridos. Inversion $104,893 (Google 74% / Meta 24%). CPL Negocio $5.25.",
-    "proyeccion_si_aplicamos_top5": "Aplicando las top 5 recomendaciones (focalizadas en destrabar bloqueos administrativos, recuperar configuraciones que rendían en el pico de Q4 2025 y arreglar tracking) estimamos +20pp de cumplimiento global en 4 semanas (de 46% a 66%) y 8,658 leads SF adicionales/mes.",
+    "estado_actual": "Cumplimiento global 59.1% (RECIBIDOS SF / REQUERIDOS) vs 70% transcurrido del mes. 25,582 leads reales recibidos de 43,290 requeridos. Inversion $108,713 (Google 71% / Meta 26%). CPL Negocio $4.25.",
+    "proyeccion_si_aplicamos_top5": "Aplicando las top 5 recomendaciones (focalizadas en destrabar bloqueos administrativos, recuperar configuraciones que rendían en el pico de Q4 2025 y arreglar tracking) estimamos +20pp de cumplimiento global en 4 semanas (de 59% a 79%) y 8,658 leads SF adicionales/mes.",
     "proximo_paso": "Migrar a APIs oficiales (Google Ads API, Meta Marketing API, GA4 Data API) para pipeline diario con alertas automaticas."
   },
   "oportunidades_cross_canal": [
     {
-      "seguro": "Autos",
-      "tipo": "Escalar Google Ads",
-      "icono": "📈",
-      "titulo": "Autos: cerrar gap de 4,246 leads para cumplir compromiso",
-      "detalle": "Cumplimiento actual 56.7% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
-      "delta_leads": "+1,698 leads SF en 4 semanas (cierra ~40% del gap)",
-      "delta_cpl": "Estable o ligera mejora"
-    },
-    {
       "seguro": "Motos",
       "tipo": "Escalar Google Ads",
       "icono": "📈",
-      "titulo": "Motos: cerrar gap de 6,427 leads para cumplir compromiso",
-      "detalle": "Cumplimiento actual 55.4% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
-      "delta_leads": "+2,570 leads SF en 4 semanas (cierra ~40% del gap)",
+      "titulo": "Motos: cerrar gap de 4,386 leads para cumplir compromiso",
+      "detalle": "Cumplimiento actual 69.5% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
+      "delta_leads": "+1,754 leads SF en 4 semanas (cierra ~40% del gap)",
       "delta_cpl": "Estable o ligera mejora"
     },
     {
       "seguro": "Arrendamiento",
       "tipo": "Escalar Google Ads",
       "icono": "📈",
-      "titulo": "Arrendamiento: cerrar gap de 11,125 leads para cumplir compromiso",
-      "detalle": "Cumplimiento actual 32.2% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
-      "delta_leads": "+4,450 leads SF en 4 semanas (cierra ~40% del gap)",
+      "titulo": "Arrendamiento: cerrar gap de 9,577 leads para cumplir compromiso",
+      "detalle": "Cumplimiento actual 41.6% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
+      "delta_leads": "+3,830 leads SF en 4 semanas (cierra ~40% del gap)",
       "delta_cpl": "Estable o ligera mejora"
     },
     {
       "seguro": "Viajes",
       "tipo": "Escalar Google Ads",
       "icono": "📈",
-      "titulo": "Viajes: cerrar gap de 1,521 leads para cumplir compromiso",
-      "detalle": "Cumplimiento actual 43.0% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
-      "delta_leads": "+608 leads SF en 4 semanas (cierra ~40% del gap)",
+      "titulo": "Viajes: cerrar gap de 1,186 leads para cumplir compromiso",
+      "detalle": "Cumplimiento actual 55.6% vs target. Hay headroom en cuota perdida por presupuesto en Google Ads. Subir budget +30% en la(s) campaña(s) con mejor CPA del seguro.",
+      "delta_leads": "+474 leads SF en 4 semanas (cierra ~40% del gap)",
       "delta_cpl": "Estable o ligera mejora"
     },
     {
@@ -4196,17 +4199,17 @@
       "tipo": "Reasignación de canal",
       "icono": "🔄",
       "titulo": "Motos: reasignar budget de Google a Meta",
-      "detalle": "En Motos, Meta convierte a CPL $5.59 vs Google a $13.93 (ratio 2.5x). Reasignando 30% del budget de Google → Meta podríamos sumar leads SF al mismo gasto.",
-      "delta_leads": "+797 leads SF/mes estimado",
-      "delta_cpl": "-8% en CPL global del seguro"
+      "detalle": "En Motos, Meta convierte a CPL $5.56 vs Google a $13.93 (ratio 2.5x). Reasignando 30% del budget de Google → Meta podríamos sumar leads SF al mismo gasto.",
+      "delta_leads": "+1,001 leads SF/mes estimado",
+      "delta_cpl": "-9% en CPL global del seguro"
     },
     {
       "seguro": "Arrendamiento",
       "tipo": "Reasignación de canal",
       "icono": "🔄",
       "titulo": "Arrendamiento: reasignar budget de Google a Meta",
-      "detalle": "En Arrendamiento, Meta convierte a CPL $5.24 vs Google a $15.46 (ratio 2.9x). Reasignando 30% del budget de Google → Meta podríamos sumar leads SF al mismo gasto.",
-      "delta_leads": "+528 leads SF/mes estimado",
+      "detalle": "En Arrendamiento, Meta convierte a CPL $5.36 vs Google a $15.46 (ratio 2.9x). Reasignando 30% del budget de Google → Meta podríamos sumar leads SF al mismo gasto.",
+      "delta_leads": "+683 leads SF/mes estimado",
       "delta_cpl": "-9% en CPL global del seguro"
     }
   ]
