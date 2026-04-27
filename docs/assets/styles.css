@@ -51,6 +51,27 @@ html, body {
   margin: 0 0 4px;
   letter-spacing: -0.02em;
 }
+.hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 10px; align-items: center; }
+.btn-primary {
+  background: var(--sura-aqua);
+  color: var(--sura-azul);
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all .15s ease;
+  border: 2px solid var(--sura-aqua);
+}
+.btn-primary:hover {
+  background: var(--sura-blanco);
+  color: var(--sura-azul);
+  border-color: var(--sura-blanco);
+  transform: translateY(-1px);
+}
 .hero .subtitle {
   opacity: 0.85;
   font-size: 15px;

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- v0.4 CRM page -->
+
+  <title>CRM · SURA Tech Colombia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/crm.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-top">
+        <div>
+          <a href="index.html" class="back-link">← Volver al informe</a>
+          <h1>CRM · Detalle de leads recibidos (SF)</h1>
+          <div class="subtitle">
+            Fuente de verdad: <strong>RECIBIDOS (SF)</strong> — leads que llegan a Salesforce de SURA Colombia
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi" id="kpi-rango-sf">
+          <div class="label">SF en rango</div>
+          <div class="value">—</div>
+          <div class="delta">leads totales</div>
+        </div>
+        <div class="kpi" id="kpi-rango-pauta">
+          <div class="label">Pauta en rango</div>
+          <div class="value">—</div>
+          <div class="delta">leads de la pauta</div>
+        </div>
+        <div class="kpi" id="kpi-rango-cumpl">
+          <div class="label">Cumpl. SF/Req</div>
+          <div class="value">—</div>
+          <div class="delta">vs requerido</div>
+        </div>
+        <div class="kpi" id="kpi-rango-cpl">
+          <div class="label">CPL Negocio (SF)</div>
+          <div class="value">—</div>
+          <div class="delta">inv total / SF</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filtros -->
+  <section>
+    <div class="container">
+      <h2>Filtros — <span class="accent">selección de fechas</span></h2>
+      <div class="filter-row">
+        <label>Desde
+          <input type="date" id="date-from">
+        </label>
+        <label>Hasta
+          <input type="date" id="date-to">
+        </label>
+        <label>Seguro
+          <select id="filter-seguro">
+            <option value="all">Todos</option>
+            <option value="Autos">Autos</option>
+            <option value="Motos">Motos</option>
+            <option value="Arrendamiento">Arrendamiento</option>
+            <option value="Viajes">Viajes</option>
+          </select>
+        </label>
+        <div class="quick-buttons">
+          <button class="quick-btn" data-range="7">Últimos 7 días</button>
+          <button class="quick-btn" data-range="30">Últimos 30 días</button>
+          <button class="quick-btn" data-range="month">Mes actual</button>
+          <button class="quick-btn" data-range="prev-month">Mes anterior</button>
+          <button class="quick-btn" data-range="ytd">Año actual</button>
+          <button class="quick-btn" data-range="all">Todo el histórico</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gráficos -->
+  <section>
+    <div class="container">
+      <h2>Evolución diaria — <span class="accent">rango seleccionado</span></h2>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>RECIBIDOS (SF) por día</h3>
+          <canvas id="chart-sf-daily" height="180"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>SF vs Pauta por día</h3>
+          <canvas id="chart-sf-vs-pauta" height="180"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Inversión diaria (Google + Meta + Bing)</h3>
+          <canvas id="chart-inversion-daily" height="180"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Cumplimiento SF/Req mensual</h3>
+          <canvas id="chart-cumpl-monthly" height="180"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparativa por seguro en el rango -->
+  <section>
+    <div class="container">
+      <h2>Resumen del rango — <span class="accent">por seguro</span></h2>
+      <table class="opt-table" id="resumen-rango-table">
+        <thead>
+          <tr>
+            <th>Seguro</th>
+            <th>Días</th>
+            <th>RECIBIDOS (SF)</th>
+            <th>Total Pauta</th>
+            <th>Requeridos</th>
+            <th>Cumpl SF/Req</th>
+            <th>Cumpl Pauta/Req</th>
+            <th>Inv. Google</th>
+            <th>Inv. Meta</th>
+            <th>Inv. Bing</th>
+            <th>CPL Neg (SF)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Tabla diaria -->
+  <section>
+    <div class="container">
+      <h2>Detalle diario — <span class="accent">filas día por día</span></h2>
+      <p class="section-intro">Mostrando primeras 200 filas del rango. Para más, ajustar filtros o exportar a Excel.</p>
+      <div class="table-wrap">
+        <table class="opt-table" id="daily-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Seguro</th>
+              <th>SF</th>
+              <th>GA</th>
+              <th>Requeridos</th>
+              <th>Pauta</th>
+              <th>Cumpl SF/Pauta</th>
+              <th>Leads Google</th>
+              <th>Inv. Google</th>
+              <th>Leads Meta</th>
+              <th>Inv. Meta</th>
+              <th>Leads Bing</th>
+              <th>Inv. Bing</th>
+              <th>SEL</th>
+              <th>SURA.CO</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insights -->
+  <section>
+    <div class="container">
+      <h2>Insights del CRM</h2>
+      <p class="section-intro">Hallazgos automáticos sobre todo el histórico (no afectados por los filtros de arriba).</p>
+      <div id="insights-list" class="insights-list"></div>
+    </div>
+  </section>
+
+  <!-- Recomendaciones del CRM -->
+  <section>
+    <div class="container">
+      <h2>Recomendaciones del CRM</h2>
+      <div id="recos-crm" class="recos"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      Elaborado por <strong>Beyond Media Agency</strong> · Dashboard SURA Tech Colombia ·
+      <a href="index.html" style="color:var(--sura-aqua)">Volver al informe</a> ·
+      <a href="https://github.com/Normandruiz/SURA-Tech-Colombia" style="color:var(--sura-aqua)">Repositorio</a>
+    </div>
+  </footer>
+
+  <script src="assets/crm.js"></script>
+</body>
+</html>
