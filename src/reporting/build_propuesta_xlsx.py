@@ -57,31 +57,40 @@ ACTUAL = {
     "Viajes":   {"google": (6762, 204, 33.01), "meta": (3186, 83, 38.38), "bing": 178},
 }
 
-# Campanias Google Ads con metricas reales (extractor MCC)
-GOOGLE_CAMPS = {
-    "Auto": [
-        {"nombre": "SURA_AUTOS_PMAX",            "cpa": 3.90,  "lost_budget": 0.74, "budget_d_actual": 517, "spend": 10672, "conv": 2739.4, "flags": ["policy_limited","budget_constrained"]},
-        {"nombre": "SURA_AUTOS_SEARCH_SEGMENT",  "cpa": 6.72,  "lost_budget": 0.15, "budget_d_actual": 326, "spend": 9198, "conv": 1369.1, "flags": []},
-        {"nombre": "SURA_AUTOS_SEARCH_RETENTION","cpa": 10.59, "lost_budget": 0.23, "budget_d_actual": 147, "spend": 4194, "conv": 396.1, "flags": ["budget_constrained"]},
-        {"nombre": "SURA_AUTOS_SEARCH_CONQUEST", "cpa": 6.41,  "lost_budget": 0.42, "budget_d_actual": 52,  "spend": 2189, "conv": 341.7, "flags": ["budget_constrained","ranking_issue"]},
-    ],
-    "Moto": [
-        {"nombre": "SURA_MOTOS_SEARCH_RETENTION","cpa": 6.46,  "lost_budget": 0.04, "budget_d_actual": 183, "spend": 1994, "conv": 308.8, "flags": []},
-        {"nombre": "SURA_MOTOS_PMAX",            "cpa": 12.19, "lost_budget": 0.58, "budget_d_actual": 397, "spend": 7832, "conv": 642.7, "flags": ["policy_limited","rejected","budget_constrained"]},
-        {"nombre": "SURA_MOTOS_SEARCH_SEGMENT",  "cpa": 15.66, "lost_budget": 0.66, "budget_d_actual": 357, "spend": 4596, "conv": 293.5, "flags": ["rejected","budget_constrained"]},
-        {"nombre": "SURA_MOTOS_SEARCH_CONQUEST", "cpa": 14.00, "lost_budget": 0.73, "budget_d_actual": 75,  "spend": 1366, "conv": 97.6, "flags": ["budget_constrained"]},
-    ],
-    "Arriendo": [
-        {"nombre": "sura-cdd-co-google-search-retention-arriendo", "cpa": 7.32,  "lost_budget": 0.06, "budget_d_actual": 984, "spend": 12383, "conv": 1690.7, "flags": ["rejected"]},
-        {"nombre": "SURA_ARRIENDO_SEARCH_SEGMENT","cpa": 25.27, "lost_budget": 0.14, "budget_d_actual": 900, "spend": 8208, "conv": 324.8, "flags": ["rejected"]},
-        {"nombre": "SURA_ARRIENDO_PMAX",          "cpa": 23.55, "lost_budget": 0.73, "budget_d_actual": 376, "spend": 7238, "conv": 307.3, "flags": ["policy_limited","budget_constrained"]},
-    ],
-    "Viajes": [
-        {"nombre": "SURA_VIAJES_SEARCH_RETENTION","cpa": 22.67, "lost_budget": 0.20, "budget_d_actual": 251, "spend": 2971, "conv": 131.0, "flags": ["budget_constrained"]},
-        {"nombre": "SURA_VIAJES_PMAX",            "cpa": 20.66, "lost_budget": 0.77, "budget_d_actual": 155, "spend": 1959, "conv": 94.8, "flags": ["policy_limited","budget_constrained"]},
-        {"nombre": "SURA_VIAJES_SEARCH_SEGMENT",  "cpa": 54.52, "lost_budget": 0.58, "budget_d_actual": 106, "spend": 1775, "conv": 32.5, "flags": ["budget_constrained"]},
-    ],
-}
+def _load_google_camps_from_dataset():
+    """Lee las campanias Google del dataset paid_media (ya tiene clicks/conv reales)."""
+    p = ROOT / "docs" / "assets" / "data_paid_media.json"
+    if not p.exists():
+        return {}
+    d = json.loads(p.read_text(encoding="utf-8"))
+    out = {}
+    map_seguro = {"Autos": "Auto", "Motos": "Moto", "Arrendamiento": "Arriendo", "Viajes": "Viajes"}
+    for nombre_full, b in d.get("seguros", {}).items():
+        seguro = map_seguro.get(nombre_full)
+        if not seguro:
+            continue
+        out[seguro] = []
+        for c in b.get("campanias", []):
+            clicks = c.get("clicks") or 0
+            conv = c.get("conversiones") or 0
+            tasa = (conv / clicks) if clicks else 0
+            out[seguro].append({
+                "nombre":          c["nombre"],
+                "cpa":             c.get("cpa") or 0,
+                "lost_budget":     c.get("cuota_perdida_budget") or 0,
+                "cuota_perdida_ranking": c.get("cuota_perdida_ranking") or 0,
+                "budget_d_actual": c.get("presupuesto_diario") or 0,
+                "spend":           c.get("coste") or 0,
+                "conv":            conv,
+                "clicks":          clicks,
+                "tasa_conv":       tasa,
+                "ctr":             c.get("ctr_pct") or 0,
+                "flags":           c.get("flags") or [],
+            })
+    return out
+
+
+GOOGLE_CAMPS = _load_google_camps_from_dataset()
 
 
 # ============== ALGORITMO DE PROPUESTA ==============
@@ -93,22 +102,54 @@ GOOGLE_CAMPS = {
 #  - Asignar el budget Google priorizando las que tienen mejor CPA y mas lost_budget
 
 def clasificar(c):
-    """Devuelve (accion, factor) donde factor es el multiplicador del budget actual."""
-    cpa = c["cpa"]; lb = c["lost_budget"]
-    if cpa <= 7 and lb >= 0.50:
-        return "ESCALAR FUERTE", 1.80
-    if cpa <= 10 and lb >= 0.30:
-        return "ESCALAR", 1.40
-    if cpa <= 10 and lb >= 0.10:
-        return "ESCALAR LEVE", 1.20
-    if cpa <= 15 and lb >= 0.50:
-        return "ESCALAR MODERADO", 1.20
+    """Devuelve (accion, factor) considerando CPA + lost_budget + tasa de conversion.
+
+    Tasa de conversion (conv/clicks) cambia el peso de las decisiones:
+    - tasa alta (>8%) refuerza el escalar
+    - tasa media (4-8%) accion estandar
+    - tasa baja (<4%) penaliza el escalado y refuerza el recorte
+    """
+    cpa = c["cpa"]; lb = c["lost_budget"]; tc = c.get("tasa_conv", 0)
+    # Buckets de tasa de conversion
+    if   tc >= 0.08: tier = "alta"
+    elif tc >= 0.04: tier = "media"
+    elif tc > 0:     tier = "baja"
+    else:            tier = "sin"
+
+    # CPA bajo ($<=7)
+    if cpa > 0 and cpa <= 7:
+        if lb >= 0.50 and tier in ("alta", "media"):
+            return "ESCALAR FUERTE", 1.80
+        if lb >= 0.30:
+            return "ESCALAR", 1.40
+        if lb >= 0.10:
+            return "ESCALAR LEVE", 1.20
+        return "MANTENER", 1.0
+
+    # CPA medio ($7-10)
+    if cpa > 0 and cpa <= 10:
+        if lb >= 0.30 and tier == "alta":
+            return "ESCALAR", 1.40
+        if lb >= 0.10 and tier in ("alta", "media"):
+            return "ESCALAR LEVE", 1.20
+        return "MANTENER", 1.0
+
+    # CPA medio-alto ($10-15)
+    if cpa > 0 and cpa <= 15:
+        if lb >= 0.50 and tier == "alta":
+            return "ESCALAR MODERADO", 1.15  # solo si tasa conv es alta
+        if tier == "baja":
+            return "RECORTAR", 0.65
+        return "MANTENER", 1.0
+
+    # CPA alto ($15-25)
+    if cpa > 0 and cpa <= 25:
+        return "RECORTAR", 0.65
+
+    # CPA insostenible (>$25)
     if cpa > 25:
         return "RECORTAR FUERTE", 0.40
-    if cpa > 15:
-        return "RECORTAR", 0.65
-    if cpa > 10 and lb < 0.10:
-        return "MANTENER", 1.0
+
     return "MANTENER", 1.0
 
 
@@ -272,34 +313,43 @@ def _justificar_google(c, accion):
     cpa = c["cpa"]; lb = c["lost_budget"]
     lr = c.get("cuota_perdida_ranking", 0)
     conv = c["conv"]; spend = c["spend"]; flags = c.get("flags", [])
+    tc = c.get("tasa_conv", 0); clicks = c.get("clicks", 0)
+    tc_str = f"{tc*100:.1f}%" if tc > 0 else "—"
+    if   tc >= 0.08: tc_eval = "alta"
+    elif tc >= 0.04: tc_eval = "media"
+    elif tc > 0:     tc_eval = "baja"
+    else:            tc_eval = "sin"
 
     if "ESCALAR FUERTE" in accion:
-        if lb >= 0.50 and cpa < 8:
-            return (f"CPA ${cpa:.2f} excelente y pierde {lb*100:.0f}% de impresiones por presupuesto. "
-                    f"Subir budget convierte impresiones perdidas en conversiones al mismo CPA.")
-        return f"CPA ${cpa:.2f} muy bueno con headroom {lb*100:.0f}% por presupuesto."
+        return (f"CPA ${cpa:.2f} + tasa de conversión {tc_str} ({tc_eval}) + pierde {lb*100:.0f}% por presupuesto. "
+                f"Combo ideal: convierte bien y le falta plata. Subir budget convierte impresiones perdidas en conversiones al mismo CPA.")
 
-    if "ESCALAR" in accion:
-        partes = [f"CPA ${cpa:.2f}"]
-        if conv >= 200: partes.append(f"{int(conv):,} conversiones ya validan el formato")
+    if accion == "ESCALAR" or accion == "ESCALAR LEVE" or accion == "ESCALAR MODERADO":
+        partes = [f"CPA ${cpa:.2f}", f"tasa conv {tc_str} ({tc_eval})"]
+        if conv >= 200: partes.append(f"{int(conv):,} conversiones validan el formato")
         if lb >= 0.10: partes.append(f"{lb*100:.0f}% lost budget = headroom")
         return ", ".join(partes) + ". Subir budget para capitalizar la eficiencia."
 
     if "RECORTAR FUERTE" in accion:
-        return (f"CPA ${cpa:.2f} insostenible. ${spend:,.0f} invertidos generaron solo {int(conv)} conversiones. "
-                f"Bajar budget y revisar keywords/creatividades antes de seguir gastando.")
+        return (f"CPA ${cpa:.2f} insostenible. Tasa conv {tc_str} ({tc_eval}) sobre {int(clicks):,} clicks. "
+                f"${spend:,.0f} invertidos generaron solo {int(conv)} conversiones. Bajar budget y revisar keywords/landing antes de seguir gastando.")
 
     if "RECORTAR" in accion:
+        if tc_eval == "baja":
+            return (f"Tasa de conversión {tc_str} ({tc_eval}) sobre {int(clicks):,} clicks → el funnel no convierte bien. "
+                    f"CPA ${cpa:.2f}. Recortar y revisar landing/oferta.")
         if "rejected" in flags:
-            return f"CPA ${cpa:.2f} alto + tiene anuncios rechazados. Recortar mientras se corrigen los assets."
+            return f"CPA ${cpa:.2f} + tasa conv {tc_str} + anuncios rechazados. Recortar mientras se corrigen los assets."
         if lb < 0.10 and cpa > 12:
-            return f"CPA ${cpa:.2f} alto sin headroom de budget (lost {lb*100:.0f}%). El problema no es plata, es el formato."
-        return f"CPA ${cpa:.2f} fuera de rango. Recortar y mover budget a campañas más eficientes del seguro."
+            return f"CPA ${cpa:.2f} alto sin headroom (lost {lb*100:.0f}%) y tasa conv {tc_str}. El problema no es budget, es formato/intent."
+        return f"CPA ${cpa:.2f} fuera de rango con tasa conv {tc_str}. Recortar y mover budget a campañas más eficientes."
 
     if "MANTENER" in accion:
         if cpa > 0 and cpa < 12 and lb < 0.10:
-            return f"CPA ${cpa:.2f} aceptable y la campaña ya consume su budget (lost {lb*100:.0f}%). Sin headroom para escalar."
-        return f"CPA ${cpa:.2f}. Monitorear y mantener estable."
+            return f"CPA ${cpa:.2f} + tasa conv {tc_str} aceptables, la campaña ya consume su budget (lost {lb*100:.0f}%). Sin headroom para escalar."
+        if tc_eval == "baja":
+            return f"CPA ${cpa:.2f} pero tasa conv baja ({tc_str}). Mantener para no romper aprendizaje, monitorear performance."
+        return f"CPA ${cpa:.2f}, tasa conv {tc_str}. Monitorear y mantener estable."
 
     return ""
 
@@ -308,34 +358,46 @@ def write_campanias_google(wb: Workbook, props: list[dict]) -> None:
     ws = wb.create_sheet("Detalle Google")
     ws["A1"] = "Detalle por campaña Google Ads"
     ws["A1"].font = Font(bold=True, size=14, color=SURA_AZUL)
-    ws.merge_cells("A1:L1")
+    ws.merge_cells("A1:N1")
     r = 3
-    headers = ["Seguro", "Campaña", "CPA actual", "% Lost Budget",
-               "Budget/día actual", "Spend actual",
-               "Conversiones actuales", "Acción", "Spend propuesto", "Δ Spend", "Δ %",
+    headers = ["Seguro", "Campaña", "CPA actual", "Tasa conv.", "% Lost Budget",
+               "Budget/día actual", "Spend actual", "Clicks",
+               "Conversiones", "Acción", "Spend propuesto", "Δ Spend", "Δ %",
                "Justificación"]
-    widths = [13, 44, 11, 12, 14, 12, 13, 20, 14, 12, 9, 70]
+    widths = [13, 42, 11, 11, 12, 13, 12, 11, 12, 19, 14, 11, 8, 75]
     header(ws, r, headers, widths)
     r += 1
     for p in props:
         for c in p["campanias_google"]:
             justif = _justificar_google(c, c["accion"])
-            row = [p["seguro"], c["nombre"], c["cpa"], c["lost_budget"],
-                   c["budget_d_actual"], c["spend"], c["conv"],
+            row = [p["seguro"], c["nombre"], c["cpa"],
+                   c.get("tasa_conv", 0),
+                   c["lost_budget"],
+                   c["budget_d_actual"], c["spend"],
+                   int(c.get("clicks", 0)),
+                   c["conv"],
                    c["accion"], c["spend_propuesto"], c["delta"], c["delta_pct"]/100,
                    justif]
             for i, v in enumerate(row, 1):
                 cell = ws.cell(row=r, column=i, value=v)
                 cell.border = BORDER; cell.font = NORMAL
-                cell.alignment = Alignment(vertical="top", wrap_text=(i == 12))
+                cell.alignment = Alignment(vertical="top", wrap_text=(i == 14))
                 if i == 1: cell.font = BOLD
                 if i == 3: cell.number_format = '"$"#,##0.00'
-                if i == 4: cell.number_format = "0.0%"
-                if i in (5, 6, 9): cell.number_format = '"$"#,##0'
-                if i == 7: cell.number_format = "#,##0.0"
-                if i == 10: cell.number_format = '"$"#,##0;[RED]"-$"#,##0'
-                if i == 11: cell.number_format = '+0.0%;[RED]-0.0%'
-                if i == 8:
+                if i == 4: cell.number_format = "0.0%"  # tasa conv
+                if i == 5: cell.number_format = "0.0%"  # lost budget
+                if i in (6, 7, 11): cell.number_format = '"$"#,##0'
+                if i == 8: cell.number_format = "#,##0"
+                if i == 9: cell.number_format = "#,##0.0"
+                if i == 12: cell.number_format = '"$"#,##0;[RED]"-$"#,##0'
+                if i == 13: cell.number_format = '+0.0%;[RED]-0.0%'
+                # color de tasa conv: verde si alta, rojo si baja
+                if i == 4 and isinstance(v, (int, float)):
+                    if v >= 0.08:
+                        cell.font = Font(name="Calibri", size=10, color=VERDE, bold=True)
+                    elif v < 0.04 and v > 0:
+                        cell.font = Font(name="Calibri", size=10, color=ROJO, bold=True)
+                if i == 10:
                     if "RECORTAR FUERTE" in str(v):
                         cell.fill = PatternFill("solid", fgColor="FEE2E2"); cell.font = Font(name="Calibri", size=10, bold=True, color=ROJO)
                     elif "RECORTAR" in str(v):
@@ -346,7 +408,7 @@ def write_campanias_google(wb: Workbook, props: list[dict]) -> None:
                         cell.fill = PatternFill("solid", fgColor="ECFDF5"); cell.font = Font(name="Calibri", size=10, bold=True, color=VERDE)
                     elif "MANTENER" in str(v):
                         cell.fill = PatternFill("solid", fgColor=GRIS_FONDO); cell.font = NORMAL
-            ws.row_dimensions[r].height = 50
+            ws.row_dimensions[r].height = 60
             r += 1
         r += 1
 
@@ -563,13 +625,15 @@ def write_metodologia(wb: Workbook) -> None:
         ("Constraint 3", "Bing se mantiene en presupuesto del Flow"),
         ("", ""),
         ("Reglas de clasificación de campañas Google", ""),
-        ("ESCALAR FUERTE (×1.80)", "CPA ≤ $7 y % Lost Budget ≥ 50% — palanca #1"),
-        ("ESCALAR (×1.40)", "CPA ≤ $10 y % Lost Budget ≥ 30%"),
-        ("ESCALAR LEVE (×1.20)", "CPA ≤ $10 y % Lost Budget ≥ 10%"),
-        ("ESCALAR MODERADO (×1.20)", "CPA ≤ $15 y % Lost Budget ≥ 50%"),
-        ("RECORTAR (×0.65)", "CPA entre $15 y $25"),
+        ("Variables consideradas", "CPA + % Lost Budget + Tasa de conversión (conv/clicks)"),
+        ("Tasa de conversión", "Buckets: alta ≥ 8% · media 4-8% · baja < 4%"),
+        ("ESCALAR FUERTE (×1.80)", "CPA ≤ $7 + Lost Budget ≥ 50% + tasa conv alta o media — palanca #1"),
+        ("ESCALAR (×1.40)", "CPA ≤ $10 + Lost Budget ≥ 30%"),
+        ("ESCALAR LEVE (×1.20)", "CPA ≤ $10 + Lost Budget ≥ 10% + tasa conv alta o media"),
+        ("ESCALAR MODERADO (×1.15)", "CPA $10-15 + Lost Budget ≥ 50% + tasa conv alta (solo si convierte bien)"),
+        ("RECORTAR (×0.65)", "CPA $15-25, o tasa conv baja con CPA > $10"),
         ("RECORTAR FUERTE (×0.40)", "CPA > $25"),
-        ("MANTENER (×1.00)", "Resto"),
+        ("MANTENER (×1.00)", "Resto - se monitorea sin tocar"),
         ("", ""),
         ("Ajuste fino", "Después del factor inicial, los presupuestos de Google se reescalan proporcionalmente para alcanzar exactamente el 72% del total por seguro."),
         ("", ""),
