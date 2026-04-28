@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta de redistribución de inversión · Mayo 2026 · SURA Colombia</title>
+<style>
+  :root {
+    --azul:#0033A0; --aqua:#00AEC7; --azul-osc:#002171;
+    --gris-osc:#53565A; --gris-med:#768692; --gris-cl:#F0F0F0; --bg:#F7F8FA;
+    --verde:#10B981; --amarillo:#F59E0B; --rojo:#DC2626;
+    --shadow: 0 1px 3px rgba(83,86,90,.06), 0 8px 24px rgba(0,51,160,.08);
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; padding:0; font-family:"Inter","Segoe UI",-apple-system,sans-serif;
+    color:var(--gris-osc); background:var(--bg); line-height:1.6; font-size:15px; }
+  .container { max-width:980px; margin:0 auto; padding:0 28px; }
+
+  /* Hero */
+  .hero { background:linear-gradient(135deg,var(--azul) 0%, var(--azul-osc) 100%);
+    color:#fff; padding:56px 0 64px; }
+  .hero .container { max-width:980px; }
+  .hero h1 { font-size:32px; font-weight:700; margin:0 0 8px; letter-spacing:-.02em; }
+  .hero .meta { opacity:.9; font-size:14px; }
+  .hero .meta strong { color:var(--aqua); font-weight:600; }
+  .hero .pill {
+    display:inline-block; background:rgba(255,255,255,.12); backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.18); padding:6px 14px; border-radius:999px;
+    font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin-top:18px;
+  }
+
+  /* Card sections */
+  section { padding:36px 0; }
+  section h2 { color:var(--azul); font-size:22px; margin:0 0 8px; letter-spacing:-.01em; }
+  section h2 .accent { color:var(--aqua); }
+  section .sub { color:var(--gris-med); font-size:14px; margin:0 0 20px; }
+  section.alt { background:#fff; border-top:1px solid var(--gris-cl); border-bottom:1px solid var(--gris-cl); }
+
+  /* Carta */
+  .carta { background:#fff; border-radius:14px; padding:32px 36px; box-shadow:var(--shadow);
+    margin-top:-36px; position:relative; z-index:2; }
+  .carta p { margin:0 0 14px; }
+  .carta strong { color:var(--azul); }
+
+  /* Tablas */
+  table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px;
+    overflow:hidden; box-shadow:var(--shadow); font-size:13px; }
+  th { background:var(--azul); color:#fff; padding:12px 14px; text-align:left;
+    font-size:11px; text-transform:uppercase; letter-spacing:.05em; font-weight:600; }
+  td { padding:11px 14px; border-bottom:1px solid var(--gris-cl); }
+  tr:last-child td { border-bottom:0; }
+  tr.total td { background:var(--gris-cl); font-weight:700; color:var(--azul); }
+  td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  td.up { color:var(--verde); font-weight:600; }
+  td.dn { color:var(--rojo); font-weight:600; }
+
+  /* Cards seguro */
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .card { background:#fff; border-radius:12px; padding:22px; box-shadow:var(--shadow);
+    border-top:4px solid var(--c, var(--aqua)); }
+  .card h3 { margin:0 0 4px; color:var(--c, var(--azul)); font-size:18px; display:flex;
+    justify-content:space-between; align-items:baseline; }
+  .card h3 small { color:var(--gris-med); font-size:12px; font-weight:500; }
+  .card .lead { font-size:14px; color:var(--gris-osc); margin:8px 0 14px; }
+  .card .row { display:flex; justify-content:space-between; padding:6px 0;
+    border-bottom:1px dashed var(--gris-cl); font-size:13px; }
+  .card .row:last-child { border-bottom:0; }
+  .card .row span:first-child { color:var(--gris-med); }
+  .card .row span:last-child { font-weight:600; }
+  .card ul.acciones { margin:14px 0 0; padding:0 0 0 18px; font-size:13px; }
+  .card ul.acciones li { margin:5px 0; }
+
+  /* Acción badges */
+  .badge { display:inline-block; padding:2px 9px; border-radius:999px;
+    font-size:10px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    vertical-align:middle; margin-right:4px; }
+  .b-up    { background:#d1fae5; color:var(--verde); }
+  .b-up-strong { background:var(--verde); color:#fff; }
+  .b-dn    { background:#fef3c7; color:var(--amarillo); }
+  .b-dn-strong { background:#fee2e2; color:var(--rojo); }
+  .b-keep  { background:var(--gris-cl); color:var(--gris-osc); }
+
+  /* Fondo highlight */
+  .highlight { background:linear-gradient(135deg,#e0f2fe 0%,#dbeafe 100%);
+    border-left:4px solid var(--azul); padding:18px 22px; border-radius:8px; margin:14px 0; }
+
+  /* KPI grid */
+  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+  .kpi { background:#fff; border-radius:10px; padding:16px; box-shadow:var(--shadow);
+    border-bottom:3px solid var(--aqua); }
+  .kpi .lbl { font-size:11px; text-transform:uppercase; color:var(--gris-med);
+    letter-spacing:.05em; }
+  .kpi .val { font-size:24px; font-weight:700; color:var(--azul); margin-top:4px; }
+
+  /* Cierre */
+  .cierre { background:#fff; border-radius:14px; padding:28px 32px;
+    box-shadow:var(--shadow); margin-top:18px; }
+  .firma { margin-top:24px; padding-top:16px; border-top:2px solid var(--gris-cl); }
+  .firma strong { color:var(--azul); display:block; font-size:16px; }
+  .firma small { color:var(--gris-med); }
+
+  /* Footer */
+  footer { padding:36px 0; text-align:center; color:var(--gris-med); font-size:12px;
+    background:var(--azul-osc); color:#fff; }
+  footer strong { color:var(--aqua); }
+
+  @media (max-width:760px) {
+    .grid { grid-template-columns:1fr; }
+    .kpis { grid-template-columns:1fr 1fr; }
+  }
+  @media print {
+    body { background:#fff; }
+    section { padding:24px 0; page-break-inside:avoid; }
+    .hero { background:#0033A0 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .card, .carta, .cierre, table { box-shadow:none; border:1px solid #ddd; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="pill">Propuesta · Beyond Media → SURA Colombia</div>
+    <h1>Redistribución de inversión digital — Mayo 2026</h1>
+    <div class="meta">
+      4 productos: <strong>Auto · Moto · Arriendo · Viajes</strong> · Plataformas: <strong>Google · Meta · Bing</strong> ·
+      Análisis basado en performance del <strong>1 al 27 de abril de 2026</strong>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="carta">
+    <p>Hola equipo SURA,</p>
+    <p>Les comparto la propuesta de redistribución de inversión para <strong>mayo 2026</strong>, construida sobre la performance real de las campañas del <strong>1 al 27 de abril</strong> y los presupuestos que acordamos por producto.</p>
+    <p>La idea de fondo es simple: <strong>mover el dinero hacia donde mejor está convirtiendo en cada producto</strong>, respetando dos cosas que ustedes nos pidieron y que comparto al 100%:</p>
+    <ol style="margin:0 0 14px 22px; padding:0;">
+      <li><strong>Mantener el 70-75% del presupuesto en Google Ads</strong>, porque es el canal que entrega leads de mayor calidad al CRM.</li>
+      <li><strong>No exceder el tope mensual por producto</strong>: Auto $52.421 · Moto $32.642 · Arriendo $31.080 · Viajes $16.900.</li>
+    </ol>
+    <p>En las próximas secciones encontrarán: el resumen del movimiento total, el detalle por producto con la lógica detrás, y al final un pedido concreto de aprobación.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <h2>Resumen del movimiento — <span class="accent">en una mirada</span></h2>
+    <p class="sub">Total presupuesto autorizado: <strong>USD $133.043</strong>. Bing se mantiene en el plan del Flow.</p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="lbl">Inversión total</div><div class="val">$133.043</div></div>
+      <div class="kpi"><div class="lbl">Google (72%)</div><div class="val">$95.791</div></div>
+      <div class="kpi"><div class="lbl">Meta (26%)</div><div class="val">$34.034</div></div>
+      <div class="kpi"><div class="lbl">Bing (2%)</div><div class="val">$3.218</div></div>
+    </div>
+
+    <table>
+      <thead><tr>
+        <th>Producto</th><th>Tope</th>
+        <th>Google ahora</th><th>Google nuevo</th><th>Δ</th>
+        <th>Meta ahora</th><th>Meta nuevo</th><th>Δ</th>
+        <th>Bing</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>Auto</strong></td><td class="num">$52.421</td>
+            <td class="num">$26.132</td><td class="num">$37.742</td><td class="num up">+$11.610</td>
+            <td class="num">$10.244</td><td class="num">$13.558</td><td class="num up">+$3.314</td>
+            <td class="num">$1.120</td></tr>
+        <tr><td><strong>Moto</strong></td><td class="num">$32.642</td>
+            <td class="num">$15.555</td><td class="num">$23.503</td><td class="num up">+$7.948</td>
+            <td class="num">$6.629</td><td class="num">$8.387</td><td class="num up">+$1.758</td>
+            <td class="num">$753</td></tr>
+        <tr><td><strong>Arriendo</strong></td><td class="num">$31.080</td>
+            <td class="num">$28.902</td><td class="num">$22.378</td><td class="num dn">−$6.524</td>
+            <td class="num">$8.083</td><td class="num">$7.535</td><td class="num dn">−$548</td>
+            <td class="num">$1.167</td></tr>
+        <tr><td><strong>Viajes</strong></td><td class="num">$16.900</td>
+            <td class="num">$6.762</td><td class="num">$12.168</td><td class="num up">+$5.406</td>
+            <td class="num">$3.186</td><td class="num">$4.554</td><td class="num up">+$1.368</td>
+            <td class="num">$178</td></tr>
+        <tr class="total"><td>TOTAL</td><td class="num">$133.043</td>
+            <td class="num">$77.351</td><td class="num">$95.791</td><td class="num">+$18.440</td>
+            <td class="num">$28.142</td><td class="num">$34.034</td><td class="num">+$5.892</td>
+            <td class="num">$3.218</td></tr>
+      </tbody>
+    </table>
+
+    <div class="highlight">
+      <strong>Lectura rápida del cuadro:</strong> en <strong>Auto, Moto y Viajes</strong> tenemos margen para escalar (los tres venían sub-invertidos respecto del tope autorizado). En <strong>Arriendo</strong> hay que recortar Google de manera quirúrgica, porque venimos sobre-ejecutando con campañas de CPA muy alto.
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <h2>Detalle por producto — <span class="accent">qué tocamos y por qué</span></h2>
+    <p class="sub">El criterio para subir o bajar cada campaña combina dos métricas: el <strong>CPA real de abril</strong> y el <strong>% de impresiones que perdemos por presupuesto</strong> (Lost Budget). Cuando el CPA es bueno y además estamos perdiendo impresiones por falta de plata, escalar es lo más obvio.</p>
+
+    <div class="grid">
+
+      <!-- AUTO -->
+      <div class="card" style="--c:#0033A0">
+        <h3>Auto <small>$52.421</small></h3>
+        <p class="lead">Performance abril: <strong>4.337 leads vía Google</strong> a CPA $6,03 · <strong>2.544 leads vía Meta</strong> a CPA $4,03. Auto es el producto más sano de la cuenta y todavía nos sobra cerca de $15K del tope autorizado.</p>
+        <div class="row"><span>Google ahora → nuevo</span><span>$26.132 → <strong style="color:var(--verde)">$37.742</strong></span></div>
+        <div class="row"><span>Meta ahora → nuevo</span><span>$10.244 → <strong style="color:var(--verde)">$13.558</strong></span></div>
+        <div class="row"><span>% del total en Google</span><span>72%</span></div>
+        <ul class="acciones">
+          <li><span class="badge b-up-strong">Escalar fuerte</span> <code>SURA_AUTOS_PMAX</code> — CPA $3,90 (¡el mejor del MCC!) y pierde 74% de impresiones por presupuesto. Es la palanca #1 del mes.</li>
+          <li><span class="badge b-up">Escalar leve</span> <code>SURA_AUTOS_SEARCH_SEGMENT</code> — CPA $6,72, lost budget 15%. Subida moderada para ganar volumen sin tocar la eficiencia.</li>
+          <li><span class="badge b-up">Escalar leve</span> <code>SURA_AUTOS_SEARCH_CONQUEST</code> — CPA $6,41, lost budget 42%. Hay que revisar Quality Score (pierde por ranking).</li>
+          <li><span class="badge b-keep">Mantener</span> <code>SEARCH_RETENTION</code> — CPA $10,59, no escala bien.</li>
+        </ul>
+      </div>
+
+      <!-- MOTO -->
+      <div class="card" style="--c:#00AEC7">
+        <h3>Moto <small>$32.642</small></h3>
+        <p class="lead">En Moto, Meta convierte a CPA $5,56 y Google a $13,92 — Meta es 60% más eficiente en este producto. Aun así, mantenemos 72% Google por la calidad del lead.</p>
+        <div class="row"><span>Google ahora → nuevo</span><span>$15.555 → <strong style="color:var(--verde)">$23.503</strong></span></div>
+        <div class="row"><span>Meta ahora → nuevo</span><span>$6.629 → <strong style="color:var(--verde)">$8.387</strong></span></div>
+        <div class="row"><span>% del total en Google</span><span>72%</span></div>
+        <ul class="acciones">
+          <li><span class="badge b-up-strong">Escalar fuerte</span> <code>SURA_MOTOS_SEARCH_RETENTION</code> — CPA $6,46, el mejor de Moto en Google. Subimos para ganar volumen.</li>
+          <li><span class="badge b-up">Escalar leve</span> <code>SURA_MOTOS_PMAX</code> — CPA $12,19 con 58% lost budget. Tiene anuncios rechazados que hay que destrabar.</li>
+          <li><span class="badge b-dn-strong">Recortar fuerte</span> <code>SEARCH_SEGMENT</code> y <code>SEARCH_CONQUEST</code> — CPAs $14-15, ambos con anuncios rechazados o limitados por política. Bajamos a la mitad mientras se corrigen.</li>
+        </ul>
+      </div>
+
+      <!-- ARRIENDO -->
+      <div class="card" style="--c:#2D6DF6">
+        <h3>Arriendo <small>$31.080</small></h3>
+        <p class="lead">Arriendo viene <strong>sobre-ejecutando</strong> en abril: gastamos $38.152 contra los $31.080 autorizados (-$7.072 de exceso). Toca recortar de manera quirúrgica, manteniendo lo que sí está rindiendo.</p>
+        <div class="row"><span>Google ahora → nuevo</span><span>$28.902 → <strong style="color:var(--rojo)">$22.378</strong></span></div>
+        <div class="row"><span>Meta ahora → nuevo</span><span>$8.083 → <strong style="color:var(--rojo)">$7.535</strong></span></div>
+        <div class="row"><span>% del total en Google</span><span>72%</span></div>
+        <ul class="acciones">
+          <li><span class="badge b-keep">Mantener</span> <code>sura-cdd-co-google-search-retention-arriendo</code> — CPA $7,32, único performer real del producto. Recorte mínimo (-8%).</li>
+          <li><span class="badge b-dn-strong">Recortar fuerte</span> <code>SURA_ARRIENDO_SEARCH_SEGMENT</code> — CPA $25,27. Desproporcionado vs el RETENTION. -56%.</li>
+          <li><span class="badge b-dn-strong">Recortar fuerte</span> <code>SURA_ARRIENDO_PMAX</code> — CPA $23,55 + 73% lost budget. Antes de escalar PMax conviene ajustar audiencias y assets. -60%.</li>
+        </ul>
+      </div>
+
+      <!-- VIAJES -->
+      <div class="card" style="--c:#9333EA">
+        <h3>Viajes <small>$16.900</small></h3>
+        <p class="lead">Viajes tiene CPAs altos en ambos canales ($22-54 en Google, $38 en Meta). En lugar de duplicar inversión a ciegas, escalamos <strong>moderadamente</strong> y dejamos $2.000 de reserva para mover si algo empieza a rendir.</p>
+        <div class="row"><span>Google ahora → nuevo</span><span>$6.762 → <strong style="color:var(--verde)">$12.168</strong></span></div>
+        <div class="row"><span>Meta ahora → nuevo</span><span>$3.186 → <strong style="color:var(--verde)">$4.554</strong></span></div>
+        <div class="row"><span>% del total en Google</span><span>72%</span></div>
+        <ul class="acciones">
+          <li><span class="badge b-up">Escalar leve</span> <code>SURA_VIAJES_SEARCH_RETENTION</code> — el menos malo del producto (CPA $22,67).</li>
+          <li><span class="badge b-up">Escalar leve</span> <code>SURA_VIAJES_PMAX</code> — CPA $20,66 con 77% lost budget; vale la pena testear con más budget.</li>
+          <li><span class="badge b-dn-strong">Recortar fuerte</span> <code>SURA_VIAJES_SEARCH_SEGMENT</code> — CPA $54,52, insostenible. -53%.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Lectura cruzada — <span class="accent">3 hallazgos clave</span></h2>
+    <div class="highlight">
+      <strong>1. PMax de Auto es el mejor activo de la cuenta.</strong> CPA $3,90 con 74% de impresiones perdidas por presupuesto: cada peso adicional que metamos ahí va a generar conversiones a un costo difícilmente replicable.
+    </div>
+    <div class="highlight">
+      <strong>2. Arriendo necesita reset, no más plata.</strong> Pasamos del tope en abril porque hay dos campañas (SEARCH_SEGMENT y PMax) con CPAs +$23. Antes de pedir ampliación, conviene corregir el desequilibrio interno del producto.
+    </div>
+    <div class="highlight">
+      <strong>3. Meta convierte mejor que Google en 3 de 4 productos</strong> (Moto, Arriendo y Auto). Mantenemos el peso en Google por calidad de lead al CRM, pero el mix actual (Meta 26%) está bien calibrado para no dejar de capitalizar a Meta como canal complementario.
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <h2>Pedido — <span class="accent">qué necesitamos de ustedes</span></h2>
+    <div class="cierre">
+      <p>Para empezar a ejecutar este ajuste les pedimos <strong>tres cosas</strong>:</p>
+      <ol>
+        <li><strong>Aprobación de la redistribución</strong> tal como está planteada arriba, o ajuste sobre los productos que les hagan ruido.</li>
+        <li><strong>Destrabar campañas con políticas pendientes</strong>: hay 5 cuentas con anuncios sin publicar y 3 con verificación de servicios financieros pendiente. Esto bloquea la entrega y limita las palancas que les estamos proponiendo (especialmente PMax de Auto).</li>
+        <li><strong>Confirmación de los eventos de conversión</strong> que están vigentes para cada producto (Auto = SURA.CO/AUTOS Paso 1, Moto = SURA.CO/MOTOS Paso 3, etc.). Si hay cambios, los aplicamos antes de mover el budget.</li>
+      </ol>
+      <p>Apenas tengamos el OK arrancamos los movimientos al inicio de mayo y reportamos resultados a las dos semanas.</p>
+      <p>Cualquier duda, comentario o cambio que quieran que aplique antes de presentarlo al equipo, me dicen.</p>
+      <p>Gracias por confiarnos esto.</p>
+      <div class="firma">
+        <strong>Norman Ruiz</strong>
+        <small>Media Buyer · SURA Tech Colombia</small><br>
+        <small>Beyond Media Agency</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    Elaborado por <strong>Beyond Media Agency</strong> · Propuesta de Mayo 2026 · Datos del 1 al 27 de abril de 2026
+  </div>
+</footer>
+
+</body>
+</html>
