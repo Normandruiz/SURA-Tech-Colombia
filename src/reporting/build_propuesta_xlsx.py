@@ -312,47 +312,108 @@ def write_campanias_google(wb: Workbook, props: list[dict]) -> None:
 
 
 def write_meta(wb: Workbook, props: list[dict]) -> None:
+    """Hoja Meta a nivel ad set con datos reales del CSV exportado."""
+    import csv as csvm
+    from pathlib import Path
+    csv_p = ROOT / "raw" / "meta" / "meta_adsets_abr_2026.csv"
+    detail_meta = []
+    if csv_p.exists():
+        with open(csv_p, encoding="utf-8") as f:
+            for r in csvm.DictReader(f):
+                name = r["Nombre del conjunto de anuncios"]
+                n_up = name.upper()
+                if   "AUTO" in n_up:                       seguro = "Auto"
+                elif "MOTO" in n_up:                       seguro = "Moto"
+                elif "ARRIENDO" in n_up or "AD " in n_up:  seguro = "Arriendo"
+                elif "VIAJE" in n_up:                      seguro = "Viajes"
+                else:                                       seguro = "OTRO"
+                detail_meta.append({
+                    "seguro": seguro,
+                    "name": name,
+                    "res": float(r["Resultados"] or 0),
+                    "cpr": float(r["Costo por resultados"] or 0),
+                    "spend": float(r["Importe gastado (USD)"] or 0),
+                    "indic": r["Indicador de resultado"],
+                    "estado": r["Entrega del conjunto de anuncios"],
+                })
+
     ws = wb.create_sheet("Detalle Meta")
-    ws["A1"] = "Detalle Meta (a nivel seguro · ad sets requieren CSV exportado)"
+    ws["A1"] = "Detalle Meta — ad sets reales del 1-27 abril 2026"
     ws["A1"].font = Font(bold=True, size=14, color=SURA_AZUL)
-    ws.merge_cells("A1:G1")
-    ws["A2"] = "Para detalle por ad set: en Meta Ads Manager → Reports → Export Reports (CSV)"
+    ws.merge_cells("A1:H1")
+    ws["A2"] = f"Total: {len(detail_meta)} ad sets · Fuente: export del Ads Manager"
     ws["A2"].font = Font(italic=True, size=10, color="768692")
-    ws.merge_cells("A2:G2")
+    ws.merge_cells("A2:H2")
+
     r = 4
-    headers = ["Seguro", "Spend actual", "Leads actuales", "CPA actual",
-               "Spend propuesto", "Δ Spend", "Recomendación"]
-    widths = [14, 14, 14, 12, 16, 14, 60]
+    headers = ["Seguro", "Conjunto de anuncios", "Resultados", "CPR (USD)",
+               "Spend (USD)", "Indicador", "Estado", "Acción sugerida"]
+    widths = [14, 50, 12, 11, 13, 50, 12, 26]
     header(ws, r, headers, widths)
     r += 1
-    for p in props:
-        a = p["actual"]; pr = p["propuesta"]
-        cpa = a["meta_cpa"]
-        delta = pr["meta_total"] - a["meta_spend"]
-        # Recomendacion textual
-        if cpa < 6:
-            rec = f"Meta convierte excelente (CPA ${cpa:.2f}). Mantener mix 70-75% Google + escalar Meta moderado."
-        elif cpa < 12:
-            rec = f"Meta CPA aceptable (${cpa:.2f}). Mantener nivel actual."
-        else:
-            rec = f"Meta CPA alto (${cpa:.2f}). Revisar ad sets - posible recorte."
-        if delta > 0:
-            rec += f" → +${delta:,} respecto del actual."
-        elif delta < 0:
-            rec += f" → −${-delta:,} respecto del actual."
 
-        row = [p["seguro"], a["meta_spend"], a["meta_leads"], cpa,
-               pr["meta_total"], delta, rec]
+    def accion(d):
+        cpr = d["cpr"]; res = d["res"]
+        if cpr <= 0: return ("MANTENER", "FFFFFF")
+        if cpr < 2:           return ("ESCALAR FUERTE", "D1FAE5")
+        if cpr < 5:           return ("ESCALAR LEVE",   "ECFDF5")
+        if cpr < 10:          return ("MANTENER",       "F0F0F0")
+        if cpr < 20:          return ("RECORTAR",       "FEF3C7")
+        return ("RECORTAR FUERTE", "FEE2E2")
+
+    # Ordenar por seguro -> CPR ascendente
+    detail_meta.sort(key=lambda d: (d["seguro"], d["cpr"]))
+    for d in detail_meta:
+        if d["seguro"] in ("OTRO", "Salud Animal", "Salud para Dos"):
+            continue
+        act, color = accion(d)
+        row = [d["seguro"], d["name"], int(d["res"]), d["cpr"],
+               d["spend"], d["indic"][:60], d["estado"], act]
         for i, v in enumerate(row, 1):
             c = ws.cell(row=r, column=i, value=v)
             c.border = BORDER; c.font = NORMAL
             if i == 1: c.font = BOLD
-            if i in (2, 3, 5):
-                c.number_format = '"$"#,##0' if i != 3 else "#,##0"
+            if i == 3: c.number_format = "#,##0"
             if i == 4: c.number_format = '"$"#,##0.00'
-            if i == 6: c.number_format = '"$"#,##0;[RED]"-$"#,##0'
-            if i == 7: c.alignment = Alignment(wrap_text=True, vertical="top")
-        ws.row_dimensions[r].height = 50
+            if i == 5: c.number_format = '"$"#,##0'
+            if i == 8:
+                c.fill = PatternFill("solid", fgColor=color)
+                c.font = Font(bold=True, size=10)
+                if "FUERTE" in str(v) and "ESCALAR" in str(v):
+                    c.font = Font(name="Calibri", size=10, bold=True, color=VERDE)
+                elif "ESCALAR" in str(v):
+                    c.font = Font(name="Calibri", size=10, bold=True, color=VERDE)
+                elif "FUERTE" in str(v):
+                    c.font = Font(name="Calibri", size=10, bold=True, color=ROJO)
+                elif "RECORTAR" in str(v):
+                    c.font = Font(name="Calibri", size=10, bold=True, color=AMARILLO)
+        r += 1
+
+    # Bloque de resumen agregado por seguro con propuesta
+    r += 2
+    ws.cell(row=r, column=1, value="Agregado Meta por seguro").font = Font(bold=True, color=SURA_AZUL, size=12)
+    r += 1
+    headers2 = ["Seguro", "Ad sets", "Spend actual", "Resultados", "CPR", "Spend propuesto", "Δ Spend"]
+    widths2 = [14, 9, 14, 12, 11, 16, 13]
+    header(ws, r, headers2, widths2)
+    r += 1
+    for p in props:
+        a = p["actual"]; pr = p["propuesta"]
+        sel = [d for d in detail_meta if d["seguro"] == p["seguro"]]
+        spend = sum(d["spend"] for d in sel)
+        res = sum(d["res"] for d in sel)
+        cpr = (spend/res) if res else 0
+        delta = pr["meta_total"] - spend
+        row = [p["seguro"], len(sel), spend, int(res), cpr, pr["meta_total"], delta]
+        for i, v in enumerate(row, 1):
+            c = ws.cell(row=r, column=i, value=v)
+            c.border = BORDER; c.font = NORMAL
+            if i == 1: c.font = BOLD
+            if i == 2: c.number_format = "0"
+            if i == 3 or i == 6: c.number_format = '"$"#,##0'
+            if i == 4: c.number_format = "#,##0"
+            if i == 5: c.number_format = '"$"#,##0.00'
+            if i == 7: c.number_format = '"$"#,##0;[RED]"-$"#,##0'
         r += 1
 
 
