@@ -268,26 +268,66 @@ def write_resumen(wb: Workbook, props: list[dict]) -> None:
         r += 1
 
 
+def _justificar_google(c, accion):
+    cpa = c["cpa"]; lb = c["lost_budget"]
+    lr = c.get("cuota_perdida_ranking", 0)
+    conv = c["conv"]; spend = c["spend"]; flags = c.get("flags", [])
+
+    if "ESCALAR FUERTE" in accion:
+        if lb >= 0.50 and cpa < 8:
+            return (f"CPA ${cpa:.2f} excelente y pierde {lb*100:.0f}% de impresiones por presupuesto. "
+                    f"Subir budget convierte impresiones perdidas en conversiones al mismo CPA.")
+        return f"CPA ${cpa:.2f} muy bueno con headroom {lb*100:.0f}% por presupuesto."
+
+    if "ESCALAR" in accion:
+        partes = [f"CPA ${cpa:.2f}"]
+        if conv >= 200: partes.append(f"{int(conv):,} conversiones ya validan el formato")
+        if lb >= 0.10: partes.append(f"{lb*100:.0f}% lost budget = headroom")
+        return ", ".join(partes) + ". Subir budget para capitalizar la eficiencia."
+
+    if "RECORTAR FUERTE" in accion:
+        return (f"CPA ${cpa:.2f} insostenible. ${spend:,.0f} invertidos generaron solo {int(conv)} conversiones. "
+                f"Bajar budget y revisar keywords/creatividades antes de seguir gastando.")
+
+    if "RECORTAR" in accion:
+        if "rejected" in flags:
+            return f"CPA ${cpa:.2f} alto + tiene anuncios rechazados. Recortar mientras se corrigen los assets."
+        if lb < 0.10 and cpa > 12:
+            return f"CPA ${cpa:.2f} alto sin headroom de budget (lost {lb*100:.0f}%). El problema no es plata, es el formato."
+        return f"CPA ${cpa:.2f} fuera de rango. Recortar y mover budget a campañas más eficientes del seguro."
+
+    if "MANTENER" in accion:
+        if cpa > 0 and cpa < 12 and lb < 0.10:
+            return f"CPA ${cpa:.2f} aceptable y la campaña ya consume su budget (lost {lb*100:.0f}%). Sin headroom para escalar."
+        return f"CPA ${cpa:.2f}. Monitorear y mantener estable."
+
+    return ""
+
+
 def write_campanias_google(wb: Workbook, props: list[dict]) -> None:
     ws = wb.create_sheet("Detalle Google")
     ws["A1"] = "Detalle por campaña Google Ads"
     ws["A1"].font = Font(bold=True, size=14, color=SURA_AZUL)
-    ws.merge_cells("A1:K1")
+    ws.merge_cells("A1:L1")
     r = 3
     headers = ["Seguro", "Campaña", "CPA actual", "% Lost Budget",
                "Budget/día actual", "Spend actual",
-               "Conversiones actuales", "Acción", "Spend propuesto", "Δ Spend", "Δ %"]
-    widths = [14, 50, 12, 13, 16, 13, 14, 22, 16, 14, 10]
+               "Conversiones actuales", "Acción", "Spend propuesto", "Δ Spend", "Δ %",
+               "Justificación"]
+    widths = [13, 44, 11, 12, 14, 12, 13, 20, 14, 12, 9, 70]
     header(ws, r, headers, widths)
     r += 1
     for p in props:
         for c in p["campanias_google"]:
+            justif = _justificar_google(c, c["accion"])
             row = [p["seguro"], c["nombre"], c["cpa"], c["lost_budget"],
                    c["budget_d_actual"], c["spend"], c["conv"],
-                   c["accion"], c["spend_propuesto"], c["delta"], c["delta_pct"]]
+                   c["accion"], c["spend_propuesto"], c["delta"], c["delta_pct"]/100,
+                   justif]
             for i, v in enumerate(row, 1):
                 cell = ws.cell(row=r, column=i, value=v)
                 cell.border = BORDER; cell.font = NORMAL
+                cell.alignment = Alignment(vertical="top", wrap_text=(i == 12))
                 if i == 1: cell.font = BOLD
                 if i == 3: cell.number_format = '"$"#,##0.00'
                 if i == 4: cell.number_format = "0.0%"
@@ -295,7 +335,6 @@ def write_campanias_google(wb: Workbook, props: list[dict]) -> None:
                 if i == 7: cell.number_format = "#,##0.0"
                 if i == 10: cell.number_format = '"$"#,##0;[RED]"-$"#,##0'
                 if i == 11: cell.number_format = '+0.0%;[RED]-0.0%'
-                # Color de la accion
                 if i == 8:
                     if "RECORTAR FUERTE" in str(v):
                         cell.fill = PatternFill("solid", fgColor="FEE2E2"); cell.font = Font(name="Calibri", size=10, bold=True, color=ROJO)
@@ -307,6 +346,7 @@ def write_campanias_google(wb: Workbook, props: list[dict]) -> None:
                         cell.fill = PatternFill("solid", fgColor="ECFDF5"); cell.font = Font(name="Calibri", size=10, bold=True, color=VERDE)
                     elif "MANTENER" in str(v):
                         cell.fill = PatternFill("solid", fgColor=GRIS_FONDO); cell.font = NORMAL
+            ws.row_dimensions[r].height = 50
             r += 1
         r += 1
 
@@ -319,6 +359,36 @@ def _accion_meta(cpr):
     if cpr < 10:        return ("MANTENER",        1.00, "F0F0F0")
     if cpr < 20:        return ("RECORTAR",        0.65, "FEF3C7")
     return                    ("RECORTAR FUERTE",  0.40, "FEE2E2")
+
+
+def _justificar_meta(d):
+    cpr = d["cpr"]; res = d["res"]; spend = d["spend"]
+    accion = d["accion"]; indic = (d.get("indic") or "")
+    is_msg = "messaging_conversation" in indic or "MENSAJES" in d["name"].upper()
+    is_lead = "leadgen" in indic
+    tipo = "conversaciones WhatsApp" if is_msg else ("leads (form)" if is_lead else "conversiones web")
+
+    if "ESCALAR FUERTE" in accion:
+        return (f"CPR ${cpr:.2f} excepcional ({int(res):,} {tipo}). "
+                f"Es un outlier eficiente del MCC - vale la pena duplicar inversión y dejar que escale.")
+
+    if "ESCALAR" in accion:
+        return (f"CPR ${cpr:.2f} bueno con {int(res):,} {tipo} validados. "
+                f"Subir budget para ganar volumen sin tocar la eficiencia actual.")
+
+    if "RECORTAR FUERTE" in accion:
+        return (f"CPR ${cpr:.2f} muy alto. ${spend:,.0f} generaron solo {int(res)} {tipo}. "
+                f"Pausar/recortar y reformular antes de seguir gastando.")
+
+    if "RECORTAR" in accion:
+        return (f"CPR ${cpr:.2f} arriba del rango eficiente del producto. "
+                f"Bajar budget y mover el spend a los ad sets que mejor convierten.")
+
+    if "MANTENER" in accion:
+        return (f"CPR ${cpr:.2f} aceptable. {int(res):,} {tipo}. "
+                f"Mantener para no romper aprendizaje del algoritmo.")
+
+    return ""
 
 
 def _load_meta_adsets():
@@ -408,8 +478,9 @@ def write_meta(wb: Workbook, props: list[dict]) -> None:
     r = 4
     headers = ["Seguro", "Conjunto de anuncios", "Resultados", "CPR (USD)",
                "Spend actual", "Indicador",
-               "Acción", "Spend propuesto", "Δ Spend", "Δ %", "Estado"]
-    widths = [13, 48, 11, 11, 12, 42, 18, 14, 12, 9, 11]
+               "Acción", "Spend propuesto", "Δ Spend", "Δ %", "Estado",
+               "Justificación"]
+    widths = [13, 44, 11, 11, 12, 38, 18, 14, 12, 9, 11, 70]
     header(ws, r, headers, widths)
     r += 1
 
@@ -417,12 +488,15 @@ def write_meta(wb: Workbook, props: list[dict]) -> None:
     for d in detail_meta:
         if d["seguro"] in ("OTRO", "Salud Animal", "Salud para Dos"):
             continue
+        justif = _justificar_meta(d)
         row = [d["seguro"], d["name"], int(d["res"]), d["cpr"],
                d["spend"], d["indic"][:60],
-               d["accion"], d["spend_propuesto"], d["delta"], d["delta_pct"], d["estado"]]
+               d["accion"], d["spend_propuesto"], d["delta"], d["delta_pct"]/100,
+               d["estado"], justif]
         for i, v in enumerate(row, 1):
             c = ws.cell(row=r, column=i, value=v)
             c.border = BORDER; c.font = NORMAL
+            c.alignment = Alignment(vertical="top", wrap_text=(i == 12))
             if i == 1: c.font = BOLD
             if i == 3: c.number_format = "#,##0"
             if i == 4: c.number_format = '"$"#,##0.00'
@@ -440,16 +514,14 @@ def write_meta(wb: Workbook, props: list[dict]) -> None:
                 elif "RECORTAR" in str(v):
                     c.font = Font(name="Calibri", size=10, bold=True, color=AMARILLO)
                 else:
-                    c.font = Font(name="Calibri", size=10, color=GRIS_FONDO if False else "53565A")
+                    c.font = Font(name="Calibri", size=10, color="53565A")
             if i == 10:
-                # color del Δ %
                 if isinstance(v, (int, float)):
                     if v > 0:
                         c.font = Font(name="Calibri", size=10, color=VERDE, bold=True)
                     elif v < 0:
                         c.font = Font(name="Calibri", size=10, color=ROJO, bold=True)
-        # delta_pct era fraccion ya escalada (× 100); paso a ratio para format %
-        ws.cell(row=r, column=10).value = d["delta_pct"] / 100
+        ws.row_dimensions[r].height = 50
         r += 1
 
     # Total por seguro al final
