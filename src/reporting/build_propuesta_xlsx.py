@@ -311,100 +311,162 @@ def write_campanias_google(wb: Workbook, props: list[dict]) -> None:
         r += 1
 
 
-def write_meta(wb: Workbook, props: list[dict]) -> None:
-    """Hoja Meta a nivel ad set con datos reales del CSV exportado."""
+def _accion_meta(cpr):
+    """Clasifica un ad set Meta segun su CPR y devuelve (accion, factor, color)."""
+    if cpr <= 0:        return ("SIN DATOS",       1.00, "FFFFFF")
+    if cpr < 2:         return ("ESCALAR FUERTE",  1.80, "D1FAE5")
+    if cpr < 5:         return ("ESCALAR LEVE",    1.30, "ECFDF5")
+    if cpr < 10:        return ("MANTENER",        1.00, "F0F0F0")
+    if cpr < 20:        return ("RECORTAR",        0.65, "FEF3C7")
+    return                    ("RECORTAR FUERTE",  0.40, "FEE2E2")
+
+
+def _load_meta_adsets():
+    """Lee CSV exportado del Ads Manager y devuelve lista con seguro inferido."""
     import csv as csvm
-    from pathlib import Path
     csv_p = ROOT / "raw" / "meta" / "meta_adsets_abr_2026.csv"
-    detail_meta = []
-    if csv_p.exists():
-        with open(csv_p, encoding="utf-8") as f:
-            for r in csvm.DictReader(f):
-                name = r["Nombre del conjunto de anuncios"]
-                n_up = name.upper()
-                if   "AUTO" in n_up:                       seguro = "Auto"
-                elif "MOTO" in n_up:                       seguro = "Moto"
-                elif "ARRIENDO" in n_up or "AD " in n_up:  seguro = "Arriendo"
-                elif "VIAJE" in n_up:                      seguro = "Viajes"
-                else:                                       seguro = "OTRO"
-                detail_meta.append({
-                    "seguro": seguro,
-                    "name": name,
-                    "res": float(r["Resultados"] or 0),
-                    "cpr": float(r["Costo por resultados"] or 0),
-                    "spend": float(r["Importe gastado (USD)"] or 0),
-                    "indic": r["Indicador de resultado"],
-                    "estado": r["Entrega del conjunto de anuncios"],
-                })
+    out = []
+    if not csv_p.exists():
+        return out
+    with open(csv_p, encoding="utf-8") as f:
+        for r in csvm.DictReader(f):
+            name = r["Nombre del conjunto de anuncios"]
+            n_up = name.upper()
+            if   "AUTO" in n_up:                       seguro = "Auto"
+            elif "MOTO" in n_up:                       seguro = "Moto"
+            elif "ARRIENDO" in n_up or "AD " in n_up:  seguro = "Arriendo"
+            elif "VIAJE" in n_up:                      seguro = "Viajes"
+            else:                                       seguro = "OTRO"
+            out.append({
+                "seguro": seguro,
+                "name":   name,
+                "res":    float(r["Resultados"] or 0),
+                "cpr":    float(r["Costo por resultados"] or 0),
+                "spend":  float(r["Importe gastado (USD)"] or 0),
+                "indic":  r["Indicador de resultado"],
+                "estado": r["Entrega del conjunto de anuncios"],
+            })
+    return out
+
+
+def _proponer_meta_por_seguro(detail_meta, props):
+    """Asigna el budget Meta de cada seguro entre sus ad sets segun la regla de
+    clasificacion + reescala para que la suma cuadre con el target Meta del seguro.
+
+    Devuelve la lista detail_meta con campos extra:
+      accion, factor_inicial, spend_propuesto, delta, delta_pct, color
+    """
+    target_meta = {p["seguro"]: p["propuesta"]["meta_total"] for p in props}
+
+    # Agrupar por seguro
+    por_seguro = {}
+    for d in detail_meta:
+        por_seguro.setdefault(d["seguro"], []).append(d)
+
+    for seguro, ads in por_seguro.items():
+        if seguro not in target_meta:
+            for d in ads:
+                d["accion"], d["factor_inicial"], d["color"] = _accion_meta(d["cpr"])
+                d["spend_propuesto"] = d["spend"]
+                d["delta"] = 0
+                d["delta_pct"] = 0
+            continue
+        target = target_meta[seguro]
+
+        # Calculo inicial
+        sum_pre = 0.0
+        for d in ads:
+            act, fac, color = _accion_meta(d["cpr"])
+            d["accion"] = act; d["factor_inicial"] = fac; d["color"] = color
+            d["spend_propuesto_pre"] = d["spend"] * fac
+            sum_pre += d["spend_propuesto_pre"]
+
+        # Reescalar a target
+        ratio = (target / sum_pre) if sum_pre > 0 else 1.0
+        for d in ads:
+            d["spend_propuesto"] = round(d["spend_propuesto_pre"] * ratio)
+            d["delta"] = d["spend_propuesto"] - d["spend"]
+            d["delta_pct"] = (d["delta"] / d["spend"] * 100) if d["spend"] > 0 else 0
+
+    return detail_meta
+
+
+def write_meta(wb: Workbook, props: list[dict]) -> None:
+    """Hoja Meta a nivel ad set con propuesta de presupuesto por ad set."""
+    detail_meta = _load_meta_adsets()
+    detail_meta = _proponer_meta_por_seguro(detail_meta, props)
 
     ws = wb.create_sheet("Detalle Meta")
     ws["A1"] = "Detalle Meta — ad sets reales del 1-27 abril 2026"
     ws["A1"].font = Font(bold=True, size=14, color=SURA_AZUL)
-    ws.merge_cells("A1:H1")
-    ws["A2"] = f"Total: {len(detail_meta)} ad sets · Fuente: export del Ads Manager"
+    ws.merge_cells("A1:K1")
+    n_relevantes = sum(1 for d in detail_meta if d["seguro"] in ("Auto","Moto","Arriendo","Viajes"))
+    ws["A2"] = f"Total relevante: {n_relevantes} ad sets en los 4 productos · Fuente: export del Ads Manager"
     ws["A2"].font = Font(italic=True, size=10, color="768692")
-    ws.merge_cells("A2:H2")
+    ws.merge_cells("A2:K2")
 
     r = 4
     headers = ["Seguro", "Conjunto de anuncios", "Resultados", "CPR (USD)",
-               "Spend (USD)", "Indicador", "Estado", "Acción sugerida"]
-    widths = [14, 50, 12, 11, 13, 50, 12, 26]
+               "Spend actual", "Indicador",
+               "Acción", "Spend propuesto", "Δ Spend", "Δ %", "Estado"]
+    widths = [13, 48, 11, 11, 12, 42, 18, 14, 12, 9, 11]
     header(ws, r, headers, widths)
     r += 1
 
-    def accion(d):
-        cpr = d["cpr"]; res = d["res"]
-        if cpr <= 0: return ("MANTENER", "FFFFFF")
-        if cpr < 2:           return ("ESCALAR FUERTE", "D1FAE5")
-        if cpr < 5:           return ("ESCALAR LEVE",   "ECFDF5")
-        if cpr < 10:          return ("MANTENER",       "F0F0F0")
-        if cpr < 20:          return ("RECORTAR",       "FEF3C7")
-        return ("RECORTAR FUERTE", "FEE2E2")
-
-    # Ordenar por seguro -> CPR ascendente
     detail_meta.sort(key=lambda d: (d["seguro"], d["cpr"]))
     for d in detail_meta:
         if d["seguro"] in ("OTRO", "Salud Animal", "Salud para Dos"):
             continue
-        act, color = accion(d)
         row = [d["seguro"], d["name"], int(d["res"]), d["cpr"],
-               d["spend"], d["indic"][:60], d["estado"], act]
+               d["spend"], d["indic"][:60],
+               d["accion"], d["spend_propuesto"], d["delta"], d["delta_pct"], d["estado"]]
         for i, v in enumerate(row, 1):
             c = ws.cell(row=r, column=i, value=v)
             c.border = BORDER; c.font = NORMAL
             if i == 1: c.font = BOLD
             if i == 3: c.number_format = "#,##0"
             if i == 4: c.number_format = '"$"#,##0.00'
-            if i == 5: c.number_format = '"$"#,##0'
-            if i == 8:
-                c.fill = PatternFill("solid", fgColor=color)
-                c.font = Font(bold=True, size=10)
-                if "FUERTE" in str(v) and "ESCALAR" in str(v):
+            if i == 5 or i == 8: c.number_format = '"$"#,##0'
+            if i == 9: c.number_format = '"$"#,##0;[RED]"-$"#,##0'
+            if i == 10: c.number_format = '+0.0%;[RED]-0.0%'
+            if i == 7:
+                c.fill = PatternFill("solid", fgColor=d["color"])
+                if "ESCALAR FUERTE" in str(v):
                     c.font = Font(name="Calibri", size=10, bold=True, color=VERDE)
                 elif "ESCALAR" in str(v):
                     c.font = Font(name="Calibri", size=10, bold=True, color=VERDE)
-                elif "FUERTE" in str(v):
+                elif "RECORTAR FUERTE" in str(v):
                     c.font = Font(name="Calibri", size=10, bold=True, color=ROJO)
                 elif "RECORTAR" in str(v):
                     c.font = Font(name="Calibri", size=10, bold=True, color=AMARILLO)
+                else:
+                    c.font = Font(name="Calibri", size=10, color=GRIS_FONDO if False else "53565A")
+            if i == 10:
+                # color del Δ %
+                if isinstance(v, (int, float)):
+                    if v > 0:
+                        c.font = Font(name="Calibri", size=10, color=VERDE, bold=True)
+                    elif v < 0:
+                        c.font = Font(name="Calibri", size=10, color=ROJO, bold=True)
+        # delta_pct era fraccion ya escalada (× 100); paso a ratio para format %
+        ws.cell(row=r, column=10).value = d["delta_pct"] / 100
         r += 1
 
-    # Bloque de resumen agregado por seguro con propuesta
+    # Total por seguro al final
     r += 2
-    ws.cell(row=r, column=1, value="Agregado Meta por seguro").font = Font(bold=True, color=SURA_AZUL, size=12)
+    ws.cell(row=r, column=1, value="Total Meta por seguro").font = Font(bold=True, color=SURA_AZUL, size=12)
     r += 1
     headers2 = ["Seguro", "Ad sets", "Spend actual", "Resultados", "CPR", "Spend propuesto", "Δ Spend"]
-    widths2 = [14, 9, 14, 12, 11, 16, 13]
+    widths2 = [13, 8, 14, 12, 11, 16, 13]
     header(ws, r, headers2, widths2)
     r += 1
     for p in props:
-        a = p["actual"]; pr = p["propuesta"]
         sel = [d for d in detail_meta if d["seguro"] == p["seguro"]]
         spend = sum(d["spend"] for d in sel)
-        res = sum(d["res"] for d in sel)
-        cpr = (spend/res) if res else 0
-        delta = pr["meta_total"] - spend
-        row = [p["seguro"], len(sel), spend, int(res), cpr, pr["meta_total"], delta]
+        prop  = sum(d["spend_propuesto"] for d in sel)
+        res   = sum(d["res"] for d in sel)
+        cpr   = (spend/res) if res else 0
+        row = [p["seguro"], len(sel), spend, int(res), cpr, prop, prop - spend]
         for i, v in enumerate(row, 1):
             c = ws.cell(row=r, column=i, value=v)
             c.border = BORDER; c.font = NORMAL
