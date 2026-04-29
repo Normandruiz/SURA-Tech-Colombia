@@ -1,0 +1,185 @@
+/* ============================================================
+   BI page · estilos especificos
+   Funnel completo Leads -> Polizas -> Prima emitida
+   ============================================================ */
+
+/* Hero KPI: 5 columnas en lugar de 4 */
+.hero .kpi-grid:has(> .kpi:nth-child(5)) {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 1100px) {
+  .hero .kpi-grid:has(> .kpi:nth-child(5)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tarjetas resumen por solucion */
+.bi-sol-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.bi-sol-card {
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--c, var(--sura-aqua));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bi-sol-card h3 {
+  margin: 0;
+  color: var(--c, var(--sura-azul));
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bi-sol-card h3 .pill {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--sura-gris-claro);
+  color: var(--sura-gris-medio);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.bi-sol-card .funnel-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-top: 1px solid var(--sura-gris-claro);
+  font-size: 14px;
+}
+.bi-sol-card .funnel-row:first-of-type { border-top: 0; }
+.bi-sol-card .funnel-row .label {
+  color: var(--sura-gris-medio);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bi-sol-card .funnel-row .value {
+  color: var(--sura-gris-oscuro);
+  font-weight: 700;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.bi-sol-card .funnel-row.tasa .value.bad     { color: var(--rojo); }
+.bi-sol-card .funnel-row.tasa .value.warn    { color: var(--amarillo); }
+.bi-sol-card .funnel-row.tasa .value.good    { color: var(--verde); }
+
+.bi-sol-card .top-channel {
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--sura-gris-medio);
+  border-left: 3px solid var(--c, var(--sura-azul));
+}
+.bi-sol-card .top-channel strong {
+  color: var(--sura-gris-oscuro);
+  display: block;
+  margin-top: 2px;
+}
+
+/* Toolbar tabla detalle */
+.bi-detalle-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.bi-detalle-toolbar input[type="search"] {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid var(--sura-gris-claro);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--sura-gris-oscuro);
+  outline: none;
+  transition: border-color .15s ease;
+  background: var(--sura-blanco);
+}
+.bi-detalle-toolbar input[type="search"]:focus {
+  border-color: var(--sura-azul);
+}
+
+.bi-count-pill {
+  background: var(--sura-azul);
+  color: var(--sura-blanco);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Tabla detalle ordenable */
+#bi-detalle-table th,
+#bi-top-table th {
+  cursor: pointer;
+  user-select: none;
+}
+#bi-detalle-table th.num,
+#bi-top-table th.num {
+  text-align: right;
+}
+#bi-detalle-table td.num,
+#bi-top-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+#bi-detalle-table th[aria-sort="ascending"]::after  { content: " ↑"; color: var(--sura-azul); }
+#bi-detalle-table th[aria-sort="descending"]::after { content: " ↓"; color: var(--sura-azul); }
+
+/* Pill de tasa en tabla */
+.tasa-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.tasa-pill.good { background: #ecfdf5; color: var(--verde); }
+.tasa-pill.warn { background: #fffbeb; color: var(--amarillo); }
+.tasa-pill.bad  { background: #fef2f2; color: var(--rojo); }
+.tasa-pill.zero { background: var(--sura-gris-claro); color: var(--sura-gris-medio); }
+
+/* Solucion pill (en tabla) */
+.sol-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+.sol-pill.Autos    { background: #00359C; }
+.sol-pill.Motos    { background: #00AEC7; }
+.sol-pill.Arriendo { background: #2D6DF6; }
+.sol-pill.Viajes   { background: #9333EA; }
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .bi-sol-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .bi-sol-grid { grid-template-columns: 1fr; }
+}

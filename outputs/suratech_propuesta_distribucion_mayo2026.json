@@ -1,0 +1,409 @@
+[
+  {
+    "seguro": "Auto",
+    "budget_total": 52421,
+    "actual": {
+      "google_spend": 26132,
+      "google_leads": 4337,
+      "google_cpa": 6.03,
+      "meta_spend": 10244,
+      "meta_leads": 2544,
+      "meta_cpa": 4.03,
+      "bing_spend": 1120,
+      "total": 37496
+    },
+    "propuesta": {
+      "google_total": 37743,
+      "meta_total": 13558,
+      "bing": 1120,
+      "google_pct": 71.99977108410751,
+      "meta_pct": 25.863680586024685,
+      "bing_pct": 2.136548329867801
+    },
+    "campanias_google": [
+      {
+        "nombre": "SURA_AUTOS_SEARCH_SEGMENT",
+        "cpa": 6.72,
+        "lost_budget": 0.1459,
+        "cuota_perdida_ranking": 0.23199999999999998,
+        "budget_d_actual": 326.0,
+        "spend": 9197.96,
+        "conv": 1369.1,
+        "clicks": 8318.0,
+        "tasa_conv": 0.1645948545323395,
+        "ctr": 0.1663,
+        "flags": [],
+        "accion": "ESCALAR LEVE",
+        "factor_inicial": 1.2,
+        "spend_propuesto_pre": 11038,
+        "spend_propuesto": 11108,
+        "budget_d_propuesto": 411.0,
+        "delta": 1910.0400000000009,
+        "delta_pct": 20.765908962422113
+      },
+      {
+        "nombre": "SURA_AUTOS_SEARCH_RETENTION",
+        "cpa": 10.59,
+        "lost_budget": 0.2289,
+        "cuota_perdida_ranking": 0.1769,
+        "budget_d_actual": 147.0,
+        "spend": 4194.0,
+        "conv": 396.14,
+        "clicks": 2933.0,
+        "tasa_conv": 0.13506307534947154,
+        "ctr": 0.29460000000000003,
+        "flags": [
+          "budget_constrained"
+        ],
+        "accion": "MANTENER",
+        "factor_inicial": 1.0,
+        "spend_propuesto_pre": 4194,
+        "spend_propuesto": 4221,
+        "budget_d_propuesto": 156.0,
+        "delta": 27.0,
+        "delta_pct": 0.6437768240343348
+      },
+      {
+        "nombre": "SURA_AUTOS_SEARCH_CONQUEST",
+        "cpa": 6.41,
+        "lost_budget": 0.4165,
+        "cuota_perdida_ranking": 0.3588,
+        "budget_d_actual": 52.0,
+        "spend": 2188.75,
+        "conv": 341.7,
+        "clicks": 2093.0,
+        "tasa_conv": 0.163258480649785,
+        "ctr": 0.0407,
+        "flags": [
+          "budget_constrained",
+          "ranking_issue"
+        ],
+        "accion": "ESCALAR",
+        "factor_inicial": 1.4,
+        "spend_propuesto_pre": 3064,
+        "spend_propuesto": 3083,
+        "budget_d_propuesto": 114.0,
+        "delta": 894.25,
+        "delta_pct": 40.85665334094803
+      },
+      {
+        "nombre": "SURA_AUTOS_PMAX",
+        "cpa": 3.9,
+        "lost_budget": 0.7424,
+        "cuota_perdida_ranking": 0.044500000000000005,
+        "budget_d_actual": 517.0,
+        "spend": 10671.99,
+        "conv": 2739.44,
+        "clicks": 14887.0,
+        "tasa_conv": 0.18401558406663532,
+        "ctr": 0.1407,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
+        ],
+        "accion": "ESCALAR FUERTE",
+        "factor_inicial": 1.8,
+        "spend_propuesto_pre": 19210,
+        "spend_propuesto": 19331,
+        "budget_d_propuesto": 716.0,
+        "delta": 8659.01,
+        "delta_pct": 81.13772595364127
+      }
+    ]
+  },
+  {
+    "seguro": "Moto",
+    "budget_total": 32642,
+    "actual": {
+      "google_spend": 15555,
+      "google_leads": 1117,
+      "google_cpa": 13.92,
+      "meta_spend": 6629,
+      "meta_leads": 1192,
+      "meta_cpa": 5.56,
+      "bing_spend": 753,
+      "total": 22937
+    },
+    "propuesta": {
+      "google_total": 23502,
+      "meta_total": 8387,
+      "bing": 753,
+      "google_pct": 71.99926475093437,
+      "meta_pct": 25.6938913056798,
+      "bing_pct": 2.306843943385822
+    },
+    "campanias_google": [
+      {
+        "nombre": "SURA_MOTOS_SEARCH_SEGMENT",
+        "cpa": 15.66,
+        "lost_budget": 0.6555,
+        "cuota_perdida_ranking": 0.10279999999999999,
+        "budget_d_actual": 357.0,
+        "spend": 4595.78,
+        "conv": 293.51,
+        "clicks": 8779.0,
+        "tasa_conv": 0.033433192846565665,
+        "ctr": 0.127,
+        "flags": [
+          "rejected",
+          "budget_constrained"
+        ],
+        "accion": "RECORTAR",
+        "factor_inicial": 0.65,
+        "spend_propuesto_pre": 2987,
+        "spend_propuesto": 6137,
+        "budget_d_propuesto": 227.0,
+        "delta": 1541.2200000000003,
+        "delta_pct": 33.535547828660214
+      },
+      {
+        "nombre": "SURA_MOTOS_SEARCH_RETENTION",
+        "cpa": 6.46,
+        "lost_budget": 0.0384,
+        "cuota_perdida_ranking": 0.0067,
+        "budget_d_actual": 183.0,
+        "spend": 1993.64,
+        "conv": 308.84,
+        "clicks": 3925.0,
+        "tasa_conv": 0.07868535031847133,
+        "ctr": 0.36479999999999996,
+        "flags": [],
+        "accion": "MANTENER",
+        "factor_inicial": 1.0,
+        "spend_propuesto_pre": 1994,
+        "spend_propuesto": 4097,
+        "budget_d_propuesto": 152.0,
+        "delta": 2103.3599999999997,
+        "delta_pct": 105.50350113360484
+      },
+      {
+        "nombre": "SURA_MOTOS_SEARCH_CONQUEST",
+        "cpa": 14.0,
+        "lost_budget": 0.7295999999999999,
+        "cuota_perdida_ranking": 0.1672,
+        "budget_d_actual": 75.0,
+        "spend": 1366.13,
+        "conv": 97.6,
+        "clicks": 2315.0,
+        "tasa_conv": 0.042159827213822894,
+        "ctr": 0.11699999999999999,
+        "flags": [
+          "budget_constrained"
+        ],
+        "accion": "MANTENER",
+        "factor_inicial": 1.0,
+        "spend_propuesto_pre": 1366,
+        "spend_propuesto": 2807,
+        "budget_d_propuesto": 104.0,
+        "delta": 1440.87,
+        "delta_pct": 105.47092882814957
+      },
+      {
+        "nombre": "SURA_MOTOS_PMAX",
+        "cpa": 12.19,
+        "lost_budget": 0.5758,
+        "cuota_perdida_ranking": 0.2677,
+        "budget_d_actual": 397.0,
+        "spend": 7831.97,
+        "conv": 642.71,
+        "clicks": 293488.0,
+        "tasa_conv": 0.0021899021425066784,
+        "ctr": 0.4807,
+        "flags": [
+          "policy_limited",
+          "rejected",
+          "budget_constrained"
+        ],
+        "accion": "RECORTAR",
+        "factor_inicial": 0.65,
+        "spend_propuesto_pre": 5091,
+        "spend_propuesto": 10461,
+        "budget_d_propuesto": 387.0,
+        "delta": 2629.0299999999997,
+        "delta_pct": 33.567927354165036
+      }
+    ]
+  },
+  {
+    "seguro": "Arriendo",
+    "budget_total": 31080,
+    "actual": {
+      "google_spend": 28902,
+      "google_leads": 1870,
+      "google_cpa": 15.45,
+      "meta_spend": 8083,
+      "meta_leads": 1508,
+      "meta_cpa": 5.36,
+      "bing_spend": 1167,
+      "total": 38152
+    },
+    "propuesta": {
+      "google_total": 22379,
+      "meta_total": 7535,
+      "bing": 1167,
+      "google_pct": 72.00450450450451,
+      "meta_pct": 24.243886743886744,
+      "bing_pct": 3.7548262548262548
+    },
+    "campanias_google": [
+      {
+        "nombre": "sura-cdd-co-google-search-retention-arriendo",
+        "cpa": 7.32,
+        "lost_budget": 0.0579,
+        "cuota_perdida_ranking": 0.0819,
+        "budget_d_actual": 984.0,
+        "spend": 12383.3,
+        "conv": 1690.66,
+        "clicks": 16967.0,
+        "tasa_conv": 0.09964401485236046,
+        "ctr": 0.46340000000000003,
+        "flags": [
+          "rejected"
+        ],
+        "accion": "MANTENER",
+        "factor_inicial": 1.0,
+        "spend_propuesto_pre": 12383,
+        "spend_propuesto": 13604,
+        "budget_d_propuesto": 504.0,
+        "delta": 1220.7000000000007,
+        "delta_pct": 9.857630841536592
+      },
+      {
+        "nombre": "SURA_ARRIENDO_SEARCH_SEGMENT",
+        "cpa": 25.27,
+        "lost_budget": 0.1399,
+        "cuota_perdida_ranking": 0.059500000000000004,
+        "budget_d_actual": 900.0,
+        "spend": 8208.29,
+        "conv": 324.78,
+        "clicks": 6406.0,
+        "tasa_conv": 0.05069934436465813,
+        "ctr": 0.24789999999999998,
+        "flags": [
+          "rejected"
+        ],
+        "accion": "RECORTAR FUERTE",
+        "factor_inicial": 0.4,
+        "spend_propuesto_pre": 3283,
+        "spend_propuesto": 3607,
+        "budget_d_propuesto": 134.0,
+        "delta": -4601.290000000001,
+        "delta_pct": -56.05662080652609
+      },
+      {
+        "nombre": "SURA_ARRIENDO_PMAX",
+        "cpa": 23.55,
+        "lost_budget": 0.7286,
+        "cuota_perdida_ranking": 0.1346,
+        "budget_d_actual": 376.0,
+        "spend": 7237.62,
+        "conv": 307.32,
+        "clicks": 56877.0,
+        "tasa_conv": 0.005403238567434991,
+        "ctr": 0.1975,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
+        ],
+        "accion": "RECORTAR",
+        "factor_inicial": 0.65,
+        "spend_propuesto_pre": 4704,
+        "spend_propuesto": 5168,
+        "budget_d_propuesto": 191.0,
+        "delta": -2069.62,
+        "delta_pct": -28.595311718493093
+      }
+    ]
+  },
+  {
+    "seguro": "Viajes",
+    "budget_total": 16900,
+    "actual": {
+      "google_spend": 6762,
+      "google_leads": 204,
+      "google_cpa": 33.01,
+      "meta_spend": 3186,
+      "meta_leads": 83,
+      "meta_cpa": 38.38,
+      "bing_spend": 178,
+      "total": 10126
+    },
+    "propuesta": {
+      "google_total": 12168,
+      "meta_total": 4554,
+      "bing": 178,
+      "google_pct": 72.0,
+      "meta_pct": 26.946745562130175,
+      "bing_pct": 1.0532544378698225
+    },
+    "campanias_google": [
+      {
+        "nombre": "SURA_VIAJES_SEARCH_SEGMENT",
+        "cpa": 54.52,
+        "lost_budget": 0.5768,
+        "cuota_perdida_ranking": 0.1461,
+        "budget_d_actual": 106.0,
+        "spend": 1774.72,
+        "conv": 32.55,
+        "clicks": 1191.0,
+        "tasa_conv": 0.02732997481108312,
+        "ctr": 0.1231,
+        "flags": [
+          "budget_constrained"
+        ],
+        "accion": "RECORTAR FUERTE",
+        "factor_inicial": 0.4,
+        "spend_propuesto_pre": 710,
+        "spend_propuesto": 2207,
+        "budget_d_propuesto": 82.0,
+        "delta": 432.28,
+        "delta_pct": 24.357645149657408
+      },
+      {
+        "nombre": "SURA_VIAJES_SEARCH_RETENTION",
+        "cpa": 22.67,
+        "lost_budget": 0.201,
+        "cuota_perdida_ranking": 0.04650000000000001,
+        "budget_d_actual": 251.0,
+        "spend": 2970.71,
+        "conv": 131.03,
+        "clicks": 2262.0,
+        "tasa_conv": 0.05792661361626879,
+        "ctr": 0.4322,
+        "flags": [
+          "budget_constrained"
+        ],
+        "accion": "RECORTAR",
+        "factor_inicial": 0.65,
+        "spend_propuesto_pre": 1931,
+        "spend_propuesto": 6003,
+        "budget_d_propuesto": 222.0,
+        "delta": 3032.29,
+        "delta_pct": 102.07290513042338
+      },
+      {
+        "nombre": "SURA_VIAJES_PMAX",
+        "cpa": 20.66,
+        "lost_budget": 0.7689,
+        "cuota_perdida_ranking": 0.11130000000000001,
+        "budget_d_actual": 155.0,
+        "spend": 1958.93,
+        "conv": 94.8,
+        "clicks": 6820.0,
+        "tasa_conv": 0.013900293255131965,
+        "ctr": 0.5526,
+        "flags": [
+          "policy_limited",
+          "budget_constrained"
+        ],
+        "accion": "RECORTAR",
+        "factor_inicial": 0.65,
+        "spend_propuesto_pre": 1273,
+        "spend_propuesto": 3958,
+        "budget_d_propuesto": 147.0,
+        "delta": 1999.07,
+        "delta_pct": 102.04907781288763
+      }
+    ]
+  }
+]
