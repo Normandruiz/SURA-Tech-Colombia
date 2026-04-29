@@ -1,0 +1,286 @@
+/* ============================================================
+   Cross page · estilos especificos
+   Cruce Google + Meta + CRM/Sheet BI
+   ============================================================ */
+
+.hero .kpi-grid:has(> .kpi:nth-child(5)) {
+  grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 1100px) {
+  .hero .kpi-grid:has(> .kpi:nth-child(5)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tarjetas resumen por producto */
+.cross-prod-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1100px) {
+  .cross-prod-grid { grid-template-columns: 1fr; }
+}
+
+.cross-prod-card {
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--c, var(--sura-aqua));
+}
+
+.cross-prod-card h3 {
+  margin: 0 0 14px;
+  color: var(--c, var(--sura-azul));
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cross-prod-card h3 .pill {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--sura-gris-claro);
+  color: var(--sura-gris-medio);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.cross-platforms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+.cross-plat-block {
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+  border-left: 3px solid var(--p, var(--sura-azul));
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.cross-plat-block.meta {
+  background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
+}
+.cross-plat-block h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--p, var(--sura-azul));
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.cross-plat-block.meta h4 {
+  color: #1877F2;
+}
+.cross-plat-block .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 3px 0;
+  border-top: 1px dashed rgba(0,0,0,0.08);
+}
+.cross-plat-block .row:first-of-type { border-top: 0; }
+.cross-plat-block .row .label {
+  color: var(--sura-gris-medio);
+  font-weight: 500;
+}
+.cross-plat-block .row .value {
+  color: var(--sura-gris-oscuro);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.cross-plat-block .row .value.bad  { color: var(--rojo); }
+.cross-plat-block .row .value.good { color: var(--verde); }
+.cross-plat-block .row .value.warn { color: var(--amarillo); }
+
+/* Diagnóstico cards */
+.diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 1100px) {
+  .diag-grid { grid-template-columns: 1fr; }
+}
+.diag-card {
+  background: var(--sura-blanco);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--sev-color, var(--sura-aqua));
+}
+.diag-card.sev-CRITICO  { --sev-color: #DC2626; }
+.diag-card.sev-ALTO     { --sev-color: #EA580C; }
+.diag-card.sev-MEDIO    { --sev-color: #F59E0B; }
+.diag-card.sev-OK       { --sev-color: #059669; }
+
+.diag-card .head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.diag-card .head h3 {
+  margin: 0;
+  font-size: 17px;
+  color: var(--sura-azul);
+  font-weight: 700;
+}
+.diag-card .head .sev-badge {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--sev-color);
+  white-space: nowrap;
+}
+
+.diag-card .delta-cpl {
+  font-size: 14px;
+  color: var(--sura-gris-medio);
+  margin-bottom: 14px;
+}
+.diag-card .delta-cpl strong {
+  color: var(--sura-gris-oscuro);
+  font-variant-numeric: tabular-nums;
+}
+.diag-card .delta-cpl .delta {
+  font-weight: 700;
+  margin-left: 4px;
+}
+.diag-card .delta-cpl .delta.up   { color: var(--rojo); }
+.diag-card .delta-cpl .delta.down { color: var(--verde); }
+
+.diag-card .metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 0;
+  border-top: 1px solid var(--sura-gris-claro);
+  border-bottom: 1px solid var(--sura-gris-claro);
+}
+.diag-card .metric {
+  text-align: center;
+}
+.diag-card .metric .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--sura-gris-medio);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.diag-card .metric .value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sura-gris-oscuro);
+  font-variant-numeric: tabular-nums;
+}
+.diag-card .metric .value.up   { color: var(--rojo); }
+.diag-card .metric .value.down { color: var(--verde); }
+
+.diag-card .drivers,
+.diag-card .actions {
+  margin: 6px 0;
+}
+.diag-card .drivers .title,
+.diag-card .actions .title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--sura-azul);
+  margin-bottom: 6px;
+}
+.diag-card .drivers ul,
+.diag-card .actions ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.diag-card .drivers li,
+.diag-card .actions li {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--sura-gris-oscuro);
+  margin-bottom: 4px;
+}
+.diag-card .actions li {
+  color: var(--sura-azul);
+  font-weight: 500;
+}
+
+/* ROI Cero alerta */
+.roi-zero-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 900px) {
+  .roi-zero-list { grid-template-columns: 1fr; }
+}
+.roi-zero-card {
+  background: linear-gradient(135deg, #fef2f2 0%, #fff5f5 100%);
+  border-left: 5px solid #DC2626;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow);
+}
+.roi-zero-card .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.roi-zero-card .nombre {
+  font-weight: 700;
+  font-size: 13px;
+  color: #991B1B;
+  letter-spacing: -0.01em;
+}
+.roi-zero-card .meta {
+  font-size: 11px;
+  color: var(--sura-gris-medio);
+}
+.roi-zero-card .nums {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+}
+.roi-zero-card .nums div .label {
+  color: var(--sura-gris-medio);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.roi-zero-card .nums div .value {
+  color: #991B1B;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tabla Match Campañas */
+#cross-camp-table th[data-sort] { cursor: pointer; user-select: none; }
+#cross-camp-table th.num,
+#cross-camp-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+#cross-camp-table th[aria-sort="ascending"]::after  { content: " ↑"; color: var(--sura-azul); }
+#cross-camp-table th[aria-sort="descending"]::after { content: " ↓"; color: var(--sura-azul); }
+#cross-camp-table tr.roi-zero td { background: #fef2f2; }
+#cross-camp-table .estado-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+#cross-camp-table .estado-pill.active   { background: #ecfdf5; color: var(--verde); }
+#cross-camp-table .estado-pill.inactive { background: var(--sura-gris-claro); color: var(--sura-gris-medio); }
+#cross-camp-table .estado-pill.habilitada { background: #ecfdf5; color: var(--verde); }
+#cross-camp-table .estado-pill.pausada  { background: #fffbeb; color: var(--amarillo); }

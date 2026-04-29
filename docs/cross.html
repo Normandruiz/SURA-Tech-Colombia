@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!-- v0.7-dev Cross page -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cross · SURA Tech Colombia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/crm.css">
+  <link rel="stylesheet" href="assets/bi.css">
+  <link rel="stylesheet" href="assets/cross.css">
+  <script src="assets/auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-top">
+        <div>
+          <a href="index.html" class="back-link">← Volver al informe</a>
+          <h1>Cross · Análisis cruzado plataformas + negocio</h1>
+          <div class="subtitle">
+            Google Ads + Meta Ads × Sheet BI · CPL plataforma vs CPL negocio · CAC real · diagnóstico forense
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi" id="kpi-spend">
+          <div class="label">Inversión</div>
+          <div class="value">—</div>
+          <div class="delta">Google + Meta</div>
+        </div>
+        <div class="kpi" id="kpi-conv">
+          <div class="label">Conv. Plataforma</div>
+          <div class="value">—</div>
+          <div class="delta">reportadas por Google/Meta</div>
+        </div>
+        <div class="kpi" id="kpi-leads">
+          <div class="label">Leads SF (CRM)</div>
+          <div class="value">—</div>
+          <div class="delta">leads que llegan a Salesforce</div>
+        </div>
+        <div class="kpi" id="kpi-cpl">
+          <div class="label">CPL Negocio</div>
+          <div class="value">—</div>
+          <div class="delta">spend / leads SF</div>
+        </div>
+        <div class="kpi" id="kpi-cac">
+          <div class="label">CAC Real</div>
+          <div class="value">—</div>
+          <div class="delta">spend / pólizas emitidas</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filtros -->
+  <section>
+    <div class="container">
+      <h2>Filtrar por producto</h2>
+      <div class="seguro-buttons" id="cross-prod-buttons">
+        <button class="seguro-btn active" data-prod="all">Todos</button>
+        <button class="seguro-btn" data-prod="Autos"    style="--c:#00359C">Autos</button>
+        <button class="seguro-btn" data-prod="Motos"    style="--c:#00AEC7">Motos</button>
+        <button class="seguro-btn" data-prod="Arriendo" style="--c:#2D6DF6">Arriendo</button>
+        <button class="seguro-btn" data-prod="Viajes"   style="--c:#9333EA">Viajes</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Filtrar por mes</h2>
+      <div class="seguro-buttons" id="cross-month-buttons">
+        <button class="seguro-btn active" data-month="all">Todos (Ene-Abr)</button>
+        <button class="seguro-btn" data-month="Enero">Enero</button>
+        <button class="seguro-btn" data-month="Febrero">Febrero</button>
+        <button class="seguro-btn" data-month="Marzo">Marzo</button>
+        <button class="seguro-btn" data-month="Abril">Abril (parcial)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resumen por producto -->
+  <section>
+    <div class="container">
+      <h2>Resumen por producto — <span class="accent">Google + Meta + cruce CRM</span></h2>
+      <p class="section-intro">
+        Cada tarjeta muestra inversión real (CSV plataforma), conversiones reportadas (CPA),
+        leads efectivos en SF (CPL Negocio) y pólizas emitidas (CAC). El gap entre CPA plataforma
+        y CPL Negocio revela qué tan ruidoso es el tracking de cada plataforma.
+      </p>
+      <div class="cross-prod-grid" id="cross-prod-grid"></div>
+    </div>
+  </section>
+
+  <!-- Charts evolución mensual -->
+  <section>
+    <div class="container">
+      <h2>Evolución mensual — <span class="accent">CPL plataforma · Ene → Abr</span></h2>
+      <p class="section-intro">
+        Tendencia mes a mes del CPA reportado por la plataforma (Google y Meta separados).
+        Subidas indican degradación de eficiencia que requieren diagnóstico.
+      </p>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>CPA Google por producto (US$)</h3>
+          <canvas id="chart-cpa-google"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>CPA Meta por producto (US$)</h3>
+          <canvas id="chart-cpa-meta"></canvas>
+        </div>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Inversión mensual Google vs Meta (US$)</h3>
+          <canvas id="chart-spend"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Leads SF vs Conversiones plataforma (filtro activo)</h3>
+          <canvas id="chart-leads-vs-conv"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diagnóstico CEO -->
+  <section>
+    <div class="container">
+      <h2>Diagnóstico forense — <span class="accent">para presentar al CEO</span></h2>
+      <p class="section-intro">
+        Por producto y plataforma, descomposición del cambio de CPL en sus drivers reales.
+        Severidad: 🟢 OK · 🟡 MEDIO · 🟠 ALTO · 🔴 CRÍTICO.
+      </p>
+      <div class="diag-grid" id="cross-diag-grid"></div>
+    </div>
+  </section>
+
+  <!-- Campañas ROI cero alerta -->
+  <section>
+    <div class="container">
+      <h2>Alerta — <span class="accent" style="color:#DC2626">campañas con ROI cero</span></h2>
+      <p class="section-intro">
+        Campañas/ad sets con inversión > USD 50 pero <strong>cero leads atribuidos en el CRM</strong>.
+        Auditar UTM tracking o pausar / reasignar presupuesto.
+      </p>
+      <div class="roi-zero-list" id="cross-roi-zero"></div>
+    </div>
+  </section>
+
+  <!-- Match Campañas -->
+  <section>
+    <div class="container">
+      <h2>Match campaña-a-campaña — <span class="accent">CPL y CAC por unidad</span></h2>
+      <p class="section-intro">
+        Cada campaña de Google y ad set de Meta cruzado con el CRM. CPL Negocio
+        y CAC reales por campaña. Ordená por la columna que necesites.
+      </p>
+      <div class="bi-detalle-toolbar">
+        <input type="search" id="cross-search" placeholder="Buscar campaña, producto, plataforma...">
+        <span id="cross-count" class="bi-count-pill">— filas</span>
+      </div>
+      <div class="table-wrap">
+        <table class="opt-table" id="cross-camp-table">
+          <thead>
+            <tr>
+              <th data-sort="producto">Producto</th>
+              <th data-sort="plataforma">Plat.</th>
+              <th data-sort="nombre">Campaña / Ad set</th>
+              <th data-sort="estado">Estado</th>
+              <th data-sort="spend"       class="num">Spend</th>
+              <th data-sort="conv"        class="num">Conv. Plat.</th>
+              <th data-sort="cpa"         class="num">CPA</th>
+              <th data-sort="leads_sf"    class="num">Leads SF</th>
+              <th data-sort="cpl_negocio" class="num">CPL Negocio</th>
+              <th data-sort="polizas"     class="num">Pólizas</th>
+              <th data-sort="cac"         class="num">CAC</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      Elaborado por <strong>Beyond Media Agency</strong> · Dashboard SURA Tech Colombia ·
+      <a href="index.html" style="color:var(--sura-aqua)">Informe</a> ·
+      <a href="paid_media.html" style="color:var(--sura-aqua)">Paid Media</a> ·
+      <a href="crm.html" style="color:var(--sura-aqua)">CRM</a> ·
+      <a href="bi.html" style="color:var(--sura-aqua)">BI</a>
+    </div>
+  </footer>
+
+  <script src="assets/cross.js"></script>
+</body>
+</html>
