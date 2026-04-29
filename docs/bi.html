@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!-- v0.6-dev BI page -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BI · SURA Tech Colombia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/crm.css">
+  <link rel="stylesheet" href="assets/bi.css">
+  <script src="assets/auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-top">
+        <div>
+          <a href="index.html" class="back-link">← Volver al informe</a>
+          <h1>BI · Funnel completo Leads → Pólizas → Prima</h1>
+          <div class="subtitle">
+            Fuente: Sheet <strong>"Abril 2026 · Power Bi"</strong> — leads, pólizas emitidas y prima en COP por canal y campaña
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi" id="kpi-leads">
+          <div class="label">Leads</div>
+          <div class="value">—</div>
+          <div class="delta">en filtro activo</div>
+        </div>
+        <div class="kpi" id="kpi-polizas">
+          <div class="label">Pólizas emitidas</div>
+          <div class="value">—</div>
+          <div class="delta">conversiones reales</div>
+        </div>
+        <div class="kpi" id="kpi-prima">
+          <div class="label">Prima emitida</div>
+          <div class="value">—</div>
+          <div class="delta">COP</div>
+        </div>
+        <div class="kpi" id="kpi-tasa">
+          <div class="label">Tasa Lead → Póliza</div>
+          <div class="value">—</div>
+          <div class="delta">% pólizas / leads</div>
+        </div>
+        <div class="kpi" id="kpi-arpu">
+          <div class="label">Prima / Póliza</div>
+          <div class="value">—</div>
+          <div class="delta">ticket promedio</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filtro por solucion -->
+  <section>
+    <div class="container">
+      <h2>Filtrar por solución</h2>
+      <div class="seguro-buttons" id="bi-sol-buttons">
+        <button class="seguro-btn active" data-sol="all">Todas</button>
+        <button class="seguro-btn" data-sol="Autos"     style="--c:#00359C">Autos</button>
+        <button class="seguro-btn" data-sol="Motos"     style="--c:#00AEC7">Motos</button>
+        <button class="seguro-btn" data-sol="Arriendo"  style="--c:#2D6DF6">Arriendo</button>
+        <button class="seguro-btn" data-sol="Viajes"    style="--c:#9333EA">Viajes</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtro por mes -->
+  <section>
+    <div class="container">
+      <h2>Filtrar por mes</h2>
+      <div class="seguro-buttons" id="bi-month-buttons">
+        <button class="seguro-btn active" data-month="all">Todos (Ene-Abr)</button>
+        <button class="seguro-btn" data-month="Enero">Enero</button>
+        <button class="seguro-btn" data-month="Febrero">Febrero</button>
+        <button class="seguro-btn" data-month="Marzo">Marzo</button>
+        <button class="seguro-btn" data-month="Abril">Abril (Parcial)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tarjetas resumen por solucion -->
+  <section>
+    <div class="container">
+      <h2>Resumen por solución — <span class="accent">leads → pólizas → prima</span></h2>
+      <p class="section-intro">
+        Tarjetas con el funnel completo por seguro. Tasa baja con muchos leads = canal trae cantidad pero no calidad. Tasa alta con pocos leads = el canal convierte pero falta volumen.
+      </p>
+      <div class="bi-sol-grid" id="bi-sol-grid"></div>
+    </div>
+  </section>
+
+  <!-- Charts mix por canal -->
+  <section>
+    <div class="container">
+      <h2>Mix por canal — <span class="accent">¿quién trae los leads y quién emite la prima?</span></h2>
+      <p class="section-intro">
+        Cuando un canal pesa más en la prima que en los leads, está convirtiendo arriba de la media — candidato a escalar. Cuando pesa más en leads que en prima, está trayendo volumen sin calidad — candidato a recortar.
+      </p>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>% Leads por canal</h3>
+          <canvas id="chart-mix-leads"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>% Prima emitida por canal</h3>
+          <canvas id="chart-mix-prima"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evolucion mensual -->
+  <section>
+    <div class="container">
+      <h2>Evolución mensual — <span class="accent">2026 enero a abril</span></h2>
+      <p class="section-intro">
+        Cómo evoluciona el funnel mes a mes. Atento a la pendiente de pólizas vs leads — si leads sube y pólizas se queda plano, hay degradación de calidad de tráfico.
+      </p>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Leads y Pólizas por mes</h3>
+          <canvas id="chart-evol-funnel"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Prima emitida por mes (COP)</h3>
+          <canvas id="chart-evol-prima"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top campañas por prima -->
+  <section>
+    <div class="container">
+      <h2>Top 15 campañas — <span class="accent">por prima emitida</span></h2>
+      <p class="section-intro">
+        Las campañas que más COP de prima generaron en el filtro activo. Útil para identificar dónde está concentrada la facturación.
+      </p>
+      <div class="table-wrap">
+        <table class="opt-table" id="bi-top-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Solución</th>
+              <th>Source</th>
+              <th>Campaign</th>
+              <th>Content</th>
+              <th>Leads</th>
+              <th>Pólizas</th>
+              <th>Tasa</th>
+              <th>Prima emitida</th>
+              <th>Prima/Póliza</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabla detalle completa -->
+  <section>
+    <div class="container">
+      <h2>Detalle completo — <span class="accent">filtros aplicados</span></h2>
+      <p class="section-intro">
+        Todas las filas que cumplen los filtros (solución + mes), ordenadas por prima emitida. Click en columna para reordenar.
+      </p>
+      <div class="bi-detalle-toolbar">
+        <input type="search" id="bi-detalle-search" placeholder="Buscar campaña, source, content...">
+        <span id="bi-detalle-count" class="bi-count-pill">— filas</span>
+      </div>
+      <div class="table-wrap">
+        <table class="opt-table" id="bi-detalle-table">
+          <thead>
+            <tr>
+              <th data-sort="sol">Solución</th>
+              <th data-sort="src">Source</th>
+              <th data-sort="med">Medium</th>
+              <th data-sort="camp">Campaign</th>
+              <th data-sort="cont">Content</th>
+              <th data-sort="leads" class="num">Leads</th>
+              <th data-sort="pol" class="num">Pólizas</th>
+              <th data-sort="tasa" class="num">Tasa</th>
+              <th data-sort="prima" class="num">Prima emitida</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      Elaborado por <strong>Beyond Media Agency</strong> · Dashboard SURA Tech Colombia ·
+      <a href="index.html" style="color:var(--sura-aqua)">Informe</a> ·
+      <a href="paid_media.html" style="color:var(--sura-aqua)">Paid Media</a> ·
+      <a href="crm.html" style="color:var(--sura-aqua)">CRM</a>
+    </div>
+  </footer>
+
+  <script src="assets/bi.js"></script>
+</body>
+</html>
