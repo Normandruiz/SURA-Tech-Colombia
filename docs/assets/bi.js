@@ -55,12 +55,21 @@
   // ----------------------------------------------------------
   const fmtInt = n => (n || 0).toLocaleString('es-CO');
   const fmtCOP = n => '$' + (n || 0).toLocaleString('es-CO');
+  // Colombian financial format: always in millones (M) - NO "B" para evitar
+  // confusion con billon espanol (10^12). Para valores >= 1.000 M se muestran
+  // como "$1.740 M" (= 1.740 millones COP).
   const fmtCOPshort = n => {
     n = n || 0;
-    if (Math.abs(n) >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
-    if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
-    if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'k';
-    return '$' + Math.round(n);
+    const abs = Math.abs(n);
+    if (abs >= 1e6) {
+      const m = n / 1e6;
+      const opts = abs >= 1e9
+        ? { maximumFractionDigits: 0 }       // 1.740 M
+        : { maximumFractionDigits: 1 };       // 290,4 M
+      return '$' + m.toLocaleString('es-CO', opts) + ' M';
+    }
+    if (abs >= 1e3) return '$' + Math.round(n / 1e3).toLocaleString('es-CO') + 'k';
+    return '$' + Math.round(n).toLocaleString('es-CO');
   };
   const fmtPct = (num, den, digits = 1) => {
     if (!den) return '—';
